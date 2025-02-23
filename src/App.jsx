@@ -1,14 +1,13 @@
 import {Navbar} from "./components/Navbar"
+import {Home} from "./components/Home"
 
 function App() {
 
   return (
     <>
     <Navbar/>
-      <div className='bg-afmber-600 h-screen'>
-      </div>
-      <div className='bg-red-400 h-screen'>
-      </div>
+    <Home/>
+    <div className="bg-amber-50 h-screen"></div>
     </>
   )
 }

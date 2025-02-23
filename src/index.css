@@ -1,1 +1,14 @@
+@font-face {
+  font-family: Segoe;
+  src: url("../src/assets/fonts/Segoe UI.ttf");
+}
+@font-face {
+  font-family: HWT;
+  src: url("../src/assets/fonts/fonnts.com-HWT_Artz.otf");
+}
 @import "tailwindcss";
+
+@theme {
+  --font-Segoe: Segoe, "sans-serif";
+  --font-HWT: HWT, "sans-serif";
+}
