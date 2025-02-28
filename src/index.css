@@ -12,3 +12,8 @@
   --font-Segoe: Segoe, "sans-serif";
   --font-HWT: HWT, "sans-serif";
 }
+html {
+  overflow-x: hidden;
+}
+body {
+}
