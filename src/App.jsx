@@ -2,7 +2,8 @@ import { useEffect } from "react";
 import Lenis from "@studio-freight/lenis";
 import {Navbar} from "./components/Navbar";
 import {Home} from "./components/Home";
-import {AboutMe} from "./components/AboutMe";
+import AboutMe from "./components/AboutMe";
+import {Project} from "./components/Project";
 
 function App() {
   useEffect(()=>{
@@ -27,9 +28,10 @@ function App() {
 
   return (
     <>
-    <Navbar/>
-    <Home/>
-    <AboutMe/>
+      <Navbar/>
+      <Home/>
+      <AboutMe />
+      <Project/>
     </>
   )
 }

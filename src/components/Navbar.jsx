@@ -1,5 +1,5 @@
 import React from "react";
-import { FloatingNav } from "./ui/floating-navbar"; 
+import { FloatingNav } from "./ui/FloatingNav"; 
 import { IconHome, IconMessage, IconUser } from "@tabler/icons-react";
 import { BrowserRouter as Router } from "react-router-dom"; 
 
