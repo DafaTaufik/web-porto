@@ -6,7 +6,7 @@ import { ScrollTrigger } from "gsap/ScrollTrigger";
 
 gsap.registerPlugin(ScrollTrigger);
 
-export function AboutMe() {
+export default function AboutMe() {
     const sectionRef = useRef(null);
     const bgRef = useRef(null);
     
@@ -42,17 +42,17 @@ export function AboutMe() {
     }, []);
     
     return(
-        <div ref={sectionRef} className="h-screen w-full flex flex-col items-center relative bg-white">
+        <div ref={sectionRef} className="w-full h-[900px] flex flex-col items-center relative bg-white">
             {/* This is the black background div that will be resized on scroll */}
             <div 
                 ref={bgRef}
-                className="absolute top-0 h-full bg-black w-screen left-1/2 transform -translate-x-1/2"
+                className="absolute top-0 h-[900px]  bg-black w-screen left-1/2 transform -translate-x-1/2"
             ></div>
             
             {/* Content that sits on top of the animated background */}
-            <span className="font-HWT text-6xl text-white mt-11 relative z-10">About Me</span>
+            <span className="font-HWT text-6xl text-white mt-32 relative z-10">About Me</span>
 
-            <div className="w-screen flex flex-row justify-between px-24 mt-32 relative z-10">
+            <div className="w-screen flex flex-row justify-between px-24 mt- relative z-10">
                 <div className="font-sans font-semibold text-lg w-96 text-white">Heloo my name is dafa taufik, you can call me Dafa. Iam a sixty-semester student, from informatics, Multimedia Nusantara University</div>
                 <div className="w-fit mr-16">
                     <TiltedCard
@@ -74,5 +74,3 @@ export function AboutMe() {
         </div>
     );
 }
-
-export default AboutMe;
