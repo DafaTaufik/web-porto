@@ -4,6 +4,8 @@ import {Navbar} from "./components/Navbar";
 import {Home} from "./components/Home";
 import AboutMe from "./components/AboutMe";
 import {Project} from "./components/Project";
+import {Experience} from "./components/Experience";
+import Certificate from "./components/Certificate";
 
 function App() {
   useEffect(()=>{
@@ -32,6 +34,8 @@ function App() {
       <Home/>
       <AboutMe />
       <Project/>
+      <Experience/>
+      <Certificate/>
     </>
   )
 }
