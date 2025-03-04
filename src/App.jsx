@@ -6,6 +6,7 @@ import AboutMe from "./components/AboutMe";
 import {Project} from "./components/Project";
 import {Experience} from "./components/Experience";
 import Certificate from "./components/Certificate";
+import {MasonryGridGallery} from "./components/MasonryGridGallery";
 
 function App() {
   useEffect(()=>{

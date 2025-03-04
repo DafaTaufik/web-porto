@@ -1,3 +1,4 @@
+@import "tailwindcss";
 @font-face {
   font-family: Segoe;
   src: url("../src/assets/fonts/Segoe UI.ttf");
@@ -6,51 +7,42 @@
   font-family: HWT;
   src: url("../src/assets/fonts/fonnts.com-HWT_Artz.otf");
 }
-@import "tailwindcss";
+@font-face {
+  font-family: Asap;
+  src: url("../src/assets/fonts/Asap-Regular.ttf");
+}
+@font-face {
+  font-family: BebasNeue;
+  src: url("../src/assets/fonts/BebasNeue-Regular.ttf");
+}
+@font-face {
+  font-family: Kanit;
+  src: url("../src/assets/fonts/Kanit-Regular.ttf");
+}
+@font-face {
+  font-family: Montserrat;
+  src: url("../src/assets/fonts/Montserrat-Regular.ttf");
+}
+@font-face {
+  font-family: Raleway;
+  src: url("../src/assets/fonts/Raleway-Regular.ttf");
+}
+@font-face {
+  font-family: Inter;
+  src: url("../src/assets/fonts/Inter.ttf");
+}
 
 @theme {
   --font-Segoe: Segoe, "sans-serif";
   --font-HWT: HWT, "sans-serif";
+  --font-Asap: Asap, "sans-serif";
+  --font-BebasNeue: BebasNeue, "sans-serif";
+  --font-Kanit: Kanit, "sans-serif";
+  --font-Montserrat: Montserrat, "sans-serif";
+  --font-Raleway: Raleway, "sans-serif";
+  --font-Inter: Inter, "sans-serif";
 }
 html,
 body {
   overflow-x: hidden;
 }
-
-/* ::-webkit-scrollbar {
-  width: 8px; 
-}
-
-::-webkit-scrollbar-track {
-  background: #f1f1f1; 
-}
-
-::-webkit-scrollbar-thumb {
-  background: #888; 
-  border-radius: 4px; 
-}
-
-::-webkit-scrollbar-thumb:hover {
-  background: #555; 
-}
-
-* {
-  scrollbar-width: thin; 
-  scrollbar-color: #888 #f1f1f1; 
-} */
-
-/* Optional: If you want to customize the color scheme further */
-/* Example with a blue theme */
-/*
-::-webkit-scrollbar-thumb {
-  background: #3498db;  
-}
-
-::-webkit-scrollbar-thumb:hover {
-  background: #2980b9;  
-}
-
-* {
-  scrollbar-color: #3498db #f1f1f1;  
-}
-*/

@@ -46,7 +46,7 @@ export default function AboutMe() {
             {/* This is the black background div that will be resized on scroll */}
             <div 
                 ref={bgRef}
-                className="absolute top-0 h-[900px]  bg-black w-screen left-1/2 transform -translate-x-1/2"
+                className="absolute top-0 h-[900px] bg-black w-screen left-1/2 transform -translate-x-1/2"
             ></div>
             
             {/* Content that sits on top of the animated background */}
