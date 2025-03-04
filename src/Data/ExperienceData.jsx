@@ -5,6 +5,7 @@ import omb_4 from "../assets/Image/Omb/4_omb.jpg";
 import omb_5 from "../assets/Image/Omb/5_omb.jpg";
 import omb_6 from "../assets/Image/Omb/6_omb.png";
 import omb_7 from "../assets/Image/Omb/7_omb.jpg";
+import omb_8 from "../assets/Image/Omb/8_omb.JPG";
 
 export const ExperienceData = [
     {
@@ -18,6 +19,16 @@ export const ExperienceData = [
           <div className="grid grid-cols-2 gap-4 mt-5">
             <img
               src={omb_2}
+              alt="startup template"
+              className="px-0 h-auto w-[350px] rounded-lg transform transition duration-300 hover:scale-105"
+            />
+            <img
+              src={omb_8}
+              alt="startup template"
+              className="px-0 h-auto w-[350px] rounded-lg transform transition duration-300 hover:scale-105"
+            />
+            <img
+              src={omb_5}
               alt="startup template"
               className="px-0 h-auto w-[350px] rounded-lg transform transition duration-300 hover:scale-105"
             />

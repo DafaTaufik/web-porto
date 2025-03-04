@@ -6,7 +6,7 @@ import AboutMe from "./components/AboutMe";
 import {Project} from "./components/Project";
 import {Experience} from "./components/Experience";
 import Certificate from "./components/Certificate";
-import {MasonryGridGallery} from "./components/MasonryGridGallery";
+import Footer from "./components/Footer";
 
 function App() {
   useEffect(()=>{
@@ -37,6 +37,7 @@ function App() {
       <Project/>
       <Experience/>
       <Certificate/>
+      <Footer/>
     </>
   )
 }
