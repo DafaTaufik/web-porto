@@ -6,8 +6,8 @@ import { useGLTF, useTexture, Environment, Lightformer } from '@react-three/drei
 import { BallCollider, CuboidCollider, Physics, RigidBody, useRopeJoint, useSphericalJoint } from '@react-three/rapier';
 import { MeshLineGeometry, MeshLineMaterial } from 'meshline';
 
-import cardGLB from "../../assets/lanyard/card.glb";
-import lanyard from "../../assets/lanyard/lanyard.png";
+import cardGLB from "../../assets/lanyard/cards.glb";
+import lanyard from "../../assets/lanyard/lanyards.png";
 
 import * as THREE from 'three';
 
@@ -20,7 +20,7 @@ export default function Lanyard({ position = [5, 0, 30], gravity = [0, -40, 0], 
       <Canvas
         camera={{ position: position, fov: fov }}
         gl={{ alpha: transparent }}
-        onCreated={({ gl }) => gl.setClearColor('#ffffff', 1)}
+        onCreated={({ gl }) => gl.setClearColor('#ffffff', 0)}
       >
         <ambientLight intensity={Math.PI} />
         <Physics gravity={gravity} timeStep={1 / 60}>
