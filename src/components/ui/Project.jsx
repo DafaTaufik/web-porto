@@ -1,6 +1,6 @@
 import { div } from "framer-motion/client";
 import React from "react";
-import Card from "./ui/Card";
+import Card from "./Card";
 
 export function Project() {
     return(

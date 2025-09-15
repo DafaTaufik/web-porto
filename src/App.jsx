@@ -1,12 +1,12 @@
 import { useEffect } from "react";
 import Lenis from "@studio-freight/lenis";
-import {Navbar} from "./components/Navbar";
-import {Home} from "./components/Home";
-import AboutMe from "./components/AboutMe";
-import {Project} from "./components/Project";
-import {Experience} from "./components/Experience";
-import Certificate from "./components/Certificate";
-import Footer from "./components/Footer";
+import {Navbar} from "./components/layout/Navbar";
+import {Home} from "./components/sections/Home";
+import AboutMe from "./components/sections/AboutMe";
+import {Project} from "./components/ui/Project";
+import {Experience} from "./components/sections/Experience";
+import Certificate from "./components/sections/Certificate";
+import Footer from "./components/layout/Footer";
 
 function App() {
   useEffect(()=>{

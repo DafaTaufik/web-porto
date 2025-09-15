@@ -1,5 +1,5 @@
 import React from "react";
-import CardCertif from "./ui/CardCertif";
+import CardCertif from "../ui/CardCertif";
 
 export default function Certificate(){
     return(

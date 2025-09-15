@@ -11,41 +11,41 @@ export const ExperienceData = [
     {
       title: "2023",
       content: (
-        <div>
+        <div className="border border-red-500 w-fit ml-2">
           <p className="text-neutral-800 dark:text-neutral-200 text-xs md:text-2xl font-HWT mb-3">
             Member of Security OMB UMN 2023
           </p>
           <p>OMB UMN is a New Student Program</p>
-          <div className="grid grid-cols-2 gap-4 mt-5">
+          <div className="border border-blue-500 w-fit gap-2 grid grid-cols-2 md:gap-4 mt-5">
             <img
               src={omb_2}
               alt="startup template"
-              className="px-0 h-auto w-[350px] rounded-lg transform transition duration-300 hover:scale-105"
+              className="h-auto w-[100px] md:w-[350px] rounded-lg transform transition duration-300 hover:scale-105"
             />
             <img
               src={omb_8}
               alt="startup template"
-              className="px-0 h-auto w-[350px] rounded-lg transform transition duration-300 hover:scale-105"
+              className="h-auto w-[100px] md:w-[350px] rounded-lg transform transition duration-300 hover:scale-105"
             />
             <img
               src={omb_5}
               alt="startup template"
-              className="px-0 h-auto w-[350px] rounded-lg transform transition duration-300 hover:scale-105"
+              className="h-auto w-[100px] md:w-[350px] rounded-lg transform transition duration-300 hover:scale-105"
             />
             <img
               src={omb_4}
               alt="startup template"
-              className="px-0 h-auto w-[350px] rounded-lg transform transition duration-300 hover:scale-105"
+              className="h-auto w-[100px] md:w-[350px] rounded-lg transform transition duration-300 hover:scale-105"
             />
             <img
               src={omb_1}
               alt="startup template"
-              className="px-0 h-auto w-[350px] rounded-lg transform transition duration-300 hover:scale-105"
+              className="h-auto w-[100px] md:w-[350px] rounded-lg transform transition duration-300 hover:scale-105"
             />
             <img
               src={omb_6}
               alt="startup template"
-              className="px-0 h-auto w-[350px] rounded-lg transform transition duration-300 hover:scale-105"
+              className="h-auto w-[100px] md:w-[350px] rounded-lg transform transition duration-300 hover:scale-105"
             />
           </div>
         </div>

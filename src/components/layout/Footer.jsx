@@ -1,8 +1,8 @@
 import React from "react";
-import ic_email from "../assets/Icon/emails.png";
-import ic_instagram from "../assets/Icon/instagram.png";
-import ic_linkedin from "../assets/Icon/linkedin.png";
-import ic_github from "../assets/Icon/github.png";
+import ic_email from "../../assets/Icon/emails.png";
+import ic_instagram from "../../assets/Icon/instagram.png";
+import ic_linkedin from "../../assets/Icon/linkedin.png";
+import ic_github from "../../assets/Icon/github.png";
 
 export default function Footer(){
     return(

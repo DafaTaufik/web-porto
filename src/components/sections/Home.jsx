@@ -1,6 +1,6 @@
 import React from "react";
-import Lanyard from "./ui/Lanyard";
-import Particles from "./ui/Particles";
+import Lanyard from "../ui/Lanyard";
+import Particles from "../ui/Particles";
 
 export function Home() {
   return (
