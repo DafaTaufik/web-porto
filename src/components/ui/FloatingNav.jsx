@@ -29,7 +29,7 @@ export const FloatingNav = ({ navItems, className }) => {
         animate={{ y: visible ? 0 : -100, opacity: visible ? 1 : 0 }}
         transition={{ duration: 0.2 }}
         className={clsx(
-          "flex max-w-[46%] fixed top-10 inset-x-0 mx-auto border border-transparent dark:border-white/[0.2] rounded-2xl dark:bg-black bg-white shadow-lg z-[5000] py-3 px-3 sm:px-5 md:px-7 lg:px-8 justify-between",
+         "flex max-w-[46%] fixed top-10 inset-x-0 mx-auto border border-transparent dark:border-white/[0.2] rounded-2xl dark:bg-black bg-white shadow-lg z-[5000] py-3 px-3 sm:px-5 md:px-7 lg:px-8 justify-between",
           className
           // "flex max-w-[46%] fixed top-10 inset-x-0 mx-auto border border-transparent dark:border-white/[0.2] rounded-2xl dark:bg-black bg-white shadow-lg z-[5000] pr-2 pl-8 py-3 items-center justify-center space-x-4",
           // className
@@ -40,11 +40,19 @@ export const FloatingNav = ({ navItems, className }) => {
         {navItems.map((navItem, idx) => (
           <Link
             key={idx}
-            to={navItem.link} // Gunakan "to" dari react-router-dom
-            className="relative font-HWT dark:text-neutral-50 items-center flex space-x-1 text-neutral-600 dark:hover:text-neutral-300 hover:text-neutral-500"
+            to={navItem.link}
+            className="relative font-HWT items-center flex"
           >
-            <span className="block sm:hidden">{navItem.icon}</span>
-            <span className="hidden sm:block text-sm sm:text-base md:text-lg lg:text-xl">{navItem.name}</span>
+            {/* Mobile: Hanya icon */}
+            <span className="block sm:hidden dark:text-neutral-50 text-neutral-600 dark:hover:text-neutral-300 hover:text-neutral-500 transition-colors duration-200">
+              {navItem.icon}
+            </span>
+            
+            {/* Tablet ke atas: Icon + Text */}
+            <span className="hidden sm:flex items-center space-x-2 dark:text-neutral-50 text-neutral-600 dark:hover:text-neutral-300 hover:text-neutral-500 transition-colors duration-200">
+              <span className="hidden lg:block">{navItem.icon}</span>
+              <span className="text-sm sm:text-base md:text-lg lg:text-xl">{navItem.name}</span>
+            </span>
           </Link>
         ))}
         </div>

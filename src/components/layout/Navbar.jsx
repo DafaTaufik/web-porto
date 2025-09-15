@@ -8,18 +8,18 @@ export function Navbar() {
     {
       name: "Home",
       link: "/",
-      icon: <IconHome className="h-4 w-4 text-neutral-500 dark:text-white" />,
+      icon: <IconHome className="h-4 w-4 md:h-5 md:w-5" />,
     },
     {
       name: "About",
       link: "/about",
-      icon: <IconUser className="h-4 w-4 text-neutral-500 dark:text-white" />,
+      icon: <IconUser className="h-4 w-4 md:h-5 md:w-5" />,
     },
     {
       name: "Contact",
       link: "/contact",
       icon: (
-        <IconMessage className="h-4 w-4 text-neutral-500 dark:text-white" />
+        <IconMessage className="h-4 w-4 md:h-5 md:w-5" />
       ),
     },
   ];
