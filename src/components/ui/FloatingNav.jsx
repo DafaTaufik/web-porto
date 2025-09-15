@@ -29,13 +29,13 @@ export const FloatingNav = ({ navItems, className }) => {
         animate={{ y: visible ? 0 : -100, opacity: visible ? 1 : 0 }}
         transition={{ duration: 0.2 }}
         className={clsx(
-         "flex max-w-[46%] fixed top-10 inset-x-0 mx-auto border border-transparent dark:border-white/[0.2] rounded-2xl dark:bg-black bg-white shadow-lg z-[5000] py-3 px-3 sm:px-5 md:px-7 lg:px-8 justify-between",
+         "flex max-w-[56%] fixed top-10 inset-x-0 mx-auto border border-transparent dark:border-white/[0.2] rounded-2xl dark:bg-black bg-white shadow-lg z-[5000] py-3 px-3 sm:px-5 md:px-7 lg:px-8 justify-between",
           className
           // "flex max-w-[46%] fixed top-10 inset-x-0 mx-auto border border-transparent dark:border-white/[0.2] rounded-2xl dark:bg-black bg-white shadow-lg z-[5000] pr-2 pl-8 py-3 items-center justify-center space-x-4",
           // className
         )}
       >
-        <p className="font-HWT text-2xl sm:text-3xl lg:text-4xl">Dafa</p>
+        <p className="font-HWT text-2xl sm:text-3xl lg:text-3xl">Dafa</p>
         <div className="flex space-x-2.5 md:space-x-6 xl:space-x-8">
         {navItems.map((navItem, idx) => (
           <Link

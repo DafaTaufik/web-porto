@@ -1,6 +1,6 @@
 import React from "react";
 import { FloatingNav } from "../ui/FloatingNav"; 
-import { IconHome, IconMessage, IconUser } from "@tabler/icons-react";
+import { IconBriefcase, IconBuilding, IconBuildings, IconCertificate, IconCode, IconHome, IconMail, IconMessage, IconUser } from "@tabler/icons-react";
 import { BrowserRouter as Router } from "react-router-dom"; 
 
 export function Navbar() {
@@ -16,11 +16,24 @@ export function Navbar() {
       icon: <IconUser className="h-4 w-4 md:h-5 md:w-5" />,
     },
     {
-      name: "Contact",
-      link: "/contact",
-      icon: (
-        <IconMessage className="h-4 w-4 md:h-5 md:w-5" />
-      ),
+      name: "Experience",
+      link: "/experience",
+      icon: <IconBuildings className="h-4 w-4 md:h-5 md:w-5" />,
+    },
+    {
+      name: "Projects",
+      link: "/projects",
+      icon: <IconBriefcase className="h-4 w-4 md:h-5 md:w-5" />,
+    },
+    {
+      name: "Skills",
+      link: "/skill",
+      icon: <IconCode className="h-4 w-4 md:h-5 md:w-5" />,
+    },
+    {
+      name: "Certificate",
+      link: "/certificate",
+      icon: <IconCertificate className="h-4 w-4 md:h-5 md:w-5" />,
     },
   ];
 
