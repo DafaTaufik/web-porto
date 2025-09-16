@@ -48,7 +48,7 @@ export default function AboutMe() {
     }, []);
     
     return(
-        <div ref={sectionRef} className="w-full h-[800px] flex flex-col items-center relative bg-white">
+        <section id="about" ref={sectionRef} className="w-full h-[800px] flex flex-col items-center relative bg-white">
             {/* This is the black background div that will be resized on scroll */}
             <div 
                 ref={bgRef}
@@ -79,6 +79,6 @@ export default function AboutMe() {
                     />
                 </div>
             </div>
-        </div>
+        </section>
     );
 }

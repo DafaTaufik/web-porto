@@ -7,32 +7,32 @@ export function Navbar() {
   const navItems = [
     {
       name: "Home",
-      link: "/",
+      link: "#home",
       icon: <IconHome className="h-4 w-4 md:h-5 md:w-5" />,
     },
     {
       name: "About",
-      link: "/about",
+      link: "#about",
       icon: <IconUser className="h-4 w-4 md:h-5 md:w-5" />,
     },
     {
       name: "Experience",
-      link: "/experience",
+      link: "#experience",
       icon: <IconBuildings className="h-4 w-4 md:h-5 md:w-5" />,
     },
     {
       name: "Projects",
-      link: "/projects",
+      link: "#projects",
       icon: <IconBriefcase className="h-4 w-4 md:h-5 md:w-5" />,
     },
     {
       name: "Skills",
-      link: "/skill",
+      link: "#skills",
       icon: <IconCode className="h-4 w-4 md:h-5 md:w-5" />,
     },
     {
       name: "Certificate",
-      link: "/certificate",
+      link: "#certificate",
       icon: <IconCertificate className="h-4 w-4 md:h-5 md:w-5" />,
     },
   ];

@@ -5,8 +5,8 @@ import { ExperienceData } from "../../data/ExperienceData";
 export function Experience() {
   
   return (
-    <div className="w-full px-4">
+    <section id="experience"className="w-full px-4">
       <Timeline data={ExperienceData} />
-    </div>
+    </section>
   );
 }
