@@ -64,7 +64,7 @@ export const FloatingNav = ({ navItems, className }) => {
       <motion.div
         initial={{ opacity: 1, y: -100 }}
         animate={{ y: visible ? 0 : -100, opacity: visible ? 1 : 0 }}
-        transition={{ duration: 0.2 }}
+        transition={{ duration: 0.5, ease: "easeInOut" }}
         className={clsx(
          "flex max-w-[90%] sm:max-w-[60%] fixed top-10 inset-x-0 mx-auto border border-transparent dark:border-white/[0.2] rounded-2xl dark:bg-black bg-white shadow-lg z-[5000] py-2 px-2 sm:py-3 sm:px-4 md:px-6 justify-between",
           className
@@ -72,7 +72,7 @@ export const FloatingNav = ({ navItems, className }) => {
           // className
         )}
       >
-        <p className="font-HWT text-2xl sm:text-3xl lg:text-3xl">Dafa</p>
+        <p className="font-HWT text-2xl sm:text-3xl lg:text-3xl dark:text-white">Dafa</p>
         <div className=" flex space-x-1 md:space-x-3 xl:space-x-4">
         {navItems.map((navItem, idx) => {
           // Check if current section matches nav item

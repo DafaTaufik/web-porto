@@ -6,7 +6,10 @@ const defaultColors = ["#ffffff", "#ffffff", "#ffffff"];
 const hexToRgb = (hex) => {
   hex = hex.replace(/^#/, "");
   if (hex.length === 3) {
-    hex = hex.split("").map((c) => c + c).join("");
+    hex = hex
+      .split("")
+      .map((c) => c + c)
+      .join("");
   }
   const int = parseInt(hex, 16);
   const r = ((int >> 16) & 255) / 255;
@@ -208,25 +211,9 @@ const Particles = ({
       }
     };
     // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, [
-    particleCount,
-    particleSpread,
-    speed,
-    moveParticlesOnHover,
-    particleHoverFactor,
-    alphaParticles,
-    particleBaseSize,
-    sizeRandomness,
-    cameraDistance,
-    disableRotation,
-  ]);
+  }, [particleCount, particleSpread, speed, moveParticlesOnHover, particleHoverFactor, alphaParticles, particleBaseSize, sizeRandomness, cameraDistance, disableRotation]);
 
-  return (
-    <div
-      ref={containerRef}
-      className={`relative w-full h-full ${className}`}
-    />
-  );
+  return <div ref={containerRef} className={`relative w-full h-full ${className}`} />;
 };
 
 export default Particles;
