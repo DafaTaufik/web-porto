@@ -1,15 +1,15 @@
 import { useEffect } from "react";
 import Lenis from "@studio-freight/lenis";
-import {Navbar} from "./components/layout/Navbar";
-import {Home} from "./components/sections/Home";
+import { Navbar } from "./components/layout/Navbar";
+import { Home } from "./components/sections/Home";
 import AboutMe from "./components/sections/AboutMe";
-import {Project} from "./components/ui/Project";
-import {Experience} from "./components/sections/Experience";
+import { Project } from "./components/ui/Project";
+import { Experience } from "./components/sections/Experience";
 import Certificate from "./components/sections/Certificate";
 import Footer from "./components/layout/Footer";
 
 function App() {
-  useEffect(()=>{
+  useEffect(() => {
     function easeOutCubic(x) {
       return 1 - Math.pow(1 - x, 3);
     }
@@ -19,9 +19,9 @@ function App() {
       smooth: true,
       easing: easeOutCubic,
     });
-    function raf(time){
+    function raf(time) {
       lenis.raf(time);
-      requestAnimationFrame(raf); 
+      requestAnimationFrame(raf);
     }
     requestAnimationFrame(raf);
     return () => {
@@ -31,15 +31,15 @@ function App() {
 
   return (
     <>
-      <Navbar/>
-      <Home/>
+      <Navbar />
+      <Home />
       <AboutMe />
-      <Project/>
-      <Experience/>
-      <Certificate/>
-      <Footer/>
+      <Project />
+      <Experience />
+      <Certificate />
+      <Footer />
     </>
-  )
+  );
 }
 
-export default App
+export default App;
