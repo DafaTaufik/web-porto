@@ -4,7 +4,7 @@ import Particles from "../ui/Particles";
 import ic_map from "../../assets/Icon/ic_maps.svg";
 import { FaLinkedin } from "react-icons/fa";
 import { FaGithubSquare } from "react-icons/fa";
-import { MdOutlineMarkEmailUnread } from "react-icons/md";
+import { MdMarkEmailUnread } from "react-icons/md";
 
 export function Home() {
   return (
@@ -37,11 +37,17 @@ export function Home() {
 
           {/* Buttons - Enable pointer events only for buttons */}
           <div className="mt-5 flex gap-4 pointer-events-auto">
-            <button className="px-4 py-2 bg-black text-white text-sm font-semibold cursor-pointer rounded-md shadow-md hover:bg-gray-800 transition duration-200" onClick={() => console.log("Projects clicked!")}>
+            <button
+              className="px-4 py-2 bg-black text-white text-sm font-semibold cursor-pointer rounded-md shadow-md hover:bg-gray-800 transition duration-400 transform hover:-translate-y-1"
+              onClick={() => console.log("Projects clicked!")}
+            >
               Projects
             </button>
 
-            <button className="px-4 py-2 bg-white text-black border border-black cursor-pointer text-sm font-semibold rounded-md shadow-md hover:bg-gray-100 transition duration-200" onClick={() => console.log("Contact clicked!")}>
+            <button
+              className="px-4 py-2 bg-white text-black border border-black cursor-pointer text-sm font-semibold rounded-md shadow-md hover:bg-gray-100 transition duration-400 transform hover:-translate-y-1"
+              onClick={() => console.log("Contact clicked!")}
+            >
               Contact Me
             </button>
           </div>
@@ -54,7 +60,7 @@ export function Home() {
             </a>
 
             <a href="mailto:dafataufik99@gmail.com" target="_blank" rel="noopener noreferrer" className="text-black hover:text-red-600 transition duration-400 transform hover:-translate-y-1 cursor-pointer">
-              <MdOutlineMarkEmailUnread size={31} />
+              <MdMarkEmailUnread size={31} />
             </a>
           </div>
         </div>
