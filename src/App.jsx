@@ -34,8 +34,8 @@ function App() {
       <Navbar />
       <Home />
       <AboutMe />
-      <Project />
       <Experience />
+      <Project />
       <Certificate />
       <Footer />
     </>
