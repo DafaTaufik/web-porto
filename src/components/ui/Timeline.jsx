@@ -21,7 +21,7 @@ export const Timeline = ({ data }) => {
 
   const { scrollYProgress } = useScroll({
     target: containerRef,
-    offset: ["start 50%", "end 40%"],
+    offset: ["start 40%", "end 40%"],
   });
 
   const heightTransform = useTransform(scrollYProgress, [0, 1], [0, height]);
@@ -34,8 +34,8 @@ export const Timeline = ({ data }) => {
 
       <div ref={ref} className="relative max-w-7xl mx-auto pb-20">
         {data.map((item, index) => (
-          <motion.div key={index} className="flex justify-start pt-10 md:pt-40 md:gap-10" style={{ opacity: opacityTransform }}>
-            <div className="sticky border border-black flex flex-row z-40 top-40 self-start w-fit ml-2">
+          <motion.div key={index} className="flex justify-start pt-10 md:pt-24 md:gap-10" style={{ opacity: opacityTransform }}>
+            <div className="sticky  flex flex-row z-40 top-40 self-start w-fit ml-2">
               <div className="h-10 md:left-3 w-10 rounded-full bg-white dark:bg-black flex items-center justify-center">
                 <div className="h-4 w-4 rounded-full bg-neutral-200 dark:bg-neutral-800  dark:border-neutral-700 p-2" />
               </div>
