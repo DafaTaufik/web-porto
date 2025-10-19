@@ -15,12 +15,12 @@ export function Experience() {
       </div>
 
       {/* Tabs */}
-      <div className="flex bg-gray-200 ml-56 mt-12 mb-12 dark:bg-neutral-800 rounded-full w-fit">
+      <div className="flex bg-gray-200 ml-56 mt-20 mb-12 dark:bg-neutral-800 rounded-full w-fit">
         {["Professional", "Organizational"].map((tab) => (
           <button
             key={tab}
             onClick={() => setActiveTab(tab)}
-            className={`px-6 py-2 rounded-full text-md font-HWT font-medium transition-colors duration-200
+            className={`px-6 py-2 rounded-full text-lg font-HWT font-medium transition-colors duration-200
               ${activeTab === tab ? "bg-black text-white" : "text-gray-600 dark:text-neutral-400 hover:text-black dark:hover:text-white"}`}
           >
             {tab}

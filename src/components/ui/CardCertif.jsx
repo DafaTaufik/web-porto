@@ -1,21 +1,36 @@
-import { div } from "framer-motion/client";
 import React from "react";
 import dicoding from "../../assets/Image/Dart.png";
 
 export default function CardCertif() {
-
-    return(
-    <div className="flex flex-col text-white bg-black rounded-2xl w-[450px] h-[400px]">
-        <div className="p-4">
-            <img src={dicoding} alt="hero template" className="rounded-lg object-cover h-20 md:h-44 lg:h-60 w-full"/>
+  return (
+    <div className="flex flex-col bg-white border-2 border-black rounded-2xl w-fit h-fit shadow-2xl mx-4">
+      {/* Certificate Image */}
+      <div className="p-6 pb-6">
+        <div className="bg-gray-100 rounded-xl overflow-hidden border border-gray-300">
+          <img src={dicoding} alt="Dicoding Certificate" className="w-full h-full object-cover" />
         </div>
-        <div className="flex flex-col ml-5">
-            <span className="font-Inter font-medium text-2xl">Belajar dasar dart</span>
-            <hr className="border-t-3 w-2/4 rounded-2xl my-2" />
-            <span className="font-Inter text-xl">Dicoding</span>
-            <span className="font-Inter text-sm mt-1">1 Dec 2024</span>
-        </div>
+      </div>
 
+      {/* Certificate Details */}
+      <div className="px-6 pb-6 flex flex-col">
+        {/* Title */}
+        <h3 className="font-Inter font-semibold text-xl md:text-2xl text-black">Belajar dasar dart</h3>
+
+        {/* Organization */}
+        <p className="font-Inter font-semibold text-lg text-black mt-1">Dicoding</p>
+
+        {/* Divider */}
+        <hr className="border-t-2 rounded-4xl border-black w-2/4 my-3" />
+
+        {/* Completion Date */}
+        <p className="font-sans font-semibold text-base text-gray-600 mb-4">Completed on 1 Dec, 2024</p>
+
+        {/* Tags/Buttons */}
+        <div className="flex gap-3 mt-2">
+          <span className="px-8 py-2 bg-[#86858A] text-white text-lg font-sans font-semibold rounded-full">language</span>
+          <span className="px-6 py-2 bg-[#464648] text-white text-lg font-sans font-semibold rounded-full">Dart</span>
+        </div>
+      </div>
     </div>
-);
+  );
 }

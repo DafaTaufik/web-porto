@@ -4,6 +4,7 @@ import TiltedCard from "../ui/TiltedCard";
 import gsap from "gsap";
 import ScrollReveal from "../ui/ScrollReveal";
 import { ScrollTrigger } from "gsap/ScrollTrigger";
+import { FaLocationArrow, FaBriefcase, FaBullseye, FaCalendarCheck } from "react-icons/fa";
 
 gsap.registerPlugin(ScrollTrigger);
 
@@ -62,17 +63,17 @@ export default function AboutMe() {
       {/* Content that sits on top of the animated background */}
       <span className="font-HWT text-5xl md:text-6xl text-black mt-16 relative z-10">About Me</span>
 
-      <div className="px-7 md:px-32 w-screen flex flex-col md:flex-row justify-center md:justify-between md:mt-16 relative z-10">
+      <div className="px-7 md:px-32 w-screen flex flex-col md:flex-row justify-center md:justify-start md:gap-36 md:mt-16 relative z-10">
         {/* Image Section - Left Side */}
         <div className="w-fit h-fit ml-20 mb-8 md:mb-0 ">
           <TiltedCard
             imageSrc={ggImage}
             altText="Dafa Taufik"
             captionText=""
-            containerHeight="400px"
-            containerWidth="350px"
-            imageHeight="400px"
-            imageWidth="350px"
+            containerHeight="450px"
+            containerWidth="400px"
+            imageHeight="450px"
+            imageWidth="400px"
             rotateAmplitude={12}
             scaleOnHover={1.2}
             showMobileWarning={false}
@@ -84,7 +85,7 @@ export default function AboutMe() {
         {/* Right Side Content */}
         <div className="flex flex-col gap-6 md:gap-10 items-center md:items-start mb-16 md:mb-0">
           {/* Text Section - Right Side */}
-          <div className="font-sans font-medium  md:text-justify  md:text-base md:w-[600px] flex items-center">
+          <div className="font-sans font-medium  md:text-justify  md:text-lg md:w-[800px] flex items-center">
             Hi, my name is Dafa Taufik Al Latief, you can call me Dafa. Iam a 6th-semester Informatics student from Multimedia Nusantara University. I love diving into software development, especially building websites and mobile apps. My
             coding journey has been exciting - I've created projects like a website for Covenant Orphanage using Laravel, a movie recommendation site called Umoviez with ReactJS, and a health tracking app named Ciakhamik using Kotlin and
             design UI/UX for movie website called Cinex Using figma. <br />
@@ -93,22 +94,45 @@ export default function AboutMe() {
           </div>
 
           <div className="w-full flex">
-            <div className="grid grid-cols-2 gap-8 font-sans">
-              <div>
-                <h3 className="font-semibold text-lg text-gray-900 mb-1">Location</h3>
-                <p className="text-gray-600">Tangerang, Indonesia</p>
+            <div className="grid grid-cols-2 gap-y-8 gap-x-24 font-sans">
+              <div className="flex flex-row gap-5 items-center">
+                <div className="flex bg-black w-10 h-10  items-center justify-center rounded">
+                  <FaLocationArrow className="text-yellow-300" size={21} />
+                </div>
+                <div className="flex flex-col">
+                  <h3 className="font-semibold text-xl text-gray-900">Location</h3>
+                  <p className="text-gray-600 font-semibold">Tangerang, Indonesia</p>
+                </div>
               </div>
-              <div>
-                <h3 className="font-semibold text-lg text-gray-900 mb-1">Experience</h3>
-                <p className="text-gray-600">4 Mounths</p>
+
+              <div className="flex flex-row gap-5 items-center">
+                <div className="flex bg-black w-10 h-10  items-center justify-center rounded">
+                  <FaBriefcase className="text-yellow-300" size={21} />
+                </div>
+                <div className="flex flex-col">
+                  <h3 className="font-semibold text-xl text-gray-900">Experience</h3>
+                  <p className="text-gray-600 font-semibold">4 Months</p>
+                </div>
               </div>
-              <div>
-                <h3 className="font-semibold text-lg text-gray-900 mb-1">Focus</h3>
-                <p className="text-gray-600">Mobile & Backend Development</p>
+
+              <div className="flex flex-row gap-5 items-center">
+                <div className="flex bg-black w-10 h-10  items-center justify-center rounded">
+                  <FaBullseye className="text-yellow-300" size={21} />
+                </div>
+                <div className="flex flex-col">
+                  <h3 className="font-semibold text-xl text-gray-900">Focus</h3>
+                  <p className="text-gray-600 font-semibold">Mobile & Backend Development</p>
+                </div>
               </div>
-              <div>
-                <h3 className="font-semibold text-lg text-gray-900 mb-1">Availability</h3>
-                <p className="text-gray-600">Open to opportunities</p>
+
+              <div className="flex flex-row gap-5 items-center">
+                <div className="flex bg-black w-10 h-10  items-center justify-center rounded">
+                  <FaCalendarCheck className="text-yellow-300" size={21} />
+                </div>
+                <div className="flex flex-col">
+                  <h3 className="font-semibold text-xl text-gray-900">Availability</h3>
+                  <p className="text-gray-600 font-semibold">Open to opportunities</p>
+                </div>
               </div>
             </div>
           </div>
