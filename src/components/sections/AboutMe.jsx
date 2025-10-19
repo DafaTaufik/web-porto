@@ -97,7 +97,7 @@ export default function AboutMe() {
             <div className="grid grid-cols-2 gap-y-8 gap-x-24 font-sans">
               <div className="flex flex-row gap-5 items-center">
                 <div className="flex bg-black w-10 h-10  items-center justify-center rounded">
-                  <FaLocationArrow className="text-yellow-300" size={21} />
+                  <FaLocationArrow className="text-white" size={21} />
                 </div>
                 <div className="flex flex-col">
                   <h3 className="font-semibold text-xl text-gray-900">Location</h3>
@@ -107,7 +107,7 @@ export default function AboutMe() {
 
               <div className="flex flex-row gap-5 items-center">
                 <div className="flex bg-black w-10 h-10  items-center justify-center rounded">
-                  <FaBriefcase className="text-yellow-300" size={21} />
+                  <FaBriefcase className="text-white" size={21} />
                 </div>
                 <div className="flex flex-col">
                   <h3 className="font-semibold text-xl text-gray-900">Experience</h3>
@@ -117,7 +117,7 @@ export default function AboutMe() {
 
               <div className="flex flex-row gap-5 items-center">
                 <div className="flex bg-black w-10 h-10  items-center justify-center rounded">
-                  <FaBullseye className="text-yellow-300" size={21} />
+                  <FaBullseye className="text-white" size={21} />
                 </div>
                 <div className="flex flex-col">
                   <h3 className="font-semibold text-xl text-gray-900">Focus</h3>
@@ -127,7 +127,7 @@ export default function AboutMe() {
 
               <div className="flex flex-row gap-5 items-center">
                 <div className="flex bg-black w-10 h-10  items-center justify-center rounded">
-                  <FaCalendarCheck className="text-yellow-300" size={21} />
+                  <FaCalendarCheck className="text-white" size={21} />
                 </div>
                 <div className="flex flex-col">
                   <h3 className="font-semibold text-xl text-gray-900">Availability</h3>

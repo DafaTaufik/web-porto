@@ -1,7 +1,7 @@
-import React, { useState } from "react";
+import { useState } from "react";
 import { Timeline } from "../ui/Timeline";
+import { ProfessionalExperience } from "../ui/ProfessionalExperience";
 import { OrganizationalExperienceData } from "../../data/OrganizationalExperienceData";
-import { ProfessionalExperienceData } from "../../data/ProfessionalExperienceData";
 
 export function Experience() {
   const [activeTab, setActiveTab] = useState("Professional");
@@ -29,14 +29,7 @@ export function Experience() {
       </div>
 
       {/* Content sesuai tab */}
-      {activeTab === "Professional" ? (
-        <div className="max-w-6xl mx-auto p-6 border rounded-xl shadow-md bg-white dark:bg-neutral-900 dark:border-neutral-700">
-          <h3 className="text-xl font-semibold mb-4 dark:text-white">Professional Experience</h3>
-          <p className="text-gray-600 dark:text-neutral-400">(Placeholder) — nanti bisa Anda isi dengan style/komponen custom.</p>
-        </div>
-      ) : (
-        <Timeline data={OrganizationalExperienceData} />
-      )}
+      {activeTab === "Professional" ? <ProfessionalExperience /> : <Timeline data={OrganizationalExperienceData} />}
     </section>
   );
 }
