@@ -1,35 +1,58 @@
 @import "tailwindcss";
+
 @font-face {
   font-family: Segoe;
   src: url("../src/assets/fonts/Segoe UI.ttf");
 }
+
 @font-face {
   font-family: HWT;
   src: url("../src/assets/fonts/fonnts.com-HWT_Artz.otf");
 }
+
 @font-face {
   font-family: Asap;
   src: url("../src/assets/fonts/Asap-Regular.ttf");
 }
+
 @font-face {
   font-family: BebasNeue;
   src: url("../src/assets/fonts/BebasNeue-Regular.ttf");
 }
+
 @font-face {
   font-family: Kanit;
   src: url("../src/assets/fonts/Kanit-Regular.ttf");
 }
+
 @font-face {
   font-family: Montserrat;
   src: url("../src/assets/fonts/Montserrat-Regular.ttf");
 }
+
 @font-face {
   font-family: Raleway;
   src: url("../src/assets/fonts/Raleway-Regular.ttf");
 }
+
 @font-face {
   font-family: Inter;
   src: url("../src/assets/fonts/Inter.ttf");
+}
+
+@font-face {
+  font-family: PublicSans;
+  src: url("../src//assets/fonts/PublicSans-VariableFont_wght.ttf")
+}
+
+@font-face {
+  font-family: PlusJakartaSans;
+  src: url("../src//assets/fonts/PlusJakartaSans-VariableFont_wght.ttf")
+}
+
+@font-face {
+  font-family: Sora;
+  src: url("../src//assets/fonts/Sora-VariableFont_wght.ttf")
 }
 
 @theme {
@@ -41,7 +64,11 @@
   --font-Montserrat: Montserrat, "sans-serif";
   --font-Raleway: Raleway, "sans-serif";
   --font-Inter: Inter, "sans-serif";
+  --font-PublicSans: PublicSans, "sans-serif";
+  --font-PlusJakartaSans: PlusJakartaSans, "sans-serif";
+  --font-Sora: Sora, "sans-serif";
 }
+
 html,
 body {
   overflow-x: hidden;

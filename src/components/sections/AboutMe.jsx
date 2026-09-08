@@ -12,37 +12,31 @@ export default function AboutMe() {
   const sectionRef = useRef(null);
   const bgRef = useRef(null);
 
+
   useEffect(() => {
     if (!sectionRef.current || !bgRef.current) return;
+
+    const isDesktop = window.matchMedia("(min-width: 640px)").matches;
+    const targetWidth = isDesktop ? "89vw" : "95vw";
+    const targetRadius = isDesktop ? "50px" : "25px";
 
     // Create animation with GSAP
     const tl = gsap.timeline({
       scrollTrigger: {
-        trigger: "#home", // Menggunakan section home sebagai trigger
-        start: "10% top", // Dimulai ketika center home mencapai top viewport
+        trigger: "#home",
+        start: "10% top",
         end: "100% top",
         scrub: 1,
         markers: true,
       },
     });
 
-    const isDesktop = window.matchMedia("(min-width: 640px)").matches;
-
-    if (isDesktop) {
-      // Animasi untuk desktop
-      tl.to(bgRef.current, {
-        width: "89vw",
-        borderRadius: "50px",
-        ease: "power1.inOut",
-      });
-    } else {
-      // Animasi untuk mobile
-      tl.to(bgRef.current, {
-        width: "95vw",
-        borderRadius: "25px",
-        ease: "power1.inOut",
-      });
-    }
+    // Animasikan hanya bgRef
+    tl.to(bgRef.current, {
+      width: targetWidth,
+      borderRadius: targetRadius,
+      ease: "power1.inOut",
+    });
 
     return () => {
       if (tl.scrollTrigger) {
@@ -53,29 +47,31 @@ export default function AboutMe() {
 
   return (
     <section id="about" ref={sectionRef} className="w-full h-[800px] flex flex-col items-center relative">
-      {/* This is the black background div that will be resized on scroll */}
+      {/* Background card putih yang dianimasikan */}
       <div
         ref={bgRef}
-        className="absolute top-0 h-[760px] w-screen left-1/2 transform -translate-x-1/2 
+        className="absolute top-0 h-[760px] w-screen left-1/2 transform -translate-x-1/2
              bg-white shadow-2xl rounded-2xl"
       ></div>
 
-      {/* Content that sits on top of the animated background */}
-      <span className="font-HWT text-5xl md:text-6xl text-black mt-16 relative z-10">About Me</span>
-
-      <div className="px-7 md:px-32 w-screen flex flex-col md:flex-row justify-center md:justify-start md:gap-36 md:mt-16 relative z-10">
+      {/* Title - di atas background */}
+      <span className="font-HWT text-5xl md:text-6xl text-black mt-10 relative z-10">About Me</span>
+      {/* Div konten - lebar statis = ukuran akhir bgRef, konten stay tidak bergerak */}
+      <div
+        className="w-[95vw] md:w-[89vw] px-7 md:px-10 flex flex-col md:flex-row justify-center md:justify-start md:gap-16 md:mt-16 relative z-10"
+      >
         {/* Image Section - Left Side */}
-        <div className="w-fit h-fit ml-20 mb-8 md:mb-0 ">
+        <div className="w-fit h-fit ml-1 mb-8 md:mb-0 ">
           <TiltedCard
             imageSrc={ggImage}
             altText="Dafa Taufik"
             captionText=""
-            containerHeight="450px"
-            containerWidth="400px"
-            imageHeight="450px"
-            imageWidth="400px"
+            containerHeight="400px"
+            containerWidth="350px"
+            imageHeight="400px"
+            imageWidth="350px"
             rotateAmplitude={12}
-            scaleOnHover={1.2}
+            scaleOnHover={1.08}
             showMobileWarning={false}
             showTooltip={false}
             displayOverlayContent={false}
@@ -86,7 +82,7 @@ export default function AboutMe() {
         <div className="flex flex-col gap-6 md:gap-10 items-center md:items-start mb-16 md:mb-0">
           {/* Text Section - Right Side */}
           <div className="font-sans font-medium  md:text-justify  md:text-lg md:w-[800px] flex items-center">
-            Hi, my name is Dafa Taufik Al Latief, you can call me Dafa. Iam a 6th-semester Informatics student from Multimedia Nusantara University. I love diving into software development, especially building websites and mobile apps. My
+            Hi, my name is Dafa Taufik Al Latief, you can call me Dafa. I'm a Fresh Graduate Informatics from Multimedia Nusantara University. I love diving into software development, especially building Websites and Mobile apps. My
             coding journey has been exciting - I've created projects like a website for Covenant Orphanage using Laravel, a movie recommendation site called Umoviez with ReactJS, and a health tracking app named Ciakhamik using Kotlin and
             design UI/UX for movie website called Cinex Using figma. <br />
             <br /> I'm passionate about exploring various programming technologies, and I'm having worked with PHP, JavaScript, ReactJS, Laravel, Kotlin, Firebase, MySQL, Dart and TailwindCSS, and I'm always excited to learn more and

@@ -6,7 +6,7 @@ import AboutMe from "./components/sections/AboutMe";
 import { Project } from "./components/ui/Project";
 import { Experience } from "./components/sections/Experience";
 import Skills from "./components/sections/Skills";
-import Certificate from "./components/sections/Certificate";
+import Courses from "./components/sections/Courses";
 import Footer from "./components/layout/Footer";
 
 function App() {
@@ -38,7 +38,7 @@ function App() {
       <Experience />
       <Project />
       <Skills />
-      <Certificate />
+      <Courses />
       <Footer />
     </>
   );

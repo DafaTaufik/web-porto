@@ -7,16 +7,28 @@ export const Timeline = ({ data }) => {
   const containerRef = useRef(null);
   const [height, setHeight] = useState(0);
 
-  // Update height saat resize
+  // Update height dengan ResizeObserver — otomatis re-measure saat gambar/konten selesai load
   useEffect(() => {
+    if (!ref.current) return;
+
     const updateHeight = () => {
       if (ref.current) {
         setHeight(ref.current.getBoundingClientRect().height);
       }
     };
+
+    // ResizeObserver: trigger setiap kali ukuran konten berubah (termasuk setelah gambar load)
+    const resizeObserver = new ResizeObserver(updateHeight);
+    resizeObserver.observe(ref.current);
+
+    // Jalankan sekali di awal
     updateHeight();
+
     window.addEventListener("resize", updateHeight);
-    return () => window.removeEventListener("resize", updateHeight);
+    return () => {
+      resizeObserver.disconnect();
+      window.removeEventListener("resize", updateHeight);
+    };
   }, []);
 
   const { scrollYProgress } = useScroll({

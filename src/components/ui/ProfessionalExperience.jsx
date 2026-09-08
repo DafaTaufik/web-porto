@@ -3,15 +3,15 @@ import { ProfessionalExperienceData } from "../../data/ProfessionalExperienceDat
 
 export const ProfessionalExperience = () => {
   return (
-    <div className="max-w-7xl mx-auto p-6">
+    <div className="max-w-7xl mx-auto">
       <div className="space-y-6">
         {ProfessionalExperienceData.map((experience, index) => (
           <div key={index} className="bg-white dark:bg-neutral-900 rounded-xl shadow-lg p-6 border border-gray-200 dark:border-neutral-800">
             {/* Header */}
-            <div className="flex flex-col md:flex-row md:justify-between md:items-start mb-4">
+            <div className="flex flex-col font-Sora md:flex-row md:justify-between md:items-start mb-4">
               <div>
-                <h4 className="text-xl font-semibold font-sans text-black dark:text-white">{experience.position}</h4>
-                <p className="text-blue-600 dark:text-blue-400 font-medium font-sans">{experience.company}</p>
+                <h4 className="text-xl font-bold font-Sora text-black dark:text-white">{experience.position}</h4>
+                <p className="text-zinc-700 font-medium">{experience.company}</p>
               </div>
               <div className="text-base text-black font-semibold dark:text-neutral-400 mt-2 md:mt-0">{experience.duration}</div>
             </div>
