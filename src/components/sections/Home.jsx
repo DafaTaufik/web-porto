@@ -60,8 +60,12 @@ export function Home() {
       const REACH = 1.2; // em: jarak geser akhir tiap kata
 
       // "Dafa" bergeser ke kiri, "Taufik" ke kanan, dalam satu gerakan menerus.
-      tl.to(masksRef.current[0], { x: `${-REACH}em`, duration: OPEN_DUR, ease: "power2.inOut" }, OPEN);
-      tl.to(masksRef.current[1], { x: `${REACH}em`, duration: OPEN_DUR, ease: "power2.inOut" }, OPEN);
+      // Jarak akhir dibuat beda per kata: "Dafa" hanya menyisakan setengah huruf A terakhir di foto,
+      // "Taufik" menyisakan huruf T dan setengah A. REACH di atas tetap dipakai untuk menghitung PASSED.
+      const REACH_LEFT = 1.3;
+      const REACH_RIGHT = 1.57;
+      tl.to(masksRef.current[0], { x: `${-REACH_LEFT}em`, duration: OPEN_DUR, ease: "power2.inOut" }, OPEN);
+      tl.to(masksRef.current[1], { x: `${REACH_RIGHT}em`, duration: OPEN_DUR, ease: "power2.inOut" }, OPEN);
 
       // Setelah tiap kata melewati ~1 huruf (power2.inOut: progres p = 2t² sebelum titik tengah),
       // zoom out sedikit dan biarkan foto terbuka dari tengah.
@@ -69,6 +73,13 @@ export function Home() {
       tl.to(groupRef.current, { scale: 0.7, duration: 0.9, ease: "power2.inOut" }, PASSED);
       // Mulai sebagai garis vertikal tipis di tengah, lalu sisi kiri menyapu ke kiri dan sisi kanan ke kanan.
       tl.fromTo(photoRef.current, { clipPath: "inset(0% 49.5% 0% 49.5%)" }, { clipPath: "inset(0% 0% 0% 0%)", duration: 0.9, ease: "power2.out", immediateRender: false }, PASSED + 0.15);
+
+      // Info di sekeliling foto muncul pelan setelah foto terbuka; tidak mengubah tween di atas.
+      gsap.set(".hero-info", { autoAlpha: 0 });
+      tl.fromTo(".hero-info", { autoAlpha: 0, y: 12 }, { autoAlpha: 1, y: 0, duration: 0.7, ease: "power2.out", stagger: 0.1, immediateRender: false }, PASSED + 0.8);
+
+      // Garis kecil pada indikator scroll bergerak turun berulang.
+      gsap.fromTo(".hero-scroll-bar", { yPercent: -100 }, { yPercent: 100, duration: 1.4, ease: "power1.inOut", repeat: -1 });
     }, sectionRef);
 
     return () => {
@@ -81,13 +92,13 @@ export function Home() {
     <section ref={sectionRef} id="home" className="relative isolate w-full h-screen min-h-[560px] overflow-hidden bg-[#F0EFEB]">
       {/* Foto — terbuka dari tengah saat kata-kata mulai membuka */}
       <div className="absolute inset-0 flex items-center justify-center z-10">
-        <div ref={photoRef} className="h-[92vh] w-[min(73.6vh,72vw)] overflow-hidden">
+        <div ref={photoRef} className="h-[80vh] w-[min(64vh,72vw)] overflow-hidden">
           <img src={photo} alt="Dafa Taufik" className="h-full w-full object-cover" />
         </div>
       </div>
 
       {/* Headline */}
-      <h1 className="absolute inset-0 z-20 flex items-center justify-center pointer-events-none font-HWT text-[#1B2A1B] text-[clamp(4rem,15vw,16rem)] leading-[0.9]">
+      <h1 className="absolute inset-0 z-20 flex items-center justify-center pointer-events-none font-HWT text-black text-[clamp(4rem,15vw,16rem)] leading-[0.9]">
         <span ref={groupRef} className="flex flex-col">
           <span ref={(el) => (masksRef.current[0] = el)} className="block overflow-hidden py-[0.06em] -my-[0.06em]">
             <span ref={(el) => (wordsRef.current[0] = el)} className="block whitespace-nowrap">
@@ -101,6 +112,44 @@ export function Home() {
           </span>
         </span>
       </h1>
+
+      {/* Info pendukung di sekitar foto */}
+      <div className="absolute inset-0 z-[25] pointer-events-none font-PlusJakartaSans text-[#1B2A1B] text-[11px] sm:text-xs uppercase tracking-[0.18em]">
+        <p className="hero-info absolute top-24 left-[4vw] hidden md:block font-semibold leading-relaxed">
+          Mobile & Backend
+          <br />
+          Developer
+        </p>
+
+        <p className="hero-info absolute top-24 right-[4vw] hidden md:block text-right opacity-60">(Portfolio — 2026)</p>
+
+        <p className="hero-info absolute bottom-6 left-[4vw] hidden sm:flex items-center gap-2.5 font-semibold">
+          <span className="relative flex h-2 w-2">
+            <span className="absolute inline-flex h-full w-full animate-ping rounded-full bg-emerald-500 opacity-75" />
+            <span className="relative inline-flex h-2 w-2 rounded-full bg-emerald-500" />
+          </span>
+          Available for work
+        </p>
+
+        <div className="hero-info absolute bottom-6 left-1/2 -translate-x-1/2 flex flex-col items-center gap-2 opacity-60">
+          <span>Scroll</span>
+          <span className="relative block h-8 w-px overflow-hidden bg-[#1B2A1B]/20">
+            <span className="hero-scroll-bar absolute inset-0 bg-[#1B2A1B]" />
+          </span>
+        </div>
+
+        <div className="hero-info absolute bottom-6 right-[4vw] hidden sm:flex items-center gap-5 font-semibold pointer-events-auto">
+          {[
+            ["GitHub", "https://github.com/DafaTaufik"],
+            ["LinkedIn", "https://www.linkedin.com/in/dafa-taufik-al-latief/"],
+            ["Instagram", "https://www.instagram.com/dafataufk/"],
+          ].map(([label, href]) => (
+            <a key={label} href={href} target="_blank" rel="noopener noreferrer" className="underline-offset-4 hover:underline">
+              {label}
+            </a>
+          ))}
+        </div>
+      </div>
 
       {/* Intro: penutup hijau berbentuk anak tangga */}
       <div className="absolute inset-0 z-30 pointer-events-none flex flex-col" aria-hidden="true">
