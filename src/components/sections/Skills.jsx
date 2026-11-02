@@ -1,83 +1,81 @@
-import React, { useState, useEffect, useRef } from "react";
+import { useLayoutEffect, useRef } from "react";
+import gsap from "gsap";
+import { ScrollTrigger } from "gsap/ScrollTrigger";
 import { skillsData } from "../../data/SkillsData";
 
-const SkillBar = ({ name, percentage, icon: Icon, color: Color, isVisible }) => {
-  const [currentPercentage, setCurrentPercentage] = useState(0);
-  const [width, setWidth] = useState(0);
+gsap.registerPlugin(ScrollTrigger);
 
-  useEffect(() => {
-    if (!isVisible) return;
-
-    const duration = 2000;
-    const steps = 60;
-    const increment = percentage / steps;
-    const stepDuration = duration / steps;
-
-    let current = 0;
-    const timer = setInterval(() => {
-      current += increment;
-      if (current >= percentage) {
-        setCurrentPercentage(percentage);
-        clearInterval(timer);
-      } else {
-        setCurrentPercentage(Math.floor(current));
-      }
-    }, stepDuration);
-
-    setTimeout(() => setWidth(percentage), 100);
-
-    return () => clearInterval(timer);
-  }, [isVisible, percentage]);
-
-  return (
-    <div className="w-full bg-white shadow-2xl rounded-lg p-5">
-      <div className="flex items-center justify-between mb-3">
-        <div className="flex items-center gap-2">
-          {Icon && <Icon size={32} color={Color} />}
-          <span className="font-HWT text-lg">{name}</span>
-        </div>
-        <span className="font-HWT text-lg">{currentPercentage}%</span>
-      </div>
-      <div className="w-full h-3 bg-mist rounded-full overflow-hidden">
-        <div className="h-full bg-navy transition-all duration-2000 ease-out rounded-full" style={{ width: `${width}%` }} />
-      </div>
-    </div>
-  );
-};
+// Urut dari yang tertinggi supaya terbaca sebagai peringkat: kolom kiri dulu, lalu kolom kanan.
+const SKILLS = [...skillsData].sort((a, b) => b.percentage - a.percentage);
 
 export default function Skills() {
-  const [isVisible, setIsVisible] = useState(false);
   const sectionRef = useRef(null);
 
-  useEffect(() => {
-    const observer = new IntersectionObserver(
-      ([entry]) => {
-        if (entry.isIntersecting) {
-          setIsVisible(true);
-        }
-      },
-      { threshold: 0.2 }
-    );
+  useLayoutEffect(() => {
+    if (window.matchMedia("(prefers-reduced-motion: reduce)").matches) return;
 
-    if (sectionRef.current) {
-      observer.observe(sectionRef.current);
-    }
+    const ctx = gsap.context(() => {
+      gsap.fromTo("[data-skills-word]", { yPercent: 110 }, { yPercent: 0, duration: 0.9, ease: "power3.out", scrollTrigger: { trigger: "[data-skills-title]", start: "top 85%", once: true } });
 
-    return () => {
-      if (sectionRef.current) {
-        observer.unobserve(sectionRef.current);
-      }
-    };
+      // Tiap baris: bar terisi lewat transform (bukan width) dan angka menghitung naik bersamaan.
+      gsap.utils.toArray("[data-skill]").forEach((row) => {
+        const fill = row.querySelector("[data-skill-fill]");
+        const value = row.querySelector("[data-skill-value]");
+        const target = Number(row.dataset.skill);
+        const counter = { n: 0 };
+
+        gsap.set(fill, { scaleX: 0 });
+        value.textContent = "0%";
+
+        gsap.to(fill, { scaleX: target / 100, duration: 1.4, ease: "power3.out", scrollTrigger: { trigger: row, start: "top 88%", once: true } });
+        gsap.to(counter, {
+          n: target,
+          duration: 1.4,
+          ease: "power3.out",
+          onUpdate: () => (value.textContent = `${Math.round(counter.n)}%`),
+          scrollTrigger: { trigger: row, start: "top 88%", once: true },
+        });
+      });
+    }, sectionRef);
+
+    return () => ctx.revert();
   }, []);
 
   return (
-    <section id="skills" ref={sectionRef} className="w-full min-h-screen flex flex-col justify-center items-center py-8 px-24 bg-cream">
-      <h2 className="font-HWT text-6xl mb-24">Skills</h2>
-      <div className="w-full grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-x-10 gap-y-10">
-        {skillsData.map((skill, index) => (
-          <SkillBar key={index} name={skill.name} percentage={skill.percentage} icon={skill.icon} color={skill.color} isVisible={isVisible} />
-        ))}
+    <section id="skills" ref={sectionRef} className="relative w-full overflow-hidden bg-cream text-navy px-[max(4vw,20px)] py-[clamp(80px,10vw,160px)]">
+      <div className="flex flex-col gap-6 md:flex-row md:items-end md:justify-between">
+        <h2 data-skills-title className="font-HWT text-[clamp(4rem,15vw,16rem)] leading-[0.9]">
+          <span className="block overflow-hidden py-[0.06em] -my-[0.06em]">
+            <span data-skills-word className="block whitespace-nowrap">
+              Skills
+            </span>
+          </span>
+        </h2>
+        <p className="font-PlusJakartaSans text-lg font-medium leading-snug md:max-w-[24ch] md:pb-[0.6em]">Self-rated proficiency out of 100, from strongest to newest.</p>
       </div>
+
+      <ul className="mt-14 md:mt-20 grid grid-cols-1 gap-x-[4vw] lg:grid-flow-col lg:grid-cols-2 lg:grid-rows-4">
+        {SKILLS.map(({ name, percentage, icon: Icon }) => (
+          <li
+            key={name}
+            data-skill={percentage}
+            className="grid grid-cols-[1fr_auto] items-center gap-x-4 gap-y-3 border-b-2 border-navy py-5 first:border-t-2 md:grid-cols-[11rem_1fr_4.5rem] lg:[&:nth-child(5)]:border-t-2"
+          >
+            <span className="col-start-1 row-start-1 flex items-center gap-3 font-PlusJakartaSans text-xl font-semibold md:text-2xl">
+              {Icon && <Icon aria-hidden="true" className="h-7 w-7 shrink-0" />}
+              {name}
+            </span>
+
+            <div aria-hidden="true" className="col-span-2 row-start-2 h-5 border-2 border-navy bg-white md:col-span-1 md:col-start-2 md:row-start-1">
+              <div data-skill-fill className="h-full origin-left bg-navy" style={{ transform: `scaleX(${percentage / 100})` }} />
+            </div>
+
+            <span data-skill-value className="col-start-2 row-start-1 text-right font-PlusJakartaSans text-2xl font-bold tabular-nums md:col-start-3">
+              {percentage}%
+            </span>
+          </li>
+        ))}
+      </ul>
     </section>
   );
 }

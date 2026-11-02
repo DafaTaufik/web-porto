@@ -48,10 +48,10 @@ export function Home() {
       });
 
       // Hijau menyapu ke kanan per anak tangga (dari atas), membuka headline.
-      tl.to(stairsRef.current, { scaleX: 0, duration: 1.1, ease: "power3.inOut", stagger: 0.15 }, 0.5);
+      tl.to(stairsRef.current, { scaleX: 0, duration: 1.6, ease: "power3.inOut", stagger: 0.15 }, 0.5);
 
       // Kata-kata slide ke kanan keluar dari mask-nya saat hijau disapu.
-      tl.fromTo(wordsRef.current, { xPercent: -110 }, { xPercent: 0, duration: 1.1, ease: "power3.out", stagger: 0.15 }, 0.9);
+      tl.fromTo(wordsRef.current, { xPercent: -110 }, { xPercent: 0, duration: 1.6, ease: "power3.out", stagger: 0.15 }, 0.9);
 
       // Headline diam 0,2 detik, lalu terbuka seperti tirai.
       const OPEN = 2.15 + 0.15;
@@ -126,12 +126,12 @@ export function Home() {
         <p className="hero-info absolute bottom-6 left-[4vw] hidden sm:flex items-center gap-2.5 font-semibold">
           <span className="relative flex h-2 w-2">
             <span className="absolute inline-flex h-full w-full animate-ping rounded-full bg-accent opacity-75" />
-            <span className="relative inline-flex h-2 w-2 rounded-full bg-accent" />
+            <span className="relative inline-flex h-2 w-2 rounded-full bg-green-400" />
           </span>
           Available for work
         </p>
 
-        <div className="hero-info absolute bottom-6 left-1/2 -translate-x-1/2 flex flex-col items-center gap-2 opacity-60">
+        <div className="hero-info absolute bottom-3 left-1/2 -translate-x-1/2 flex flex-col items-center gap-2 opacity-60">
           <span>Scroll</span>
           <span className="relative block h-8 w-px overflow-hidden bg-navy/20">
             <span className="hero-scroll-bar absolute inset-0 bg-navy" />

@@ -66,7 +66,7 @@ export const FloatingNav = ({ navItems, className }) => {
         transition={{ duration: 0.45, ease: "easeOut" }}
         className={clsx(
           "flex max-w-[90%] sm:max-w-[60%] fixed top-5 inset-x-0 mx-auto border border-navy/10 dark:border-white/[0.2] rounded-2xl dark:bg-black bg-cream shadow-lg z-[5000] py-2 px-2 sm:py-3 sm:px-4 md:px-6 justify-between",
-          className
+          className,
           // "flex max-w-[46%] fixed top-5 inset-x-0 mx-auto border border-transparent dark:border-white/[0.2] rounded-2xl dark:bg-black bg-white shadow-lg z-[5000] pr-2 pl-8 py-3 items-center justify-center space-x-4",
           // className
         )}
@@ -96,7 +96,7 @@ export const FloatingNav = ({ navItems, className }) => {
                 <span
                   className={clsx(
                     "block sm:hidden relative z-10", // z-10 supaya text di atas bg
-                    isActive ? "text-white dark:text-black" : "dark:text-neutral-50 text-navy/70 dark:hover:text-neutral-300 hover:text-navy"
+                    isActive ? "text-white dark:text-black" : "dark:text-neutral-50 text-navy/70 dark:hover:text-neutral-300 hover:text-navy",
                   )}
                 >
                   {navItem.icon}
