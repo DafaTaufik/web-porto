@@ -67,15 +67,15 @@ export function Experience() {
     <section id="experience" className="w-full">
       <div className="max-w-7xl w-fit mt-20 lg:mx-44">
         {/* Headline */}
-        <h2 className="font-HWT text-5xl md:text-6xl text-black dark:text-white max-w-4xl">Experience</h2>
+        <h2 className="font-HWT text-5xl md:text-6xl text-navy dark:text-white max-w-4xl">Experience</h2>
         <p className="text-neutral-700 dark:text-neutral-300 text-sm md:text-base max-w-sm"></p>
       </div>
 
       {/* Tabs */}
-      <div className="relative flex bg-gray-200 ml-42 mt-14  mb-11 dark:bg-neutral-800 rounded-full w-fit p-1">
+      <div className="relative flex bg-mist ml-42 mt-14  mb-11 dark:bg-neutral-800 rounded-full w-fit p-1">
         {/* Sliding pill hitam */}
         <div
-          className="absolute top-1 bottom-1 rounded-full bg-black transition-all duration-700 ease-in-out"
+          className="absolute top-1 bottom-1 rounded-full bg-accent transition-all duration-700 ease-in-out"
           style={{
             width: "calc(50% - 4px)",
             left: activeTab === "Professional" ? "4px" : "calc(50%)",
@@ -87,7 +87,7 @@ export function Experience() {
             key={tab}
             onClick={() => handleTabChange(tab)}
             className={`relative z-10 px-6 py-2 rounded-full text-lg font-HWT font-medium transition-colors duration-700
-              ${activeTab === tab ? "text-white" : "text-gray-600 dark:text-neutral-400 hover:text-black dark:hover:text-white"}`}
+              ${activeTab === tab ? "text-white" : "text-navy/70 dark:text-neutral-400 hover:text-navy dark:hover:text-white"}`}
           >
             {tab}
           </button>

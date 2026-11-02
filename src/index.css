@@ -67,6 +67,12 @@
   --font-PublicSans: PublicSans, "sans-serif";
   --font-PlusJakartaSans: PlusJakartaSans, "sans-serif";
   --font-Sora: Sora, "sans-serif";
+
+  /* Palet: navy dari blazer di foto, krem dari latar hero, aksen dari senter/papan di foto. */
+  --color-navy: #14264b;
+  --color-cream: #f0efeb;
+  --color-accent: #d93a22;
+  --color-mist: #dce3f0; /* pendukung biru pucat, pengganti abu netral */
 }
 
 html,

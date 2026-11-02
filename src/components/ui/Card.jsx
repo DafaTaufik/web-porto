@@ -3,7 +3,7 @@ import Logo from "../../assets/Image/CiakhamikLogo.png";
 
 export default function Card() {
   return (
-    <div className="w-[973] h-[407] bg-black border-2 flex rounded-2xl text-white ">
+    <div className="w-[973] h-[407] bg-navy border-2 flex rounded-2xl text-white ">
         <div className="p-7 grid grid-cols-2 gap-6">
         <div className="w-fit h-fit">
             <img src={Logo} className="w-[450px] h-[350px] rounded-2xl" alt="Logo" />

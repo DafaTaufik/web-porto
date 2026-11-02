@@ -4,7 +4,7 @@ import Card from "./Card";
 
 export function Project() {
     return(
-        <div className="w-full h-full bg-white flex flex-col items-center mt-20 mb-20">
+        <div id="projects" className="w-full h-full bg-cream flex flex-col items-center mt-20 mb-20">
             <span className="font-HWT text-6xl">Project</span>
             <div className="mt-20 grid grid-cols-1  gap-12 overflow-hidden">
                 <Card/>

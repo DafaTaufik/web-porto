@@ -65,13 +65,13 @@ export const FloatingNav = ({ navItems, className }) => {
         animate={{ y: visible ? 0 : -100, opacity: visible ? 1 : 0 }}
         transition={{ duration: 0.45, ease: "easeOut" }}
         className={clsx(
-          "flex max-w-[90%] sm:max-w-[60%] fixed top-5 inset-x-0 mx-auto border border-transparent dark:border-white/[0.2] rounded-2xl dark:bg-black bg-white shadow-lg z-[5000] py-2 px-2 sm:py-3 sm:px-4 md:px-6 justify-between",
+          "flex max-w-[90%] sm:max-w-[60%] fixed top-5 inset-x-0 mx-auto border border-navy/10 dark:border-white/[0.2] rounded-2xl dark:bg-black bg-cream shadow-lg z-[5000] py-2 px-2 sm:py-3 sm:px-4 md:px-6 justify-between",
           className
           // "flex max-w-[46%] fixed top-5 inset-x-0 mx-auto border border-transparent dark:border-white/[0.2] rounded-2xl dark:bg-black bg-white shadow-lg z-[5000] pr-2 pl-8 py-3 items-center justify-center space-x-4",
           // className
         )}
       >
-        <p className="font-HWT text-2xl sm:text-3xl lg:text-3xl dark:text-white">Dafa</p>
+        <p className="font-HWT text-2xl sm:text-3xl lg:text-3xl text-navy dark:text-white">Dafa</p>
         <div className=" flex space-x-1 md:space-x-3 xl:space-x-4">
           {navItems.map((navItem, idx) => {
             const sectionId = navItem.link.replace("#", "");
@@ -82,7 +82,7 @@ export const FloatingNav = ({ navItems, className }) => {
                 {isActive && (
                   <motion.span
                     layoutId="navHighlight"
-                    className="absolute inset-0 rounded-full bg-black dark:bg-white shadow-md"
+                    className="absolute inset-0 rounded-full bg-accent dark:bg-white shadow-md"
                     transition={{
                       type: "spring",
                       stiffness: 550, // makin besar makin cepat
@@ -96,14 +96,14 @@ export const FloatingNav = ({ navItems, className }) => {
                 <span
                   className={clsx(
                     "block sm:hidden relative z-10", // z-10 supaya text di atas bg
-                    isActive ? "text-white dark:text-black" : "dark:text-neutral-50 text-neutral-600 dark:hover:text-neutral-300 hover:text-neutral-500"
+                    isActive ? "text-white dark:text-black" : "dark:text-neutral-50 text-navy/70 dark:hover:text-neutral-300 hover:text-navy"
                   )}
                 >
                   {navItem.icon}
                 </span>
 
                 {/* Tablet ke atas: Icon + Text */}
-                <span className={clsx("hidden sm:flex items-center space-x-2 relative z-10", isActive ? "text-white dark:text-black" : "dark:text-neutral-50 text-neutral-600 dark:hover:text-neutral-300 hover:text-neutral-500")}>
+                <span className={clsx("hidden sm:flex items-center space-x-2 relative z-10", isActive ? "text-white dark:text-black" : "dark:text-neutral-50 text-navy/70 dark:hover:text-neutral-300 hover:text-navy")}>
                   <span className="hidden lg:block">{navItem.icon}</span>
                   <span className="text-sm sm:text-base md:text-lg">{navItem.name}</span>
                 </span>

@@ -27,7 +27,6 @@ export default function AboutMe() {
         start: "10% top",
         end: "100% top",
         scrub: 1,
-        markers: true,
       },
     });
 
@@ -55,7 +54,7 @@ export default function AboutMe() {
       ></div>
 
       {/* Title - di atas background */}
-      <span className="font-HWT text-5xl md:text-6xl text-black mt-10 relative z-10">About Me</span>
+      <span className="font-HWT text-5xl md:text-6xl text-navy mt-10 relative z-10">About Me</span>
       {/* Div konten - lebar statis = ukuran akhir bgRef, konten stay tidak bergerak */}
       <div
         className="w-[95vw] md:w-[89vw] px-7 md:px-10 flex flex-col md:flex-row justify-center md:justify-start md:gap-16 md:mt-16 relative z-10"
@@ -92,42 +91,42 @@ export default function AboutMe() {
           <div className="w-full flex">
             <div className="grid grid-cols-2 gap-y-8 gap-x-24 font-sans">
               <div className="flex flex-row gap-5 items-center">
-                <div className="flex bg-black w-10 h-10  items-center justify-center rounded">
+                <div className="flex bg-navy w-10 h-10  items-center justify-center rounded">
                   <FaLocationArrow className="text-white" size={21} />
                 </div>
                 <div className="flex flex-col">
-                  <h3 className="font-semibold text-xl text-gray-900">Location</h3>
-                  <p className="text-gray-600 font-semibold">Tangerang, Indonesia</p>
+                  <h3 className="font-semibold text-xl text-navy">Location</h3>
+                  <p className="text-navy/70 font-semibold">Tangerang, Indonesia</p>
                 </div>
               </div>
 
               <div className="flex flex-row gap-5 items-center">
-                <div className="flex bg-black w-10 h-10  items-center justify-center rounded">
+                <div className="flex bg-navy w-10 h-10  items-center justify-center rounded">
                   <FaBriefcase className="text-white" size={21} />
                 </div>
                 <div className="flex flex-col">
-                  <h3 className="font-semibold text-xl text-gray-900">Experience</h3>
-                  <p className="text-gray-600 font-semibold">4 Months</p>
+                  <h3 className="font-semibold text-xl text-navy">Experience</h3>
+                  <p className="text-navy/70 font-semibold">4 Months</p>
                 </div>
               </div>
 
               <div className="flex flex-row gap-5 items-center">
-                <div className="flex bg-black w-10 h-10  items-center justify-center rounded">
+                <div className="flex bg-navy w-10 h-10  items-center justify-center rounded">
                   <FaBullseye className="text-white" size={21} />
                 </div>
                 <div className="flex flex-col">
-                  <h3 className="font-semibold text-xl text-gray-900">Focus</h3>
-                  <p className="text-gray-600 font-semibold">Mobile & Backend Development</p>
+                  <h3 className="font-semibold text-xl text-navy">Focus</h3>
+                  <p className="text-navy/70 font-semibold">Mobile & Backend Development</p>
                 </div>
               </div>
 
               <div className="flex flex-row gap-5 items-center">
-                <div className="flex bg-black w-10 h-10  items-center justify-center rounded">
+                <div className="flex bg-navy w-10 h-10  items-center justify-center rounded">
                   <FaCalendarCheck className="text-white" size={21} />
                 </div>
                 <div className="flex flex-col">
-                  <h3 className="font-semibold text-xl text-gray-900">Availability</h3>
-                  <p className="text-gray-600 font-semibold">Open to opportunities</p>
+                  <h3 className="font-semibold text-xl text-navy">Availability</h3>
+                  <p className="text-navy/70 font-semibold">Open to opportunities</p>
                 </div>
               </div>
             </div>

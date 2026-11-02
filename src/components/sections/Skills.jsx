@@ -38,8 +38,8 @@ const SkillBar = ({ name, percentage, icon: Icon, color: Color, isVisible }) => 
         </div>
         <span className="font-HWT text-lg">{currentPercentage}%</span>
       </div>
-      <div className="w-full h-3 bg-gray-200 rounded-full overflow-hidden">
-        <div className="h-full bg-black transition-all duration-2000 ease-out rounded-full" style={{ width: `${width}%` }} />
+      <div className="w-full h-3 bg-mist rounded-full overflow-hidden">
+        <div className="h-full bg-navy transition-all duration-2000 ease-out rounded-full" style={{ width: `${width}%` }} />
       </div>
     </div>
   );
@@ -71,7 +71,7 @@ export default function Skills() {
   }, []);
 
   return (
-    <section id="skills" ref={sectionRef} className="w-full min-h-screen flex flex-col justify-center items-center py-8 px-24 bg-white">
+    <section id="skills" ref={sectionRef} className="w-full min-h-screen flex flex-col justify-center items-center py-8 px-24 bg-cream">
       <h2 className="font-HWT text-6xl mb-24">Skills</h2>
       <div className="w-full grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-x-10 gap-y-10">
         {skillsData.map((skill, index) => (

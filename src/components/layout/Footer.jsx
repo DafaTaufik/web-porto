@@ -6,7 +6,7 @@ import ic_github from "../../assets/Icon/github.png";
 
 export default function Footer(){
     return(
-        <div className="bg-black mt-20 w-full h-[300px] flex justify-center">
+        <div className="bg-navy mt-20 w-full h-[300px] flex justify-center">
             <div className="w-7xl text-white  h-full py-12 flex flex-col">
                 <p className="font-HWT text-5xl">Contact</p>
                 <p className="font-Inter">Currently i </p>

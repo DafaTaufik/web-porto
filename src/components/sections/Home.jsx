@@ -89,7 +89,7 @@ export function Home() {
   }, []);
 
   return (
-    <section ref={sectionRef} id="home" className="relative isolate w-full h-screen min-h-[560px] overflow-hidden bg-[#F0EFEB]">
+    <section ref={sectionRef} id="home" className="relative isolate w-full h-screen min-h-[560px] overflow-hidden bg-cream">
       {/* Foto — terbuka dari tengah saat kata-kata mulai membuka */}
       <div className="absolute inset-0 flex items-center justify-center z-10">
         <div ref={photoRef} className="h-[80vh] w-[min(64vh,72vw)] overflow-hidden">
@@ -98,7 +98,7 @@ export function Home() {
       </div>
 
       {/* Headline */}
-      <h1 className="absolute inset-0 z-20 flex items-center justify-center pointer-events-none font-HWT text-black text-[clamp(4rem,15vw,16rem)] leading-[0.9]">
+      <h1 className="absolute inset-0 z-20 flex items-center justify-center pointer-events-none font-HWT text-navy text-[clamp(4rem,15vw,16rem)] leading-[0.9]">
         <span ref={groupRef} className="flex flex-col">
           <span ref={(el) => (masksRef.current[0] = el)} className="block overflow-hidden py-[0.06em] -my-[0.06em]">
             <span ref={(el) => (wordsRef.current[0] = el)} className="block whitespace-nowrap">
@@ -114,7 +114,7 @@ export function Home() {
       </h1>
 
       {/* Info pendukung di sekitar foto */}
-      <div className="absolute inset-0 z-[25] pointer-events-none font-PlusJakartaSans text-[#1B2A1B] text-[11px] sm:text-xs uppercase tracking-[0.18em]">
+      <div className="absolute inset-0 z-[25] pointer-events-none font-PlusJakartaSans text-navy text-[11px] sm:text-xs uppercase tracking-[0.18em]">
         <p className="hero-info absolute top-24 left-[4vw] hidden md:block font-semibold leading-relaxed">
           Mobile & Backend
           <br />
@@ -125,16 +125,16 @@ export function Home() {
 
         <p className="hero-info absolute bottom-6 left-[4vw] hidden sm:flex items-center gap-2.5 font-semibold">
           <span className="relative flex h-2 w-2">
-            <span className="absolute inline-flex h-full w-full animate-ping rounded-full bg-emerald-500 opacity-75" />
-            <span className="relative inline-flex h-2 w-2 rounded-full bg-emerald-500" />
+            <span className="absolute inline-flex h-full w-full animate-ping rounded-full bg-accent opacity-75" />
+            <span className="relative inline-flex h-2 w-2 rounded-full bg-accent" />
           </span>
           Available for work
         </p>
 
         <div className="hero-info absolute bottom-6 left-1/2 -translate-x-1/2 flex flex-col items-center gap-2 opacity-60">
           <span>Scroll</span>
-          <span className="relative block h-8 w-px overflow-hidden bg-[#1B2A1B]/20">
-            <span className="hero-scroll-bar absolute inset-0 bg-[#1B2A1B]" />
+          <span className="relative block h-8 w-px overflow-hidden bg-navy/20">
+            <span className="hero-scroll-bar absolute inset-0 bg-navy" />
           </span>
         </div>
 
@@ -151,10 +151,10 @@ export function Home() {
         </div>
       </div>
 
-      {/* Intro: penutup hijau berbentuk anak tangga */}
+      {/* Intro: penutup navy berbentuk anak tangga */}
       <div className="absolute inset-0 z-30 pointer-events-none flex flex-col" aria-hidden="true">
         {Array.from({ length: STAIRS }).map((_, i) => (
-          <div key={i} ref={(el) => (stairsRef.current[i] = el)} className="flex-1 bg-[#242B19] -mb-px" />
+          <div key={i} ref={(el) => (stairsRef.current[i] = el)} className="flex-1 bg-navy -mb-px" />
         ))}
       </div>
     </section>
