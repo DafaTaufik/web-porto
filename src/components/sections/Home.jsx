@@ -1,5 +1,5 @@
 import React from "react";
-import Lanyard from "../ui/Lanyard";
+import Lanyards from "../ui/lanyard_dafa";
 import Particles from "../ui/Particles";
 import ic_map from "../../assets/Icon/ic_maps.svg";
 import { FaLinkedin } from "react-icons/fa";
@@ -16,7 +16,7 @@ export function Home() {
 
       {/* Lanyard 3D */}
       <div className="absolute inset-0 z-10 pointer-events-none">
-        <Lanyard position={[0, 0, 20]} gravity={[0, -40, 0]} />
+        <Lanyards position={[0, 0, 20]} gravity={[0, -40, 0]} />
       </div>
 
       {/* Content Text */}

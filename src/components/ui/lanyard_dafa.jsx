@@ -6,7 +6,7 @@ import { useGLTF, useTexture, Environment, Lightformer } from "@react-three/drei
 import { BallCollider, CuboidCollider, Physics, RigidBody, useRopeJoint, useSphericalJoint } from "@react-three/rapier";
 import { MeshLineGeometry, MeshLineMaterial } from "meshline";
 
-import cardGLB from "../../assets/lanyard/cards_dafa_v2.glb";
+import cardGLB from "../../assets/lanyard/cards.glb";
 import lanyard from "../../assets/lanyard/strap.png";
 
 import * as THREE from "three";
@@ -17,7 +17,7 @@ const ENV_BOOST = 0.32;
 
 extend({ MeshLineGeometry, MeshLineMaterial });
 
-export default function Lanyard({ position = [5, 0, 30], gravity = [0, -40, 0], fov = 20, transparent = true, cardScale = 1.15, ambient = AMBIENT, envBoost = ENV_BOOST }) {
+export default function Lanyards({ position = [5, 0, 30], gravity = [0, -40, 0], fov = 20, transparent = true, cardScale = 1.15, ambient = AMBIENT, envBoost = ENV_BOOST }) {
   return (
     <div className="h-full w-full">
       <Canvas flat camera={{ position: position, fov: fov }} gl={{ alpha: transparent }} onCreated={({ gl }) => gl.setClearColor("#ffffff", 0)}>
