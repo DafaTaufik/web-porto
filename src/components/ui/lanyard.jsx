@@ -7,7 +7,7 @@ import { BallCollider, CuboidCollider, Physics, RigidBody, useRopeJoint, useSphe
 import { MeshLineGeometry, MeshLineMaterial } from "meshline";
 
 import cardGLB from "../../assets/lanyard/cards.glb";
-import lanyard from "../../assets/lanyard/lanyards.png";
+import lanyard from "../../assets/lanyard/strap.png";
 
 import * as THREE from "three";
 
@@ -53,7 +53,7 @@ function Band({ maxSpeed = 50, minSpeed = 0, initialPosition = [0, 4, 0] }) {
         new THREE.Vector3().add(new THREE.Vector3(...initialPosition)),
         new THREE.Vector3().add(new THREE.Vector3(...initialPosition)),
         new THREE.Vector3().add(new THREE.Vector3(...initialPosition)),
-      ])
+      ]),
   );
 
   const [dragged, drag] = useState(false);
@@ -64,7 +64,7 @@ function Band({ maxSpeed = 50, minSpeed = 0, initialPosition = [0, 4, 0] }) {
   useRopeJoint(j2, j3, [[0, 0, 0], [0, 0, 0], 1]);
   useSphericalJoint(j3, card, [
     [0, 0, 0],
-    [0, 1.45, 0],
+    [0, 1.85, 0],
   ]);
 
   useEffect(() => {
@@ -119,7 +119,7 @@ function Band({ maxSpeed = 50, minSpeed = 0, initialPosition = [0, 4, 0] }) {
         <RigidBody position={[2, 0, 0]} ref={card} {...segmentProps} type={dragged ? "kinematicPosition" : "dynamic"}>
           <CuboidCollider args={[0.8, 1.125, 0.01]} />
           <group
-            scale={2.25}
+            scale={2.6}
             position={[0, -1.2, -0.05]}
             onPointerOver={() => hover(true)}
             onPointerOut={() => hover(false)}

@@ -1,38 +1,35 @@
 import React from "react";
+import { FaCalendarCheck } from "react-icons/fa";
 
 export default function CardCourse({ course }) {
+  const [category, ...rest] = course.tags;
+
   return (
-    <div className="flex flex-col bg-white border-2 border-black rounded-2xl w-fit h-fit shadow-2xl mx-4">
+    <article className="group flex flex-col h-full bg-white border border-gray-200 rounded-2xl p-4 shadow-md transition duration-300 hover:-translate-y-1 hover:shadow-xl hover:border-[#1D1D1D]">
       {/* Certificate Image */}
-      <div className="p-6 pb-6">
-        <div className="bg-gray-100 rounded-xl overflow-hidden border border-gray-300">
-          <img src={course.image} alt={`${course.organization} Certificate`} className="w-full h-full object-cover" />
-        </div>
+      <div className="bg-gray-100 rounded-xl overflow-hidden border border-gray-200">
+        <img src={course.image} alt={`${course.title} certificate from ${course.organization}`} loading="lazy" className="w-full aspect-[4/3] object-cover transition duration-300 group-hover:scale-[1.03]" />
       </div>
 
-      {/* Certificate Details */}
-      <div className="px-6 pb-6 flex flex-col">
-        {/* Title */}
-        <h3 className="font-Inter font-semibold text-xl md:text-2xl text-black">{course.title}</h3>
+      {/* Details */}
+      <div className="flex flex-col flex-1 pt-5 px-1">
+        <span className="font-sans text-xs font-semibold uppercase tracking-[0.15em] text-gray-500">{course.organization}</span>
+        <h3 className="font-sans font-bold text-xl text-[#1D1D1D] mt-1 leading-snug">{course.title}</h3>
 
-        {/* Organization */}
-        <p className="font-Inter font-semibold text-lg text-black mt-1">{course.organization}</p>
+        <p className="flex items-center gap-2 font-sans text-sm font-semibold text-gray-600 mt-3">
+          <FaCalendarCheck size={14} aria-hidden="true" />
+          Completed on {course.completedDate}
+        </p>
 
-        {/* Divider */}
-        <hr className="border-t-2 rounded-4xl border-black w-2/4 my-3" />
-
-        {/* Completion Date */}
-        <p className="font-Sora font-semibold text-base text-gray-600 mb-4">Completed on {course.completedDate}</p>
-
-        {/* Tags/Buttons */}
-        <div className="flex gap-3 mt-2">
-          {course.tags.map((tag, index) => (
-            <span key={index} className={`px-6 py-2 text-white text-lg font-Sora font-semibold rounded-full ${index === 0 ? "bg-[#86858A]" : "bg-[#464648]"}`}>
+        <div className="flex flex-wrap gap-2 mt-auto pt-5">
+          <span className="px-3 py-1 text-sm font-sans font-semibold rounded-full border border-gray-300 text-gray-700">{category}</span>
+          {rest.map((tag) => (
+            <span key={tag} className="px-3 py-1 text-sm font-sans font-semibold rounded-full bg-[#1D1D1D] text-white">
               {tag}
             </span>
           ))}
         </div>
       </div>
-    </div>
+    </article>
   );
 }
