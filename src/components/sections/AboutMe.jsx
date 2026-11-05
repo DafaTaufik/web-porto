@@ -86,22 +86,26 @@ export default function AboutMe() {
           });
         }, 2000);
 
-        // 3. Parallax scroll pada [data-depth]
+        // Section di layar atau tidak: pause loop CSS dan mouse saat di luar layar
+        let inView = false;
+        const io = new IntersectionObserver(([entry]) => {
+          inView = entry.isIntersecting;
+          sectionRef.current.classList.toggle("about-paused", !inView);
+        });
+        io.observe(sectionRef.current);
+
+        // 3. Parallax scroll pada [data-depth]: satu ScrollTrigger untuk semua objek
         const depthEls = gsap.utils.toArray("[data-depth]");
+        const parallax = gsap.timeline({
+          defaults: { ease: "none", duration: 1 },
+          scrollTrigger: { trigger: sectionRef.current, start: "top bottom", end: "bottom top", scrub: 0.8 },
+        });
         depthEls.forEach((el) => {
           const d = parseFloat(el.dataset.depth);
-          gsap.fromTo(
-            el,
-            { y: d * 70 },
-            {
-              y: -d * 70,
-              ease: "none",
-              scrollTrigger: { trigger: sectionRef.current, start: "top bottom", end: "bottom top", scrub: 0.8 },
-            },
-          );
+          parallax.fromTo(el, { y: d * 70 }, { y: -d * 70 }, 0);
         });
 
-        // 4. Parallax mouse pada [data-mouse] (hanya perangkat dengan hover)
+        // 4. Parallax mouse pada [data-mouse] (hanya perangkat dengan hover), dibatasi 1x per frame dan hanya saat terlihat
         let removeMove = () => {};
         if (window.matchMedia("(hover: hover)").matches) {
           const movers = depthEls.map((el) => {
@@ -112,16 +116,27 @@ export default function AboutMe() {
               y: gsap.quickTo(inner, "y", { duration: 0.8, ease: "power3.out" }),
             };
           });
-          const onMove = (e) => {
-            const nx = (e.clientX / window.innerWidth - 0.5) * 2;
-            const ny = (e.clientY / window.innerHeight - 0.5) * 2;
+          let nx = 0;
+          let ny = 0;
+          let frame = 0;
+          const apply = () => {
+            frame = 0;
             movers.forEach((m) => {
               m.x(nx * m.d * 22);
               m.y(ny * m.d * 14);
             });
           };
+          const onMove = (e) => {
+            if (!inView) return;
+            nx = (e.clientX / window.innerWidth - 0.5) * 2;
+            ny = (e.clientY / window.innerHeight - 0.5) * 2;
+            if (!frame) frame = requestAnimationFrame(apply);
+          };
           window.addEventListener("mousemove", onMove);
-          removeMove = () => window.removeEventListener("mousemove", onMove);
+          removeMove = () => {
+            window.removeEventListener("mousemove", onMove);
+            cancelAnimationFrame(frame);
+          };
         }
 
         // Font HWT dimuat belakangan dan mengubah tinggi headline
@@ -133,6 +148,7 @@ export default function AboutMe() {
         return () => {
           cancelled = true;
           clearTimeout(safety);
+          io.disconnect();
           removeMove();
         };
       }, sectionRef);

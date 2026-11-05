@@ -6,7 +6,7 @@ import { useGLTF, useTexture, Environment, Lightformer } from "@react-three/drei
 import { BallCollider, CuboidCollider, Physics, RigidBody, useRopeJoint, useSphericalJoint } from "@react-three/rapier";
 import { MeshLineGeometry, MeshLineMaterial } from "meshline";
 
-import cardGLB from "../../assets/lanyard/cards.glb";
+import cardGLB from "../../assets/lanyard/cards.min.glb";
 import lanyard from "../../assets/lanyard/strap.png";
 
 import * as THREE from "three";
@@ -18,11 +18,21 @@ const ENV_BOOST = 0.32;
 extend({ MeshLineGeometry, MeshLineMaterial });
 
 export default function Lanyards({ position = [5, 0, 30], gravity = [0, -40, 0], fov = 20, transparent = true, cardScale = 1.15, ambient = AMBIENT, envBoost = ENV_BOOST }) {
+  const wrapRef = useRef(null);
+  const [visible, setVisible] = useState(true);
+
+  // Hentikan render dan fisika saat di luar layar
+  useEffect(() => {
+    const io = new IntersectionObserver(([entry]) => setVisible(entry.isIntersecting));
+    io.observe(wrapRef.current);
+    return () => io.disconnect();
+  }, []);
+
   return (
-    <div className="h-full w-full">
-      <Canvas flat camera={{ position: position, fov: fov }} gl={{ alpha: transparent }} onCreated={({ gl }) => gl.setClearColor("#ffffff", 0)}>
+    <div ref={wrapRef} className="h-full w-full">
+      <Canvas frameloop={visible ? "always" : "never"} flat camera={{ position: position, fov: fov }} gl={{ alpha: transparent }} onCreated={({ gl }) => gl.setClearColor("#ffffff", 0)}>
         <ambientLight intensity={ambient} />
-        <Physics gravity={gravity} timeStep={1 / 60}>
+        <Physics paused={!visible} gravity={gravity} timeStep={1 / 60}>
           <Band initialPosition={[5, 4, 0]} cardScale={cardScale} />
         </Physics>
         <Environment blur={0.75} environmentIntensity={envBoost}>

@@ -25,6 +25,16 @@
 .about-ring { animation: about-spin 70s linear infinite; }
 .about-marquee { animation: about-marquee 32s linear infinite; }
 
+/* Section di luar layar: hentikan semua loop */
+.about-paused .about-fl1,
+.about-paused .about-fl2,
+.about-paused .about-fl3,
+.about-paused .about-fl4,
+.about-paused .about-ring,
+.about-paused .about-marquee {
+  animation-play-state: paused;
+}
+
 @media (prefers-reduced-motion: reduce) {
   .about-fl1, .about-fl2, .about-fl3, .about-fl4,
   .about-ring, .about-marquee {
