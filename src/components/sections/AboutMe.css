@@ -1,0 +1,33 @@
+/* About section: loop CSS. Transform scroll/mouse dikerjakan GSAP di wrapper terpisah. */
+@keyframes about-fl1 {
+  0%, 100% { transform: translateY(0); }
+  50% { transform: translateY(-14px); }
+}
+@keyframes about-fl2 {
+  0%, 100% { transform: translateY(0) rotate(-1.5deg); }
+  50% { transform: translateY(10px) rotate(1.5deg); }
+}
+@keyframes about-fl3 {
+  0%, 100% { transform: translate(0, 0); }
+  50% { transform: translate(6px, -8px); }
+}
+@keyframes about-spin {
+  to { transform: rotate(360deg); }
+}
+@keyframes about-marquee {
+  to { transform: translateX(-50%); }
+}
+
+.about-fl1 { animation: about-fl1 6s ease-in-out infinite; }
+.about-fl2 { animation: about-fl2 7.5s ease-in-out infinite; }
+.about-fl3 { animation: about-fl3 5.5s ease-in-out infinite; }
+.about-fl4 { animation: about-fl1 8.5s ease-in-out -2s infinite; }
+.about-ring { animation: about-spin 70s linear infinite; }
+.about-marquee { animation: about-marquee 32s linear infinite; }
+
+@media (prefers-reduced-motion: reduce) {
+  .about-fl1, .about-fl2, .about-fl3, .about-fl4,
+  .about-ring, .about-marquee {
+    animation: none;
+  }
+}
