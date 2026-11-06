@@ -82,8 +82,6 @@ const Particles = ({
   particleSpread = 10,
   speed = 0.1,
   particleColors,
-  moveParticlesOnHover = false,
-  particleHoverFactor = 1,
   alphaParticles = false,
   particleBaseSize = 100,
   sizeRandomness = 1,
@@ -92,7 +90,6 @@ const Particles = ({
   className,
 }) => {
   const containerRef = useRef(null);
-  const mouseRef = useRef({ x: 0, y: 0 });
 
   useEffect(() => {
     const container = containerRef.current;
@@ -114,17 +111,6 @@ const Particles = ({
     };
     window.addEventListener("resize", resize, false);
     resize();
-
-    const handleMouseMove = (e) => {
-      const rect = container.getBoundingClientRect();
-      const x = ((e.clientX - rect.left) / rect.width) * 2 - 1;
-      const y = -(((e.clientY - rect.top) / rect.height) * 2 - 1);
-      mouseRef.current = { x, y };
-    };
-
-    if (moveParticlesOnHover) {
-      container.addEventListener("mousemove", handleMouseMove);
-    }
 
     const count = particleCount;
     const positions = new Float32Array(count * 3);
@@ -181,14 +167,6 @@ const Particles = ({
 
       program.uniforms.uTime.value = elapsed * 0.001;
 
-      if (moveParticlesOnHover) {
-        particles.position.x = -mouseRef.current.x * particleHoverFactor;
-        particles.position.y = -mouseRef.current.y * particleHoverFactor;
-      } else {
-        particles.position.x = 0;
-        particles.position.y = 0;
-      }
-
       if (!disableRotation) {
         particles.rotation.x = Math.sin(elapsed * 0.0002) * 0.1;
         particles.rotation.y = Math.cos(elapsed * 0.0005) * 0.15;
@@ -200,18 +178,26 @@ const Particles = ({
 
     animationFrameId = requestAnimationFrame(update);
 
-    return () => {
-      window.removeEventListener("resize", resize);
-      if (moveParticlesOnHover) {
-        container.removeEventListener("mousemove", handleMouseMove);
+    // Hentikan loop saat di luar layar; waktu dilanjutkan tanpa lonjakan
+    const io = new IntersectionObserver(([entry]) => {
+      cancelAnimationFrame(animationFrameId);
+      if (entry.isIntersecting) {
+        lastTime = performance.now();
+        animationFrameId = requestAnimationFrame(update);
       }
+    });
+    io.observe(container);
+
+    return () => {
+      io.disconnect();
+      window.removeEventListener("resize", resize);
       cancelAnimationFrame(animationFrameId);
       if (container.contains(gl.canvas)) {
         container.removeChild(gl.canvas);
       }
     };
     // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, [particleCount, particleSpread, speed, moveParticlesOnHover, particleHoverFactor, alphaParticles, particleBaseSize, sizeRandomness, cameraDistance, disableRotation]);
+  }, [particleCount, particleSpread, speed, alphaParticles, particleBaseSize, sizeRandomness, cameraDistance, disableRotation]);
 
   return <div ref={containerRef} className={`relative w-full h-full ${className}`} />;
 };

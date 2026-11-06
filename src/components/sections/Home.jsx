@@ -1,5 +1,4 @@
-import React from "react";
-import Lanyard from "../ui/Lanyard";
+import { useEffect, useState } from "react";
 import Particles from "../ui/Particles";
 import ic_map from "../../assets/Icon/ic_maps.svg";
 import { FaLinkedin } from "react-icons/fa";
@@ -7,16 +6,27 @@ import { FaGithubSquare } from "react-icons/fa";
 import { MdMarkEmailUnread } from "react-icons/md";
 
 export function Home() {
+  // Three.js + Rapier berat: dimuat terpisah supaya teks Home tampil lebih dulu.
+  // Tanpa React.lazy/Suspense: <Canvas> R3F menyuspend boundary di atasnya dan lanyard tidak tampil.
+  const [Lanyards, setLanyards] = useState(null);
+  useEffect(() => {
+    let alive = true;
+    import("../ui/lanyard_dafa").then((m) => alive && setLanyards(() => m.default));
+    return () => {
+      alive = false;
+    };
+  }, []);
+
   return (
     <section id="home" className="relative w-full h-screen">
       {/* Particles Background */}
       <div className="absolute inset-0 z-0 pointer-events-none">
-        <Particles particleColors={["#333333", "#666666", "#999999"]} particleCount={550} particleBaseSize={105} particleSpread={12} speed={0.03} moveParticlesOnHover={true} />
+        <Particles particleColors={["#333333", "#666666", "#999999"]} particleCount={550} particleBaseSize={105} particleSpread={12} speed={0.03} />
       </div>
 
       {/* Lanyard 3D */}
       <div className="absolute inset-0 z-10 pointer-events-none">
-        <Lanyard position={[0, 0, 20]} gravity={[0, -40, 0]} />
+        {Lanyards && <Lanyards position={[0, 0, 20]} gravity={[0, -40, 0]} />}
       </div>
 
       {/* Content Text */}
@@ -63,6 +73,13 @@ export function Home() {
               <MdMarkEmailUnread size={31} />
             </a>
           </div>
+          <p className="hero-info absolute bottom-16 hidden sm:flex items-center gap-2.5 font-semibold">
+            <span className="relative flex h-2 w-2">
+              <span className="absolute inline-flex h-full w-full animate-ping rounded-full bg-red-600 opacity-75" />
+              <span className="relative inline-flex h-2 w-2 rounded-full bg-green-400" />
+            </span>
+            Available for work
+          </p>
         </div>
       </div>
     </section>

@@ -1,9 +1,12 @@
 export const ProfessionalExperienceData = [
   {
-    company: "PT. Mitra Integrasi Digital - Remote",
+    company: "PT. Mitra Integrasi Digital",
+    mode: "Remote",
     position: "Fullstack Android Intern",
+    type: "Intern",
     duration: "Feb 2025 - Jun 2025",
     year: "2025",
+    projects: ["Moni POS", "CmoAsik HRIS"],
     activities: [
       "Developed and maintained POS application features using Kotlin, Java, and Golang",
       "Implemented features including Pending QRIS payments, menu management, and Bluetooth printer configuration and printing",
@@ -20,8 +23,10 @@ export const ProfessionalExperienceData = [
       "gRPC"],
   },
   {
-    company: "Luarsekolah - Remote",
+    company: "Luarsekolah",
+    mode: "Remote",
     position: "Project-Based Intern (Software Engineer (Flutter) Intern)",
+    type: "Intern",
     duration: "Sept 2025 - Dec 2025",
     year: "2025",
     activities: [
