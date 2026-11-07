@@ -3,8 +3,9 @@ import Lenis from "@studio-freight/lenis";
 import { Navbar } from "./components/layout/Navbar";
 import { Home } from "./components/sections/Home";
 import AboutMe from "./components/sections/AboutMe";
-import { Project } from "./components/ui/Project";
+import Projects from "./components/sections/Projects";
 import { Experience } from "./components/sections/Experience";
+import Organizational from "./components/sections/Organizational";
 import Skills from "./components/sections/Skills";
 import Courses from "./components/sections/Courses";
 import Footer from "./components/layout/Footer";
@@ -36,7 +37,8 @@ function App() {
       <Home />
       <AboutMe />
       <Experience />
-      <Project />
+      <Projects />
+      <Organizational />
       <Skills />
       <Courses />
       <Footer />

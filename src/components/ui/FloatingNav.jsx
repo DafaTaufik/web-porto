@@ -65,20 +65,20 @@ export const FloatingNav = ({ navItems, className }) => {
         animate={{ y: visible ? 0 : -100, opacity: visible ? 1 : 0 }}
         transition={{ duration: 0.45, ease: "easeOut" }}
         className={clsx(
-          "flex max-w-[90%] sm:max-w-[60%] fixed top-10 inset-x-0 mx-auto border border-transparent dark:border-white/[0.2] rounded-2xl dark:bg-black bg-white shadow-lg z-[5000] py-2 px-2 sm:py-3 sm:px-4 md:px-6 justify-between",
+          "flex w-fit gap-3 max-w-[94%] fixed top-10 inset-x-0 mx-auto border border-transparent dark:border-white/[0.2] rounded-2xl dark:bg-black bg-white shadow-lg z-[5000] py-2 px-2 sm:py-3 sm:px-4 md:px-6 justify-between",
           className
           // "flex max-w-[46%] fixed top-10 inset-x-0 mx-auto border border-transparent dark:border-white/[0.2] rounded-2xl dark:bg-black bg-white shadow-lg z-[5000] pr-2 pl-8 py-3 items-center justify-center space-x-4",
           // className
         )}
       >
         <p className="font-HWT text-2xl sm:text-3xl lg:text-3xl dark:text-white">Dafa</p>
-        <div className=" flex space-x-1 md:space-x-3 xl:space-x-4">
+        <div className="flex space-x-0.5 lg:space-x-2 xl:space-x-3">
           {navItems.map((navItem, idx) => {
             const sectionId = navItem.link.replace("#", "");
             const isActive = activeSection === sectionId;
 
             return (
-              <button key={idx} onClick={() => handleNavClick(navItem.link)} className="relative font-HWT items-center flex transition-all duration-100 rounded-full px-3 py-1.5 cursor-pointer">
+              <button key={idx} onClick={() => handleNavClick(navItem.link)} className="relative font-HWT items-center flex transition-all duration-100 rounded-full px-2 md:px-2.5 lg:px-3 py-1.5 cursor-pointer">
                 {isActive && (
                   <motion.span
                     layoutId="navHighlight"
@@ -105,7 +105,7 @@ export const FloatingNav = ({ navItems, className }) => {
                 {/* Tablet ke atas: Icon + Text */}
                 <span className={clsx("hidden sm:flex items-center space-x-2 relative z-10", isActive ? "text-white dark:text-black" : "dark:text-neutral-50 text-neutral-600 dark:hover:text-neutral-300 hover:text-neutral-500")}>
                   <span className="hidden lg:block">{navItem.icon}</span>
-                  <span className="text-sm sm:text-base md:text-lg">{navItem.name}</span>
+                  <span className="text-sm lg:text-base xl:text-lg">{navItem.name}</span>
                 </span>
               </button>
             );

@@ -1,0 +1,126 @@
+/* Projects section: baris, galeri thumbnail, hover/dim. Reveal, garis, parallax, dan galeri dikerjakan GSAP. */
+@keyframes pj-fl1 { 0%, 100% { transform: translateY(0); } 50% { transform: translateY(-14px); } }
+@keyframes pj-fl2 { 0%, 100% { transform: translateY(0); } 50% { transform: translateY(10px); } }
+@keyframes pj-fl3 { 0%, 100% { transform: translate(0, 0); } 50% { transform: translate(6px, -8px); } }
+.pj-fl1 { animation: pj-fl1 6.5s ease-in-out infinite; }
+.pj-fl2 { animation: pj-fl2 7.5s ease-in-out infinite; }
+.pj-fl3 { animation: pj-fl3 5.5s ease-in-out infinite; }
+.pj-paused .pj-fl1, .pj-paused .pj-fl2, .pj-paused .pj-fl3 { animation-play-state: paused; }
+
+.pj-row {
+  position: relative;
+  display: grid;
+  grid-template-columns: 48px 320px minmax(0, 1fr) 64px;
+  column-gap: 32px;
+  align-items: center;
+  padding: 40px 0;
+  color: inherit;
+  transition: opacity 0.4s ease;
+}
+.pj-ix { align-self: start; padding-top: 10px; font-family: HWT, Impact, sans-serif; font-size: 26px; line-height: 1; color: #6b7280; }
+
+.pj-thumb {
+  position: relative;
+  width: 100%;
+  aspect-ratio: 16 / 10;
+  box-sizing: border-box;
+  border-radius: 20px;
+  border: 1px solid #d4d4d4;
+  background: #f3f4f6;
+  overflow: hidden;
+  transition: border-color 0.3s, box-shadow 0.4s;
+}
+.pj-row:hover .pj-thumb, .pj-row:focus-visible .pj-thumb { border-color: #1d1d1d; box-shadow: 0 18px 40px rgba(0, 0, 0, 0.12); }
+
+/* Slide non-aktif disembunyikan lewat GSAP (autoAlpha), bukan CSS, supaya cover tetap terlihat kalau JS gagal */
+.pj-sl { position: absolute; inset: 0; display: flex; align-items: center; justify-content: center; }
+.pj-sl > img { width: 100%; height: 100%; object-fit: cover; }
+.pj-sl:not(:first-child) { visibility: hidden; opacity: 0; }
+.pj-cap {
+  position: absolute;
+  left: 12px;
+  top: 12px;
+  padding: 4px 10px;
+  border-radius: 999px;
+  background: #fff;
+  border: 1px solid #d4d4d4;
+  font-size: 11px;
+  font-weight: 600;
+  font-style: italic;
+  color: #6b7280;
+}
+.pj-bars {
+  position: absolute;
+  left: 12px;
+  right: 12px;
+  bottom: 12px;
+  display: flex;
+  gap: 6px;
+  padding: 8px 12px;
+  border-radius: 999px;
+  background: #fff;
+  border: 1px solid #d4d4d4;
+  opacity: 0;
+  transition: opacity 0.3s ease;
+}
+.pj-row.on .pj-bars { opacity: 1; }
+.pj-bar { flex: 1; height: 3px; border-radius: 2px; background: #d4d4d4; overflow: hidden; }
+.pj-bar i { display: block; height: 100%; background: #1d1d1d; transform-origin: 0 50%; }
+
+.pj-nm {
+  margin: 0;
+  font-family: HWT, Impact, sans-serif;
+  font-weight: 400;
+  text-transform: uppercase;
+  font-size: clamp(32px, 4.4vw, 62px);
+  line-height: 1;
+  transition: transform 0.55s cubic-bezier(0.16, 1, 0.3, 1);
+}
+.pj-row:hover .pj-nm, .pj-row:focus-visible .pj-nm { transform: translateX(14px); }
+
+.pj-arr {
+  width: 64px;
+  height: 64px;
+  box-sizing: border-box;
+  border-radius: 50%;
+  border: 2px solid #1d1d1d;
+  background: #fff;
+  color: #1d1d1d;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  transition: background 0.3s ease, color 0.3s ease, transform 0.5s cubic-bezier(0.16, 1, 0.3, 1);
+}
+.pj-row:hover .pj-arr, .pj-row:focus-visible .pj-arr { background: #1d1d1d; color: #fff; transform: rotate(-45deg); }
+.pj-row:focus-visible { outline: 3px solid #1d1d1d; outline-offset: 6px; border-radius: 8px; }
+
+.pj-list.hv .pj-row { opacity: 0.35; }
+.pj-list.hv .pj-row.on { opacity: 1; }
+
+.pj-chip {
+  display: inline-flex;
+  align-items: center;
+  gap: 7px;
+  padding: 7px 14px;
+  border-radius: 999px;
+  border: 1px solid #d4d4d4;
+  background: #fff;
+  font-size: 13px;
+  font-weight: 600;
+  color: #1d1d1d;
+}
+.pj-chip.ph { color: #6b7280; font-style: italic; }
+
+@media (max-width: 1000px) {
+  .pj-row { grid-template-columns: minmax(0, 1fr) 56px; column-gap: 20px; row-gap: 22px; padding: 36px 0; }
+  .pj-ix { display: none; }
+  .pj-thumb { grid-column: 1 / -1; grid-row: 1; max-width: 560px; }
+  .pj-body { grid-column: 1; grid-row: 2; }
+  .pj-arr { grid-column: 2; grid-row: 2; align-self: start; width: 56px; height: 56px; }
+  .pj-dec { display: none; }
+}
+@media (hover: none) { .pj-bars { display: none; } }
+@media (prefers-reduced-motion: reduce) {
+  .pj-fl1, .pj-fl2, .pj-fl3 { animation: none; }
+  .pj-nm, .pj-arr, .pj-thumb { transition: none; }
+}
