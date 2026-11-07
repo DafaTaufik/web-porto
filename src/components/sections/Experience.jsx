@@ -220,7 +220,7 @@ export function Experience() {
                     <defs>
                       <path id="exp-stamp-circle" d="M100,100 m-80,0 a80,80 0 1,1 160,0 a80,80 0 1,1 -160,0" />
                     </defs>
-                    <text style={{ fontFamily: "HWT, sans-serif", fontSize: 17, textTransform: "uppercase", fill: INK }}>
+                    <text style={{ fontFamily: "hwt-artz, sans-serif", fontSize: 17, textTransform: "uppercase", fill: INK }}>
                       <textPath href="#exp-stamp-circle" textLength="498" lengthAdjust="spacing">
                         Mobile developer • Backend • Software engineering •{" "}
                       </textPath>

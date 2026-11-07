@@ -17,7 +17,7 @@
   color: inherit;
   transition: opacity 0.4s ease;
 }
-.pj-ix { align-self: start; padding-top: 10px; font-family: HWT, Impact, sans-serif; font-size: 26px; line-height: 1; color: #6b7280; }
+.pj-ix { align-self: start; padding-top: 10px; font-family: "hwt-artz", Impact, sans-serif; font-size: 26px; line-height: 1; color: #6b7280; }
 
 .pj-thumb {
   position: relative;
@@ -69,7 +69,7 @@
 
 .pj-nm {
   margin: 0;
-  font-family: HWT, Impact, sans-serif;
+  font-family: "hwt-artz", Impact, sans-serif;
   font-weight: 400;
   text-transform: uppercase;
   font-size: clamp(32px, 4.4vw, 62px);

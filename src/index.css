@@ -6,11 +6,6 @@
 }
 
 @font-face {
-  font-family: HWT;
-  src: url("../src/assets/fonts/fonnts.com-HWT_Artz.otf");
-}
-
-@font-face {
   font-family: Asap;
   src: url("../src/assets/fonts/Asap-Regular.ttf");
 }
@@ -57,7 +52,7 @@
 
 @theme {
   --font-Segoe: Segoe, "sans-serif";
-  --font-HWT: HWT, "sans-serif";
+  --font-HWT: "hwt-artz", sans-serif;
   --font-Asap: Asap, "sans-serif";
   --font-BebasNeue: BebasNeue, "sans-serif";
   --font-Kanit: Kanit, "sans-serif";

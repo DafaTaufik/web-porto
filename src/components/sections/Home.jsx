@@ -39,9 +39,9 @@ export function Home() {
 
           <div className="flex items-center gap-2 mb-4">
             <img src={ic_map} alt="Map Icon" className="w-5 h-5" />
-            <span className="text-gray-500 text-base md:tex-base font-medium font-sans">Tangerang, Indonesia</span>
+            <span className="text-gray-500 text-base md:tex-base font-medium font-Inter">Tangerang, Indonesia</span>
           </div>
-          <h3 className="text-sm md:text-lg font-sans text-gray-700 font-medium w-[300px] md:w-[420px]">
+          <h3 className="text-sm md:text-lg font-Inter text-gray-700 font-medium w-[300px] md:w-[420px]">
             Mobile & Backend Developer skilled in Kotlin, Java, and Golang. Informatics student at Universitas Multimedia Nusantara with passion for creating efficient and scalable solutions.
           </h3>
 
