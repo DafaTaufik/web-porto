@@ -242,9 +242,12 @@
   background: #fff;
   box-shadow: 0 30px 80px rgba(0, 0, 0, 0.5);
 }
-.cert-zoom { overflow: hidden; line-height: 0; }
-.cert-img { display: block; width: auto; height: auto; max-width: 100%; max-height: calc(100vh - 240px); transition: transform 0.35s var(--c-ease); }
-.cert-frame { display: block; border: 0; width: min(900px, 100%); height: calc(100vh - 240px); }
+.cert-zoom { position: relative; display: flex; align-items: center; justify-content: center; overflow: hidden; line-height: 0; }
+/* Saat zoom, area foto melebar memenuhi seluruh stage */
+.cert-zoom.is-zoom { position: absolute; inset: 0; z-index: 1; max-width: none; padding: 24px 90px; box-sizing: border-box; border-radius: 0; background: transparent; box-shadow: none; animation: none; }
+.cert-img { display: block; width: auto; height: auto; max-width: 100%; max-height: calc(100vh - 240px); border-radius: 8px; }
+.cert-zoom.is-zoom .cert-img { max-height: 100%; }
+.cert-frame { display: block; border: 0; width: min(1500px, 100%); height: calc(100vh - 215px); }
 
 .cert-info {
   display: flex;
@@ -267,6 +270,5 @@
 }
 @media (prefers-reduced-motion: reduce) {
   .courses-fl1, .courses-fl2, .courses-fl3, .cert-modal, .cert-view { animation: none; }
-  .cert-img { transition: none; }
   .course-tile, .course-thumb img, .course-go, .course-veil { transition: none; }
 }

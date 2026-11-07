@@ -1,4 +1,5 @@
 import { useEffect, useRef } from "react";
+import ZoomImage from "./ZoomImage";
 import { createPortal } from "react-dom";
 
 const pad = (n) => String(n).padStart(2, "0");
@@ -67,7 +68,7 @@ export default function PhotoViewer({ photos, index, orgName, onClose, onStep, o
             <path d="m15 5-7 7 7 7" />
           </svg>
         </button>
-        <img key={photo.src} src={photo.src} alt={photo.alt} className="org-pg" />
+        <ZoomImage key={photo.src} src={photo.src} alt={photo.alt} className="org-zoom" imgClassName="org-pg" />
         <button type="button" onClick={() => onStep(1)} aria-label="Next photo" className="org-round org-mb org-arr right-[22px] max-[700px]:right-1.5">
           <svg width="22" height="22" {...ICON}>
             <path d="m9 5 7 7-7 7" />

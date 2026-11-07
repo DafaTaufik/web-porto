@@ -1,5 +1,6 @@
 import { useEffect, useRef, useState } from "react";
 import { createPortal } from "react-dom";
+import ZoomImage from "./ZoomImage";
 
 const pad = (n) => String(n).padStart(2, "0");
 
@@ -27,30 +28,6 @@ function useIsSmall() {
   return small;
 }
 
-// Klik untuk zoom ke titik kursor, gerakkan mouse untuk menggeser, klik lagi untuk kembali
-function ZoomImage({ src, alt }) {
-  const [zoom, setZoom] = useState(false);
-  const [origin, setOrigin] = useState("50% 50%");
-
-  const point = (e) => {
-    const r = e.currentTarget.getBoundingClientRect();
-    return `${((e.clientX - r.left) / r.width) * 100}% ${((e.clientY - r.top) / r.height) * 100}%`;
-  };
-
-  return (
-    <div
-      className={`cert-view cert-zoom ${zoom ? "cursor-zoom-out" : "cursor-zoom-in"}`}
-      onClick={(e) => {
-        if (!zoom) setOrigin(point(e));
-        setZoom(!zoom);
-      }}
-      onMouseMove={(e) => zoom && setOrigin(point(e))}
-    >
-      <img src={src} alt={alt} className="cert-img" draggable="false" style={{ transform: zoom ? "scale(2.4)" : "none", transformOrigin: origin }} />
-    </div>
-  );
-}
-
 function Viewer({ cert, small }) {
   if (!cert.src) {
     return (
@@ -65,7 +42,7 @@ function Viewer({ cert, small }) {
   }
   if (cert.type === "pdf" && !small) {
     return (
-      <iframe key={cert.src} src={`${cert.src}#view=FitH`} title={`Certificate: ${cert.title}`} className="cert-view cert-frame">
+      <iframe key={cert.src} src={`${cert.src}#zoom=85`} title={`Certificate: ${cert.title}`} className="cert-view cert-frame">
         <a href={cert.src}>Open PDF</a>
       </iframe>
     );
@@ -80,7 +57,7 @@ function Viewer({ cert, small }) {
       </div>
     );
   }
-  return <ZoomImage key={cert.src} src={cert.src} alt={`Certificate: ${cert.title}`} />;
+  return <ZoomImage key={cert.src} src={cert.src} alt={`Certificate: ${cert.title}`} className="cert-view cert-zoom" imgClassName="cert-img" />;
 }
 
 export default function CertificateModal({ items, index, onClose, onStep }) {

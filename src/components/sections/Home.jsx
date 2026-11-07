@@ -25,9 +25,7 @@ export function Home() {
       </div>
 
       {/* Lanyard 3D */}
-      <div className="absolute inset-0 z-10 pointer-events-none">
-        {Lanyards && <Lanyards position={[0, 0, 20]} gravity={[0, -40, 0]} />}
-      </div>
+      <div className="absolute inset-0 z-10 pointer-events-none">{Lanyards && <Lanyards position={[0, 0, 20]} gravity={[0, -40, 0]} />}</div>
 
       {/* Content Text */}
       <div className="absolute inset-0 z-20 px-3 md:px-24 pointer-events-none">
@@ -45,23 +43,7 @@ export function Home() {
             Mobile & Backend Developer skilled in Kotlin, Java, and Golang. Informatics student at Universitas Multimedia Nusantara with passion for creating efficient and scalable solutions.
           </h3>
 
-          {/* Buttons - Enable pointer events only for buttons */}
-          <div className="mt-5 flex gap-4 pointer-events-auto">
-            <button
-              className="px-4 py-2 bg-[#1D1D1D] text-white text-base font-semibold cursor-pointer rounded-md shadow-md hover:bg-gray-800 transition duration-400 transform hover:-translate-y-1"
-              onClick={() => console.log("Projects clicked!")}
-            >
-              Projects
-            </button>
-
-            <button
-              className="px-4 py-2 bg-white text-[#1D1D1D] border border-black cursor-pointer text-base font-semibold rounded-md shadow-md hover:bg-gray-100 transition duration-400 transform hover:-translate-y-1"
-              onClick={() => console.log("Contact clicked!")}
-            >
-              Contact Me
-            </button>
-          </div>
-          <div className="mt-8 flex gap-4 items-center pointer-events-auto">
+          <div className="mt-7 flex gap-4 items-center pointer-events-auto">
             <a href="https://www.linkedin.com/in/dafa-taufik-al-latief" target="_blank" rel="noopener noreferrer" className="text-black hover:text-blue-600 transition duration-400 transform hover:-translate-y-1 cursor-pointer">
               <FaLinkedin size={30} />
             </a>
@@ -73,7 +55,7 @@ export function Home() {
               <MdMarkEmailUnread size={31} />
             </a>
           </div>
-          <p className="hero-info absolute bottom-16 hidden sm:flex items-center gap-2.5 font-semibold">
+          <p className="hero-info absolute bottom-20 hidden sm:flex items-center gap-2.5 font-semibold">
             <span className="relative flex h-2 w-2">
               <span className="absolute inline-flex h-full w-full animate-ping rounded-full bg-red-600 opacity-75" />
               <span className="relative inline-flex h-2 w-2 rounded-full bg-green-400" />
