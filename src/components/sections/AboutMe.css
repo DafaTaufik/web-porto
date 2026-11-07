@@ -22,7 +22,14 @@
 .about-fl2 { animation: about-fl2 7.5s ease-in-out infinite; }
 .about-fl3 { animation: about-fl3 5.5s ease-in-out infinite; }
 .about-fl4 { animation: about-fl1 8.5s ease-in-out -2s infinite; }
+@keyframes about-pulse {
+  0% { box-shadow: 0 0 0 0 rgba(21, 128, 61, 0.45); }
+  100% { box-shadow: 0 0 0 12px rgba(21, 128, 61, 0); }
+}
+
 .about-ring { animation: about-spin 70s linear infinite; }
+.about-spin { animation: about-spin 18s linear infinite; }
+.about-pulse { animation: about-pulse 2.2s ease-out infinite; }
 .about-marquee { animation: about-marquee 32s linear infinite; }
 
 /* Section di luar layar: hentikan semua loop */
@@ -31,13 +38,15 @@
 .about-paused .about-fl3,
 .about-paused .about-fl4,
 .about-paused .about-ring,
+.about-paused .about-spin,
+.about-paused .about-pulse,
 .about-paused .about-marquee {
   animation-play-state: paused;
 }
 
 @media (prefers-reduced-motion: reduce) {
   .about-fl1, .about-fl2, .about-fl3, .about-fl4,
-  .about-ring, .about-marquee {
+  .about-ring, .about-spin, .about-pulse, .about-marquee {
     animation: none;
   }
 }
