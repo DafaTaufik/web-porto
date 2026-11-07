@@ -1,14 +1,23 @@
-import React, { useState, useEffect } from "react";
-import { motion, AnimatePresence } from "framer-motion";
-import { Link } from "react-router-dom";
-import clsx from "clsx"; // Gunakan clsx untuk className yang dinamis
+import React, { useState, useEffect, useRef } from "react";
+import { motion } from "framer-motion";
+import gsap from "gsap";
+import clsx from "clsx";
 
 export const FloatingNav = ({ navItems, className }) => {
   const [visible, setVisible] = useState(false);
   const [lastScrollY, setLastScrollY] = useState(window.scrollY);
   const [activeSection, setActiveSection] = useState("home");
+  const navRef = useRef(null);
 
-  // Gunakan useEffect untuk mendeteksi scroll (karena useScroll Framer Motion lebih optimal di Next.js)
+  // Animasi masuk navbar (wrapper terpisah dari motion.div yang mengurus hide/show saat scroll)
+  useEffect(() => {
+    const el = navRef.current;
+    if (!el) return;
+    if (window.matchMedia("(prefers-reduced-motion: reduce)").matches) return;
+    const tween = gsap.fromTo(el, { y: -26, opacity: 0 }, { y: 0, opacity: 1, duration: 1.1, ease: "expo.out" });
+    return () => tween.kill();
+  }, []);
+
   useEffect(() => {
     const handleScroll = () => {
       const currentScrollY = window.scrollY;
@@ -46,72 +55,53 @@ export const FloatingNav = ({ navItems, className }) => {
     return () => window.removeEventListener("scroll", handleActiveSection);
   }, [navItems]);
 
-  const handleNavClick = (link) => {
-    const targetId = link.replace("#", "");
-    const targetElement = document.getElementById(targetId);
-
+  const handleNavClick = (e, link) => {
+    e.preventDefault();
+    const targetElement = document.getElementById(link.replace("#", ""));
     if (targetElement) {
-      targetElement.scrollIntoView({
-        behavior: "smooth",
-        block: "start",
-      });
+      targetElement.scrollIntoView({ behavior: "smooth", block: "start" });
     }
   };
 
   return (
-    <AnimatePresence mode="wait">
-      <motion.div
-        initial={{ opacity: 1, y: -100 }}
-        animate={{ y: visible ? 0 : -100, opacity: visible ? 1 : 0 }}
-        transition={{ duration: 0.45, ease: "easeOut" }}
-        className={clsx(
-          "flex w-fit gap-3 max-w-[94%] fixed top-10 inset-x-0 mx-auto border border-transparent dark:border-white/[0.2] rounded-2xl dark:bg-black bg-white shadow-lg z-[5000] py-2 px-2 sm:py-3 sm:px-4 md:px-6 justify-between",
-          className
-          // "flex max-w-[46%] fixed top-10 inset-x-0 mx-auto border border-transparent dark:border-white/[0.2] rounded-2xl dark:bg-black bg-white shadow-lg z-[5000] pr-2 pl-8 py-3 items-center justify-center space-x-4",
-          // className
-        )}
+    <motion.header
+      initial={{ opacity: 1, y: -100 }}
+      animate={{ y: visible ? 0 : -100, opacity: visible ? 1 : 0 }}
+      transition={{ duration: 0.45, ease: "easeOut" }}
+      className="fixed top-7 inset-x-0 flex justify-center px-6 z-[5000] pointer-events-none"
+    >
+      <nav
+        ref={navRef}
+        aria-label="Primary"
+        className={clsx("pointer-events-auto flex w-full max-w-[1210px] items-center justify-between gap-x-4 gap-y-2 whitespace-nowrap rounded-full bg-white py-2.5 pr-3.5 pl-5 sm:pl-7 shadow-[0_6px_30px_rgba(0,0,0,0.08)]", className)}
       >
-        <p className="font-HWT text-2xl sm:text-3xl lg:text-3xl dark:text-white">Dafa</p>
-        <div className="flex space-x-0.5 lg:space-x-2 xl:space-x-3">
-          {navItems.map((navItem, idx) => {
+        <a href="#home" onClick={(e) => handleNavClick(e, "#home")} className="hidden min-[561px]:block font-HWT text-[32px] leading-none uppercase text-[#1D1D1D]">
+          Dafa
+        </a>
+        <div className="flex items-center gap-0.5 font-HWT text-[19px] uppercase text-[#4B5563] max-[560px]:mx-auto">
+          {navItems.map((navItem) => {
             const sectionId = navItem.link.replace("#", "");
             const isActive = activeSection === sectionId;
 
             return (
-              <button key={idx} onClick={() => handleNavClick(navItem.link)} className="relative font-HWT items-center flex transition-all duration-100 rounded-full px-2 md:px-2.5 lg:px-3 py-1.5 cursor-pointer">
-                {isActive && (
-                  <motion.span
-                    layoutId="navHighlight"
-                    className="absolute inset-0 rounded-full bg-black dark:bg-white shadow-md"
-                    transition={{
-                      type: "spring",
-                      stiffness: 550, // makin besar makin cepat
-                      damping: 45, // makin kecil makin "lemes"
-                      mass: 0.6, // makin besar makin berat (makin lambat)
-                    }}
-                  />
+              <a
+                key={sectionId}
+                href={navItem.link}
+                aria-current={isActive ? "page" : undefined}
+                aria-label={navItem.name}
+                onClick={(e) => handleNavClick(e, navItem.link)}
+                className={clsx(
+                  "flex items-center gap-2 rounded-full transition-colors duration-300 py-[11px] px-3.5 min-[1240px]:px-4 focus-visible:outline-3 focus-visible:outline-offset-[3px] focus-visible:outline-[#1D1D1D]",
+                  isActive ? "bg-[#1D1D1D] text-white min-[1240px]:px-5" : "hover:bg-[#F3F4F6] hover:text-[#1D1D1D]",
                 )}
-
-                {/* Mobile: Icon only */}
-                <span
-                  className={clsx(
-                    "block sm:hidden relative z-10", // z-10 supaya text di atas bg
-                    isActive ? "text-white dark:text-black" : "dark:text-neutral-50 text-neutral-600 dark:hover:text-neutral-300 hover:text-neutral-500"
-                  )}
-                >
-                  {navItem.icon}
-                </span>
-
-                {/* Tablet ke atas: Icon + Text */}
-                <span className={clsx("hidden sm:flex items-center space-x-2 relative z-10", isActive ? "text-white dark:text-black" : "dark:text-neutral-50 text-neutral-600 dark:hover:text-neutral-300 hover:text-neutral-500")}>
-                  <span className="hidden lg:block">{navItem.icon}</span>
-                  <span className="text-sm lg:text-base xl:text-lg">{navItem.name}</span>
-                </span>
-              </button>
+              >
+                {navItem.icon}
+                <span className="hidden min-[1240px]:inline">{navItem.name}</span>
+              </a>
             );
           })}
         </div>
-      </motion.div>
-    </AnimatePresence>
+      </nav>
+    </motion.header>
   );
 };

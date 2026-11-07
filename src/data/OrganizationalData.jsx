@@ -9,8 +9,9 @@ import p8 from "../assets/Image/organizational/organizational-08.jpg";
 import p9 from "../assets/Image/organizational/organizational-09.jpg";
 import p10 from "../assets/Image/organizational/organizational-10.jpg";
 import p11 from "../assets/Image/organizational/organizational-11.jpg";
-import p12 from "../assets/Image/organizational/organizational-12.jpg";
-import p13 from "../assets/Image/organizational/organizational-13.jpg";
+import p12 from "../assets/Image/organizational/organizational-13.jpg";
+import p13 from "../assets/Image/organizational/organizational-14.jpg";
+import p14 from "../assets/Image/organizational/organizational-15.jpg";
 
 // Teks dalam kurung siku adalah placeholder sampai Dafa mengisinya. Jangan diisi karangan.
 export const OrganizationalData = {
@@ -23,7 +24,7 @@ export const OrganizationalData = {
   heroCaption: "[Caption: where and when this group photo was taken]",
 };
 
-// Satu sumber untuk hero, galeri, viewer, dan strip. Urutan array = nomor foto 01-13.
+// Satu sumber untuk hero, galeri, viewer, dan strip. Urutan array = nomor foto 01-14.
 // caption: kosong = viewer menampilkan placeholder. ratio: rasio kotak di galeri.
 export const OrganizationalPhotos = [
   { src: p1, alt: "Aerial view of the whole group standing in formation on the lawn", caption: "", ratio: "16 / 9" },
@@ -37,13 +38,14 @@ export const OrganizationalPhotos = [
   { src: p9, alt: "Committee members in navy jackets guiding a line of participants along the road", caption: "", ratio: "3 / 2" },
   { src: p10, alt: "Close group photo of masked committee members posing under the trees", caption: "", ratio: "3 / 2" },
   { src: p11, alt: "Two committee members in light blue shirts holding up their name tags", caption: "", ratio: "1108 / 1478" },
-  { src: p12, alt: "Two committee members posing together, one giving a thumbs up", caption: "", ratio: "1108 / 1477" },
-  { src: p13, alt: "Two committee members posing on the paved plaza, one flashing a peace sign", caption: "", ratio: "1109 / 1479" },
+  { src: p12, alt: "Two committee members posing on the paved plaza, one flashing a peace sign", caption: "", ratio: "1109 / 1479" },
+  { src: p13, alt: "A committee member in a black cap and navy blazer stamping a participant's card on the street", caption: "", ratio: "1108 / 1662" },
+  { src: p14, alt: "Committee members in navy blazers checking in a long line of participants in yellow and orange shirts", caption: "", ratio: "3 / 2" },
 ];
 
 // Kolom galeri (indeks foto), margin-top bergerigi, dan kecepatan parallax
 export const GalleryColumns = [
-  { photos: [5, 2, 8, 11], top: 0, speed: 0.06 },
-  { photos: [4, 1, 6, 12], top: 72, speed: 0.14 },
-  { photos: [3, 7, 9, 10], top: 32, speed: 0.1 },
+  { photos: [5, 2, 8, 12], top: 0, speed: 0.06 },
+  { photos: [4, 1, 6, 11], top: 72, speed: 0.14 },
+  { photos: [3, 7, 9, 10, 13], top: 32, speed: 0.1 },
 ];
