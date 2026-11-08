@@ -1,6 +1,7 @@
 import { useLayoutEffect, useRef } from "react";
 import gsap from "gsap";
 import { ScrollTrigger } from "gsap/ScrollTrigger";
+import { createReplay } from "../../utils/replayOnVisit";
 import { ProjectsData } from "../../data/ProjectsData";
 import { COVERS, SHOTS } from "../ui/ProjectPlaceholders";
 import "./Projects.css";
@@ -227,23 +228,19 @@ export default function Projects() {
         // Reduced motion: semua konten tampil langsung dalam keadaan akhir
         if (!motion) return () => cleanups.forEach((fn) => fn());
 
+        // Animasi masuk main lagi tiap user kembali dari atas (lihat utils/replayOnVisit)
+        const { replay, disconnect: disconnectReplay } = createReplay(section);
+
         // 1. Headline: trigger di PEMBUNGKUS mask, bukan di teksnya
         const lines = gsap.utils.toArray("[data-line]");
-        gsap.set(lines, { yPercent: 108 });
         lines.forEach((line, i) => {
-          gsap.to(line, {
-            yPercent: 0,
-            duration: 1.2,
-            ease: "expo.out",
-            delay: i * 0.12,
-            scrollTrigger: { trigger: line.parentElement, start: "top 92%", once: true },
-          });
+          replay(line.parentElement, gsap.fromTo(line, { yPercent: 108 }, { yPercent: 0, duration: 1.2, ease: "expo.out", delay: i * 0.12, paused: true }));
         });
 
         // 2. Reveal umum
         const reveals = gsap.utils.toArray("[data-rv]");
         reveals.forEach((el) => {
-          gsap.fromTo(el, { autoAlpha: 0, y: 42 }, { autoAlpha: 1, y: 0, duration: 1, ease: "expo.out", scrollTrigger: { trigger: el, start: "top 92%", once: true } });
+          replay(el, gsap.fromTo(el, { autoAlpha: 0, y: 42 }, { autoAlpha: 1, y: 0, duration: 1, ease: "expo.out", paused: true }));
         });
 
         // 3. Garis tepi atas tergambar mengikuti scroll (scaleX dari kiri)
@@ -313,6 +310,7 @@ export default function Projects() {
           cancelled = true;
           clearTimeout(safety);
           io.disconnect();
+          disconnectReplay();
           cleanups.forEach((fn) => fn());
         };
       }, sectionRef);

@@ -13,15 +13,19 @@ import p12 from "../assets/Image/organizational/organizational-13.jpg";
 import p13 from "../assets/Image/organizational/organizational-14.jpg";
 import p14 from "../assets/Image/organizational/organizational-15.jpg";
 
-// Teks dalam kurung siku adalah placeholder sampai Dafa mengisinya. Jangan diisi karangan.
 export const OrganizationalData = {
-  name: "[Organization name]",
-  role: "[Your role / division]",
-  period: "[Mon YYYY – Mon YYYY]",
-  event: "[Event / program]",
-  summary: "[Two or three sentences: what the organization does, what the event was, and what your part was.]",
-  bullets: ["[Add what you did: responsibility 1]", "[Add what you did: responsibility 2]", "[Add a result: number of people, scale, outcome]"],
-  heroCaption: "[Caption: where and when this group photo was taken]",
+  name: "OMB UMN 2023",
+  role: "Security Division Member",
+  period: "Feb 2023 – Aug 2023",
+  event: "New Student Orientation",
+  summary:
+    "OMB (Orientasi Mahasiswa Baru) is Universitas Multimedia Nusantara’s annual orientation program that introduces new students to campus life. About 2.800 new students attended the 2023 edition. As a member of Adhyasta, the security division, I helped plan the guard posts, participant flow, and on event day I kept the venue safe and orderly.",
+  bullets: [
+    "Served on the security team for the New Student Orientation, which about 2.800 new students attended, and kept the event safe and running smoothly",
+    "Helped plan security post locations, participant flow, and event rules to keep the event safe and organized.",
+    "Stamped about 1.000 student assignments at the entrance as proof of participation",
+  ],
+  heroCaption: "Building D Garden, Universitas Multimedia Nusantara · Jul 2023",
 };
 
 // Satu sumber untuk hero, galeri, viewer, dan strip. Urutan array = nomor foto 01-14.

@@ -145,18 +145,45 @@ export default function Organizational() {
       const section = sectionRef.current;
 
       const ctx = gsap.context(() => {
+        // Animasi masuk hanya dimainkan saat user datang dari ATAS (scroll turun). Selama section masih di layar tidak diulang.
+        // Reset hanya terjadi kalau user pergi ke section di atas (section 05 keluar lewat bawah layar), jadi main lagi saat kembali.
+        // User yang kembali dari bawah (mis. section 06 scroll naik): elemen langsung tampil tanpa animasi.
+        // Pakai IntersectionObserver (bukan ScrollTrigger) karena membaca posisi yang benar-benar tampil,
+        // termasuk geseran parallax kolom galeri; ScrollTrigger menghitung dari posisi layout sehingga elemen bisa telat muncul
+        const observers = [];
+        const replays = [];
+        const replay = (el, anim) => {
+          const state = { anim, played: false };
+          replays.push(state);
+          const enter = new IntersectionObserver(
+            ([entry]) => {
+              if (!entry.isIntersecting || state.played) return;
+              state.played = true;
+              if (entry.boundingClientRect.top > 0) anim.play();
+              else anim.progress(1);
+            },
+            { rootMargin: "0px 0px -6% 0px" }
+          );
+          enter.observe(el);
+          observers.push(enter);
+        };
+        const resetAll = () =>
+          replays.forEach((state) => {
+            state.played = false;
+            state.anim.pause(0);
+          });
+
         // 1. Headline: trigger di PEMBUNGKUS mask, bukan di teksnya
         const lines = gsap.utils.toArray("[data-line]");
-        gsap.set(lines, { yPercent: 108 });
         lines.forEach((line, i) => {
-          gsap.to(line, { yPercent: 0, duration: 1.1, ease: "expo.out", delay: i * 0.12, scrollTrigger: { trigger: line.parentElement, start: "top 94%", once: true } });
+          replay(line.parentElement, gsap.fromTo(line, { yPercent: 108 }, { yPercent: 0, duration: 1.1, ease: "expo.out", delay: i * 0.12, paused: true }));
         });
 
         // 2. Reveal umum; delay (ms) dibaca dari data-rv
         const reveals = gsap.utils.toArray("[data-rv]");
         reveals.forEach((el) => {
           const delay = (parseInt(el.dataset.rv, 10) || 0) / 1000;
-          gsap.fromTo(el, { autoAlpha: 0, y: 42 }, { autoAlpha: 1, y: 0, duration: 1, ease: "expo.out", delay, scrollTrigger: { trigger: el, start: "top 94%", once: true } });
+          replay(el, gsap.fromTo(el, { autoAlpha: 0, y: 42 }, { autoAlpha: 1, y: 0, duration: 1, ease: "expo.out", delay, paused: true }));
         });
 
         // 3. Foto: clip dari bawah + zoom turun. clipPath dibuang setelah selesai supaya lift/shadow hover tidak terpotong
@@ -164,18 +191,12 @@ export default function Organizational() {
         tws.forEach((tw, i) => {
           const r = `${tw.dataset.radius}px`;
           const zm = tw.querySelector("[data-zm]");
-          gsap.set(tw, { clipPath: `inset(100% 0% 0% 0% round ${r})` });
-          gsap.set(zm, { scale: 1.22 });
           const delay = (i % 3) * 0.09;
-          ScrollTrigger.create({
-            trigger: tw,
-            start: "top 94%",
-            once: true,
-            onEnter: () => {
-              gsap.to(tw, { clipPath: `inset(0% 0% 0% 0% round ${r})`, duration: 1.3, ease: "expo.out", delay, onComplete: () => gsap.set(tw, { clearProps: "clipPath" }) });
-              gsap.to(zm, { scale: 1, duration: 1.6, ease: "expo.out", delay });
-            },
-          });
+          const tl = gsap
+            .timeline({ paused: true, onComplete: () => gsap.set(tw, { clearProps: "clipPath" }) })
+            .fromTo(tw, { clipPath: `inset(100% 0% 0% 0% round ${r})` }, { clipPath: `inset(0% 0% 0% 0% round ${r})`, duration: 1.3, ease: "expo.out" }, delay)
+            .fromTo(zm, { scale: 1.22 }, { scale: 1, duration: 1.6, ease: "expo.out" }, delay);
+          replay(tw, tl);
         });
 
         // 4. Parallax kolom galeri (desktop) dan zoom foto utama
@@ -222,7 +243,10 @@ export default function Organizational() {
         }
 
         // Pause loop CSS saat section di luar layar
-        const io = new IntersectionObserver(([entry]) => section.classList.toggle("org-paused", !entry.isIntersecting));
+        const io = new IntersectionObserver(([entry]) => {
+          section.classList.toggle("org-paused", !entry.isIntersecting);
+          if (!entry.isIntersecting && entry.boundingClientRect.top > 0) resetAll();
+        });
         io.observe(section);
 
         // Cadangan: kalau trigger tidak jalan, tampilkan yang sudah ada di layar
@@ -256,6 +280,7 @@ export default function Organizational() {
           cancelled = true;
           clearTimeout(safety);
           io.disconnect();
+          observers.forEach((o) => o.disconnect());
           cleanups.forEach((fn) => fn());
         };
       }, sectionRef);

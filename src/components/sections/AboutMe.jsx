@@ -1,6 +1,7 @@
 import { useLayoutEffect, useRef } from "react";
 import gsap from "gsap";
 import { ScrollTrigger } from "gsap/ScrollTrigger";
+import { createReplay } from "../../utils/replayOnVisit";
 import AboutCluster from "../ui/AboutCluster";
 import "./AboutMe.css";
 
@@ -40,48 +41,26 @@ export default function AboutMe() {
 
     mm.add("(prefers-reduced-motion: no-preference)", () => {
       const ctx = gsap.context(() => {
+        // Animasi masuk main lagi tiap user kembali dari atas (lihat utils/replayOnVisit)
+        const { replay, disconnect: disconnectReplay } = createReplay(sectionRef.current);
+
         // 1. Headline: trigger di PEMBUNGKUS mask, bukan di teksnya (teks di luar mask dianggap tak terlihat)
         const lines = gsap.utils.toArray("[data-line]");
-        gsap.set(lines, { yPercent: 108 });
         lines.forEach((line, i) => {
-          gsap.to(line, {
-            yPercent: 0,
-            duration: 1.1,
-            ease: "expo.out",
-            delay: i * 0.12,
-            scrollTrigger: { trigger: line.parentElement, start: "top 92%", once: true },
-          });
+          replay(line.parentElement, gsap.fromTo(line, { yPercent: 108 }, { yPercent: 0, duration: 1.1, ease: "expo.out", delay: i * 0.12, paused: true }));
         });
 
         // 2. Reveal umum; delay (ms) dibaca dari data-rv
         const reveals = gsap.utils.toArray("[data-rv]");
         reveals.forEach((el) => {
           const delay = (parseInt(el.dataset.rv, 10) || 0) / 1000;
-          gsap.fromTo(
-            el,
-            { autoAlpha: 0, y: 42 },
-            {
-              autoAlpha: 1,
-              y: 0,
-              duration: 1,
-              ease: "expo.out",
-              delay,
-              scrollTrigger: { trigger: el, start: "top 92%", once: true },
-            },
-          );
+          replay(el, gsap.fromTo(el, { autoAlpha: 0, y: 42 }, { autoAlpha: 1, y: 0, duration: 1, ease: "expo.out", delay, paused: true }));
         });
 
         // Foto utama terbuka dari bawah. Trigger = [data-cluster] yang tidak ikut parallax
-        gsap.fromTo(
-          "[data-clip]",
-          { clipPath: "inset(100% 0% 0% 0%)" },
-          {
-            clipPath: "inset(0% 0% 0% 0%)",
-            duration: 1.5,
-            ease: "expo.out",
-            delay: 0.15,
-            scrollTrigger: { trigger: "[data-cluster]", start: "top 92%", once: true },
-          },
+        replay(
+          sectionRef.current.querySelector("[data-cluster]"),
+          gsap.fromTo("[data-clip]", { clipPath: "inset(100% 0% 0% 0%)" }, { clipPath: "inset(0% 0% 0% 0%)", duration: 1.5, ease: "expo.out", delay: 0.15, paused: true }),
         );
 
         // Kata paragraf utama menyala mengikuti scroll
@@ -188,6 +167,7 @@ export default function AboutMe() {
           cancelled = true;
           clearTimeout(safety);
           io.disconnect();
+          disconnectReplay();
           removeMove();
         };
       }, sectionRef);
