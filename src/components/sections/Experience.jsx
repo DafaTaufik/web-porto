@@ -1,6 +1,7 @@
 import { useLayoutEffect, useRef } from "react";
 import gsap from "gsap";
 import { ScrollTrigger } from "gsap/ScrollTrigger";
+import { createReplay } from "../../utils/replayOnVisit";
 import ExperienceCard from "../ui/ExperienceCard";
 import { ProfessionalExperienceData as EXPERIENCES } from "../../data/ProfessionalExperienceData";
 
@@ -21,38 +22,26 @@ export function Experience() {
       if (!mq.conditions.motion) return;
 
       const ctx = gsap.context(() => {
+        // Animasi masuk main lagi tiap user kembali dari atas (lihat utils/replayOnVisit)
+        const { replay, disconnect: disconnectReplay } = createReplay(sectionRef.current);
+
         // 1. Headline: trigger di PEMBUNGKUS mask, bukan di teksnya
         const lines = gsap.utils.toArray("[data-line]");
-        gsap.set(lines, { yPercent: 108 });
         lines.forEach((line, i) => {
-          gsap.to(line, {
-            yPercent: 0,
-            duration: 1.1,
-            ease: "expo.out",
-            delay: i * 0.12,
-            scrollTrigger: { trigger: line.parentElement, start: "top 92%", once: true },
-          });
+          replay(line.parentElement, gsap.fromTo(line, { yPercent: 108 }, { yPercent: 0, duration: 1.1, ease: "expo.out", delay: i * 0.12, paused: true }));
         });
 
         // 2. Reveal umum; delay (ms) dibaca dari data-rv
         const reveals = gsap.utils.toArray("[data-rv]");
         reveals.forEach((el) => {
           const delay = (parseInt(el.dataset.rv, 10) || 0) / 1000;
-          gsap.fromTo(
-            el,
-            { autoAlpha: 0, y: 42 },
-            { autoAlpha: 1, y: 0, duration: 1, ease: "expo.out", delay, scrollTrigger: { trigger: el, start: "top 92%", once: true } },
-          );
+          replay(el, gsap.fromTo(el, { autoAlpha: 0, y: 42 }, { autoAlpha: 1, y: 0, duration: 1, ease: "expo.out", delay, paused: true }));
         });
 
         // 3. Kartu masuk dari kanan
         const cards = gsap.utils.toArray("[data-card]");
         cards.forEach((card) => {
-          gsap.fromTo(
-            card,
-            { autoAlpha: 0, x: 64, rotation: 2 },
-            { autoAlpha: 1, x: 0, rotation: 0, duration: 1.2, ease: "expo.out", scrollTrigger: { trigger: card, start: "top 92%", once: true } },
-          );
+          replay(card, gsap.fromTo(card, { autoAlpha: 0, x: 64, rotation: 2 }, { autoAlpha: 1, x: 0, rotation: 0, duration: 1.2, ease: "expo.out", paused: true }));
         });
 
         // Cadangan: kalau trigger tidak jalan, tampilkan yang sudah ada di layar
@@ -165,6 +154,7 @@ export function Experience() {
         return () => {
           cancelled = true;
           clearTimeout(safety);
+          disconnectReplay();
           cleanups.forEach((fn) => fn());
         };
       }, sectionRef);
@@ -220,7 +210,7 @@ export function Experience() {
                     <defs>
                       <path id="exp-stamp-circle" d="M100,100 m-80,0 a80,80 0 1,1 160,0 a80,80 0 1,1 -160,0" />
                     </defs>
-                    <text style={{ fontFamily: "HWT, sans-serif", fontSize: 17, textTransform: "uppercase", fill: INK }}>
+                    <text style={{ fontFamily: "hwt-artz, sans-serif", fontSize: 17, textTransform: "uppercase", fill: INK }}>
                       <textPath href="#exp-stamp-circle" textLength="498" lengthAdjust="spacing">
                         Mobile developer • Backend • Software engineering •{" "}
                       </textPath>

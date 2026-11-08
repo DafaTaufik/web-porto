@@ -1,0 +1,83 @@
+/* Organizational section: dekorasi clipboard, foto, viewer. Reveal, parallax, dan zoom dikerjakan GSAP di wrapper terpisah. */
+@keyframes org-fl1 { 0%, 100% { transform: translateY(0); } 50% { transform: translateY(-12px); } }
+@keyframes org-fl2 { 0%, 100% { transform: translateY(0) rotate(-6deg); } 50% { transform: translateY(10px) rotate(6deg); } }
+@keyframes org-fl3 { 0%, 100% { transform: translate(0, 0); } 50% { transform: translate(6px, -8px); } }
+@keyframes org-tk { 0%, 4% { stroke-dashoffset: 24; } 14%, 84% { stroke-dashoffset: 0; } 96%, 100% { stroke-dashoffset: 24; } }
+@keyframes org-fade { from { opacity: 0; } to { opacity: 1; } }
+@keyframes org-pop { from { opacity: 0; transform: translateY(18px) scale(0.97); } to { opacity: 1; transform: none; } }
+.org-fl1 { animation: org-fl1 7s ease-in-out infinite; }
+.org-fl2 { animation: org-fl2 8s ease-in-out infinite; }
+.org-fl3 { animation: org-fl3 5.5s ease-in-out infinite; }
+.org-tk { stroke-dasharray: 24; animation: org-tk 6s ease infinite; }
+.org-paused .org-fl1, .org-paused .org-fl2, .org-paused .org-fl3, .org-paused .org-tk { animation-play-state: paused; }
+
+/* Foto: tombol = hover/lift; [data-zm] di dalamnya = zoom reveal; <img> = zoom hover */
+.org-ph {
+  display: block;
+  position: relative;
+  width: 100%;
+  padding: 0;
+  margin: 0;
+  border: 1px solid #d4d4d4;
+  background: #f3f4f6;
+  overflow: hidden;
+  cursor: pointer;
+  transition: border-color 0.3s, box-shadow 0.4s, transform 0.5s cubic-bezier(0.16, 1, 0.3, 1);
+}
+.org-ph:hover { border-color: #1d1d1d; box-shadow: 0 22px 48px rgba(0, 0, 0, 0.14) !important; transform: translateY(-4px); }
+.org-ph:focus-visible { outline: 3px solid #1d1d1d; outline-offset: 3px; }
+.org-im { display: block; width: 100%; height: 100%; object-fit: cover; transition: transform 0.8s cubic-bezier(0.16, 1, 0.3, 1); }
+.org-ph:hover .org-im { transform: scale(1.045); }
+.org-vw { position: absolute; inset: 0; display: flex; align-items: center; justify-content: center; opacity: 0; transition: opacity 0.3s; pointer-events: none; }
+.org-ph:hover .org-vw, .org-ph:focus-visible .org-vw { opacity: 1; }
+@media (hover: none) { .org-vw { display: none; } }
+
+/* Viewer */
+.org-modal {
+  position: fixed;
+  inset: 0;
+  z-index: 6000; /* di atas navbar (z-[5000]) */
+  display: flex;
+  flex-direction: column;
+  background: rgba(15, 15, 15, 0.94);
+  color: #fff;
+  outline: none;
+  animation: org-fade 0.25s ease;
+}
+.org-mb { transition: background 0.2s, border-color 0.2s; }
+.org-mb:hover { background: rgba(255, 255, 255, 0.16); }
+.org-modal :is(.org-mb, .org-tb):focus-visible { outline: 3px solid #fff; outline-offset: 2px; }
+.org-round { flex: none; border-radius: 50%; border: 1px solid rgba(255, 255, 255, 0.3); background: transparent; color: #fff; display: flex; align-items: center; justify-content: center; cursor: pointer; padding: 0; }
+.org-stage { position: relative; flex: 1; min-height: 0; display: flex; align-items: center; justify-content: center; padding: 24px 90px; box-sizing: border-box; }
+.org-arr { position: absolute; top: 50%; margin-top: -26px; width: 52px; height: 52px; background: rgba(255, 255, 255, 0.08); z-index: 2; }
+.org-zoom { position: relative; display: flex; align-items: center; justify-content: center; max-width: 100%; }
+.org-zoom.is-zoom { position: absolute; inset: 0; z-index: 1; overflow: hidden; padding: 24px 90px; box-sizing: border-box; }
+.org-zoom.is-zoom .org-pg { max-height: 100%; }
+.org-pg { display: block; max-width: 100%; max-height: calc(100vh - 250px); width: auto; height: auto; object-fit: contain; border-radius: 8px; box-shadow: 0 30px 80px rgba(0, 0, 0, 0.5); animation: org-pop 0.5s cubic-bezier(0.16, 1, 0.3, 1); }
+.org-tb { flex: none; width: 68px; height: 46px; padding: 0; border: 2px solid transparent; border-radius: 8px; overflow: hidden; background: #000; cursor: pointer; opacity: 0.55; transition: opacity 0.2s, border-color 0.2s; }
+.org-tb:hover { opacity: 1; }
+.org-tb.act { opacity: 1; border-color: #fff; }
+.org-tb img { display: block; width: 100%; height: 100%; object-fit: cover; }
+
+/* Galeri */
+@media (max-width: 1100px) {
+  .org-deco { display: none; }
+  .org-info { grid-template-columns: minmax(0, 1fr) !important; }
+  .org-gal { grid-template-columns: repeat(2, minmax(0, 1fr)) !important; }
+  .org-gal > div:nth-child(3) { grid-column: 1 / -1; flex-direction: row !important; margin-top: 0 !important; }
+  .org-gal > div:nth-child(3) > * { flex: 1; }
+}
+@media (max-width: 700px) {
+  .org-gal { grid-template-columns: minmax(0, 1fr) !important; }
+  .org-gal > div { margin-top: 0 !important; }
+  .org-gal > div:nth-child(3) { flex-direction: column !important; }
+  .org-arr { width: 44px; height: 44px; margin-top: -22px; }
+  .org-stage { padding: 16px 12px; }
+  .org-hint, .org-strip { display: none !important; }
+  .org-bar { padding: 12px 14px !important; }
+}
+@media (prefers-reduced-motion: reduce) {
+  .org-fl1, .org-fl2, .org-fl3, .org-modal, .org-pg { animation: none; }
+  .org-tk { animation: none; stroke-dashoffset: 0; }
+  .org-ph, .org-im { transition: none; }
+}

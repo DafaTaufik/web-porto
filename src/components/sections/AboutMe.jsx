@@ -1,6 +1,7 @@
 import { useLayoutEffect, useRef } from "react";
 import gsap from "gsap";
 import { ScrollTrigger } from "gsap/ScrollTrigger";
+import { createReplay } from "../../utils/replayOnVisit";
 import AboutCluster from "../ui/AboutCluster";
 import "./AboutMe.css";
 
@@ -40,40 +41,57 @@ export default function AboutMe() {
 
     mm.add("(prefers-reduced-motion: no-preference)", () => {
       const ctx = gsap.context(() => {
+        // Animasi masuk main lagi tiap user kembali dari atas (lihat utils/replayOnVisit)
+        const { replay, disconnect: disconnectReplay } = createReplay(sectionRef.current);
+
         // 1. Headline: trigger di PEMBUNGKUS mask, bukan di teksnya (teks di luar mask dianggap tak terlihat)
         const lines = gsap.utils.toArray("[data-line]");
-        gsap.set(lines, { yPercent: 108 });
         lines.forEach((line, i) => {
-          gsap.to(line, {
-            yPercent: 0,
-            duration: 1.1,
-            ease: "expo.out",
-            delay: i * 0.12,
-            scrollTrigger: { trigger: line.parentElement, start: "top 92%", once: true },
-          });
+          replay(line.parentElement, gsap.fromTo(line, { yPercent: 108 }, { yPercent: 0, duration: 1.1, ease: "expo.out", delay: i * 0.12, paused: true }));
         });
 
         // 2. Reveal umum; delay (ms) dibaca dari data-rv
         const reveals = gsap.utils.toArray("[data-rv]");
         reveals.forEach((el) => {
           const delay = (parseInt(el.dataset.rv, 10) || 0) / 1000;
-          gsap.fromTo(
-            el,
-            { autoAlpha: 0, y: 42 },
-            {
-              autoAlpha: 1,
-              y: 0,
-              duration: 1,
-              ease: "expo.out",
-              delay,
-              scrollTrigger: { trigger: el, start: "top 92%", once: true },
-            },
-          );
+          replay(el, gsap.fromTo(el, { autoAlpha: 0, y: 42 }, { autoAlpha: 1, y: 0, duration: 1, ease: "expo.out", delay, paused: true }));
         });
+
+        // Foto utama terbuka dari bawah. Trigger = [data-cluster] yang tidak ikut parallax
+        replay(
+          sectionRef.current.querySelector("[data-cluster]"),
+          gsap.fromTo("[data-clip]", { clipPath: "inset(100% 0% 0% 0%)" }, { clipPath: "inset(0% 0% 0% 0%)", duration: 1.5, ease: "expo.out", delay: 0.15, paused: true }),
+        );
+
+        // Kata paragraf utama menyala mengikuti scroll
+        const words = gsap.utils.toArray("[data-w]");
+        gsap.set(words, { color: "#BFC4CC" });
+        gsap.to(words, {
+          color: "#1D1D1D",
+          ease: "none",
+          duration: 0.3,
+          stagger: 0.1,
+          scrollTrigger: { trigger: "[data-hl]", start: "top 88%", end: "bottom 40%", scrub: true },
+        });
+
+        // Zoom foto 1.14 -> 1.0, selesai saat pusat foto di tengah layar
+        gsap.fromTo(
+          "[data-zoom]",
+          { scale: 1.14 },
+          {
+            scale: 1,
+            ease: "none",
+            scrollTrigger: { trigger: "[data-cluster]", start: "top bottom", end: "center center", scrub: true },
+          },
+        );
 
         // Cadangan: kalau trigger tidak jalan, tampilkan yang sudah ada di layar
         const safety = setTimeout(() => {
           const vh = window.innerHeight;
+          const clip = sectionRef.current.querySelector("[data-clip]");
+          if (clip && clip.parentElement.getBoundingClientRect().top < vh && String(gsap.getProperty(clip, "clipPath")).includes("100%")) {
+            gsap.to(clip, { clipPath: "inset(0% 0% 0% 0%)", duration: 0.6, ease: "expo.out", overwrite: "auto" });
+          }
           lines.forEach((line) => {
             if (gsap.getProperty(line, "yPercent") > 0 && line.parentElement.getBoundingClientRect().top < vh) {
               gsap.to(line, { yPercent: 0, duration: 0.6, ease: "expo.out", overwrite: "auto" });
@@ -149,6 +167,7 @@ export default function AboutMe() {
           cancelled = true;
           clearTimeout(safety);
           io.disconnect();
+          disconnectReplay();
           removeMove();
         };
       }, sectionRef);
@@ -181,9 +200,6 @@ export default function AboutMe() {
           </span>
           <span className={MASK}>
             <span data-line className="block">
-              <span aria-hidden="true" className="relative inline-block w-[0.95em] h-[0.5em] rounded-full bg-[#1D1D1D] align-[0.04em] mr-[0.18em]">
-                <span className="absolute top-[0.07em] left-[0.07em] w-[0.36em] h-[0.36em] rounded-full bg-white" />
-              </span>
               and the backends
             </span>
           </span>
@@ -195,10 +211,25 @@ export default function AboutMe() {
         </h2>
 
         {/* Body */}
-        <div className="mt-[72px] flex flex-wrap items-start gap-x-[72px] gap-y-14">
-          {/* Left */}
-          <div className="flex flex-col gap-10 min-w-0 flex-[1.1_1_520px]">
-            <p className="m-0 text-[clamp(21px,2.1vw,28px)] font-medium leading-normal tracking-[-0.005em]">{LEAD}</p>
+        <div className="mt-[72px] flex flex-wrap items-start lg:items-center gap-x-20 gap-y-14">
+          {/* Left: klaster foto */}
+          <div data-rv="0" className="min-w-0 flex-[1_1_480px]">
+            <div className="relative mx-auto w-[324px] h-[420px] sm:w-[540px] sm:h-[700px] max-w-full">
+              <div className="absolute left-0 top-0 origin-top-left scale-[0.6] sm:scale-100">
+                <AboutCluster />
+              </div>
+            </div>
+          </div>
+
+          {/* Right: teks */}
+          <div className="flex flex-col gap-10 min-w-0 flex-[1.1_1_480px]">
+            <p data-hl aria-label={LEAD} className="m-0 text-[clamp(21px,2.1vw,28px)] font-medium leading-normal tracking-[-0.005em]">
+              {LEAD.split(" ").map((word, i) => (
+                <span key={i} data-w aria-hidden="true" className="inline-block mr-[0.27em]">
+                  {word}
+                </span>
+              ))}
+            </p>
 
             <p data-rv="0" className="m-0 max-w-[540px] text-[17px] font-medium leading-[1.7] text-[#4B5563]">
               Right now I&apos;m looking for a team where I can keep growing across mobile and backend engineering, and where clean, maintainable code is part of the culture.
@@ -223,15 +254,6 @@ export default function AboutMe() {
                 <path d="M5 12h14m0 0l-6-6m6 6l-6 6" />
               </svg>
             </a>
-          </div>
-
-          {/* Right: dekoratif */}
-          <div data-rv="150" className="min-w-0 flex-[1_1_440px]">
-            <div className="relative mx-auto w-[312px] h-[348px] sm:w-[520px] sm:h-[580px] max-w-full">
-              <div className="absolute left-0 top-0 origin-top-left scale-[0.6] sm:scale-100">
-                <AboutCluster />
-              </div>
-            </div>
           </div>
         </div>
       </div>

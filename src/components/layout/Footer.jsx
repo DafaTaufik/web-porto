@@ -6,7 +6,7 @@ import ic_github from "../../assets/Icon/github.png";
 
 export default function Footer(){
     return(
-        <div className="bg-black mt-20 w-full h-[300px] flex justify-center">
+        <div className="bg-black mt-20 w-full min-h-[300px] flex justify-center">
             <div className="w-7xl text-white  h-full py-12 flex flex-col">
                 <p className="font-HWT text-5xl">Contact</p>
                 <p className="font-Inter">Currently i </p>
@@ -26,6 +26,10 @@ export default function Footer(){
                         <img src={ic_github } alt="ic_github" className="w-7 h-7 mt-[5px] ml-[3px] hover:transform hover:-translate-y-1 transition-transform duration-500" />
                     </a>
                 </div>
+                <p className="mt-auto pt-6 text-xs text-white/50 font-Inter">
+                    Headings set in HWT Artz, licensed via{" "}
+                    <a href="https://fonts.adobe.com/fonts/hwt-artz" target="_blank" rel="noopener noreferrer" className="underline underline-offset-2 hover:text-white transition-colors">Adobe Fonts</a>.
+                </p>
             </div>
 
         </div>
