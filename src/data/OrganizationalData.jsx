@@ -31,20 +31,20 @@ export const OrganizationalData = {
 // Satu sumber untuk hero, galeri, viewer, dan strip. Urutan array = nomor foto 01-14.
 // caption: kosong = viewer menampilkan placeholder. ratio: rasio kotak di galeri.
 export const OrganizationalPhotos = [
-  { src: p1, alt: "Aerial view of the whole group standing in formation on the lawn", caption: "", ratio: "16 / 9" },
-  { src: p2, alt: "A committee member in a light blue shirt crossing the street", caption: "", ratio: "3 / 2" },
-  { src: p3, alt: "Committee members checking in participants on the street", caption: "", ratio: "3 / 2" },
-  { src: p4, alt: "Committee members handing out materials to participants", caption: "", ratio: "3 / 2" },
-  { src: p5, alt: "A committee member in a navy jacket holding a small marker", caption: "", ratio: "3 / 2" },
-  { src: p6, alt: "A committee member in a navy jacket briefing a participant", caption: "", ratio: "727 / 910" },
-  { src: p7, alt: "Committee members and participants lining up on the road", caption: "", ratio: "3 / 2" },
-  { src: p8, alt: "A committee member in a cap and mask scanning a participant's card", caption: "", ratio: "3 / 2" },
-  { src: p9, alt: "Committee members in navy jackets guiding a line of participants along the road", caption: "", ratio: "3 / 2" },
-  { src: p10, alt: "Close group photo of masked committee members posing under the trees", caption: "", ratio: "3 / 2" },
-  { src: p11, alt: "Two committee members in light blue shirts holding up their name tags", caption: "", ratio: "1108 / 1478" },
-  { src: p12, alt: "Two committee members posing on the paved plaza, one flashing a peace sign", caption: "", ratio: "1109 / 1479" },
-  { src: p13, alt: "A committee member in a black cap and navy blazer stamping a participant's card on the street", caption: "", ratio: "1108 / 1662" },
-  { src: p14, alt: "Committee members in navy blazers checking in a long line of participants in yellow and orange shirts", caption: "", ratio: "3 / 2" },
+  { src: p1, alt: "Aerial view of the whole group standing in formation on the lawn", ratio: "16 / 9" },
+  { src: p2, alt: "A committee member in a light blue shirt crossing the street", ratio: "3 / 2" },
+  { src: p3, alt: "Committee members checking in participants on the street", ratio: "3 / 2" },
+  { src: p4, alt: "Committee members handing out materials to participants", ratio: "3 / 2" },
+  { src: p5, alt: "A committee member in a navy jacket holding a small marker", ratio: "3 / 2" },
+  { src: p6, alt: "A committee member in a navy jacket briefing a participant", ratio: "727 / 910" },
+  { src: p7, alt: "Committee members and participants lining up on the road", ratio: "3 / 2" },
+  { src: p8, alt: "A committee member in a cap and mask scanning a participant's card", ratio: "3 / 2" },
+  { src: p9, alt: "Committee members in navy jackets guiding a line of participants along the road", ratio: "3 / 2" },
+  { src: p10, alt: "Close group photo of masked committee members posing under the trees", ratio: "3 / 2" },
+  { src: p11, alt: "Two committee members in light blue shirts holding up their name tags", ratio: "1108 / 1478" },
+  { src: p12, alt: "Two committee members posing on the paved plaza, one flashing a peace sign", ratio: "1109 / 1479" },
+  { src: p13, alt: "A committee member in a black cap and navy blazer stamping a participant's card on the street", ratio: "1108 / 1662" },
+  { src: p14, alt: "Committee members in navy blazers checking in a long line of participants in yellow and orange shirts", ratio: "3 / 2" },
 ];
 
 // Kolom galeri (indeks foto), margin-top bergerigi, dan kecepatan parallax

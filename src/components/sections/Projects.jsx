@@ -1,4 +1,5 @@
 import { useLayoutEffect, useRef } from "react";
+import { Link } from "react-router-dom";
 import gsap from "gsap";
 import { ScrollTrigger } from "gsap/ScrollTrigger";
 import { createReplay } from "../../utils/replayOnVisit";
@@ -74,12 +75,16 @@ function Slides({ project, index }) {
 function Row({ project, index }) {
   const slideCount = project.images.length || 1 + SHOTS.length;
   const typeIsPh = isPh(project.type);
+  // Link internal (/projects/:slug) lewat router; selain itu anchor biasa
+  const internal = project.href.startsWith("/");
+  const RowLink = internal ? Link : "a";
+  const rowProps = internal ? { to: project.href } : { href: project.href };
 
   return (
     <div data-rv className="relative">
       <span aria-hidden="true" className="absolute left-0 right-0 top-0 h-px bg-[#D4D4D4]" />
       <span aria-hidden="true" data-ln className="absolute left-0 right-0 top-0 h-0.5 bg-[#1D1D1D] origin-left" />
-      <a href={project.href} data-row className="pj-row">
+      <RowLink {...rowProps} data-row className="pj-row">
         <span aria-hidden="true" className="pj-ix">
           {pad(index + 1)}
         </span>
@@ -120,7 +125,7 @@ function Row({ project, index }) {
             <path d="M5 12h14m0 0l-6-6m6 6l-6 6" />
           </svg>
         </span>
-      </a>
+      </RowLink>
     </div>
   );
 }

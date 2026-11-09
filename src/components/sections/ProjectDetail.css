@@ -1,0 +1,116 @@
+/* Halaman detail project: hover, loop dekor, gallery, viewer. Reveal, parallax, dan pin sidebar dikerjakan GSAP di ProjectDetail.jsx. */
+.pd {
+  background-color: #fff;
+  background-image:
+    radial-gradient(circle at 6% 22%, #1d1d1d 0 3px, transparent 4px),
+    radial-gradient(circle at 44% 12%, #999 0 2px, transparent 3px),
+    radial-gradient(circle at 53% 46%, #333 0 2.5px, transparent 3.5px),
+    radial-gradient(circle at 38% 71%, #bbb 0 3px, transparent 4px),
+    radial-gradient(circle at 71% 30%, #bbb 0 2px, transparent 3px),
+    radial-gradient(circle at 92% 38%, #999 0 2px, transparent 3px),
+    radial-gradient(circle at 17% 88%, #777 0 2px, transparent 3px),
+    radial-gradient(circle at 96% 82%, #333 0 2.5px, transparent 3.5px);
+}
+
+@keyframes pd-fl1 { 0%, 100% { transform: translateY(0); } 50% { transform: translateY(-12px); } }
+@keyframes pd-fl2 { 0%, 100% { transform: translateY(0) rotate(-6deg); } 50% { transform: translateY(10px) rotate(6deg); } }
+@keyframes pd-fl3 { 0%, 100% { transform: translate(0, 0); } 50% { transform: translate(6px, -8px); } }
+@keyframes pd-pop { from { opacity: 0; transform: translateY(18px) scale(0.97); } to { opacity: 1; transform: none; } }
+.pd-fl1 { animation: pd-fl1 7s ease-in-out infinite; }
+.pd-fl2 { animation: pd-fl2 8s ease-in-out infinite; }
+.pd-fl3 { animation: pd-fl3 5.5s ease-in-out infinite; }
+.pd-pop { animation: pd-pop 0.5s cubic-bezier(0.16, 1, 0.3, 1); }
+.pd-paused .pd-fl1, .pd-paused .pd-fl2, .pd-paused .pd-fl3 { animation-play-state: paused; }
+
+.pd a:focus-visible, .pd button:focus-visible { outline: 3px solid #1d1d1d; outline-offset: 3px; }
+
+/* Link kembali */
+.pd-bk { display: inline-flex; align-items: center; gap: 10px; transition: gap 0.4s cubic-bezier(0.16, 1, 0.3, 1); }
+.pd-bk:hover, .pd-bk:focus-visible { gap: 16px; }
+
+/* Tile gallery */
+.pd-ph {
+  position: relative;
+  display: block;
+  width: 100%;
+  padding: 0;
+  margin: 0;
+  border: 1px dashed #bdbdbd;
+  border-radius: 22px;
+  background: #f4f4f4;
+  cursor: pointer;
+  overflow: hidden;
+  font: inherit;
+  color: inherit;
+  transition: border-color 0.3s, box-shadow 0.4s, transform 0.5s cubic-bezier(0.16, 1, 0.3, 1);
+}
+.pd-ph.has-img { border: 1px solid #d4d4d4; background: #fff; }
+.pd-ph:hover, .pd-ph:focus-visible {
+  border-color: #1d1d1d;
+  border-style: solid;
+  box-shadow: 0 22px 48px rgba(0, 0, 0, 0.14);
+  transform: translateY(-4px);
+}
+.pd-ph img { display: block; width: 100%; height: 100%; object-fit: cover; transition: transform 0.8s cubic-bezier(0.16, 1, 0.3, 1); }
+.pd-ph:hover img { transform: scale(1.045); }
+.pd-ov { opacity: 0; transition: opacity 0.4s; }
+.pd-ph:hover .pd-ov, .pd-ph:focus-visible .pd-ov { opacity: 1; }
+
+/* Kolom gallery bertingkat */
+.pd-gal { display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 24px; align-items: start; }
+.pd-col { display: flex; flex-direction: column; gap: 24px; }
+.pd-col:nth-child(2) { margin-top: 72px; }
+.pd-col:nth-child(3) { margin-top: 32px; }
+
+/* What I worked on */
+.pd-wr { transition: padding 0.4s cubic-bezier(0.16, 1, 0.3, 1); }
+.pd-wr:hover { padding-left: 14px; }
+.pd-wr .pd-wn { transition: color 0.3s; }
+.pd-wr:hover .pd-wn { color: #1d1d1d; }
+
+/* Link sidebar */
+.pd-lk { transition: background 0.3s, color 0.3s, transform 0.35s cubic-bezier(0.16, 1, 0.3, 1); }
+.pd-lk:hover, .pd-lk:focus-visible { background: #1d1d1d; color: #fff; transform: translateY(-2px); }
+.pd-lk .pd-lar { transition: transform 0.35s cubic-bezier(0.16, 1, 0.3, 1); }
+.pd-lk:hover .pd-lar, .pd-lk:focus-visible .pd-lar { transform: translate(3px, -3px); }
+
+/* Panel Next project */
+.pd-nx { transition: transform 0.5s cubic-bezier(0.16, 1, 0.3, 1), box-shadow 0.5s; }
+.pd-nx:hover, .pd-nx:focus-visible { transform: translateY(-6px); box-shadow: 0 30px 60px rgba(0, 0, 0, 0.25); }
+.pd-nx:focus-visible { outline-color: #1d1d1d; }
+.pd-nx .pd-cir { transition: background 0.4s, color 0.4s, transform 0.6s cubic-bezier(0.16, 1, 0.3, 1); }
+.pd-nx:hover .pd-cir, .pd-nx:focus-visible .pd-cir { background: #fff; color: #1d1d1d; transform: rotate(45deg); }
+
+/* Viewer */
+.pd-modal { position: fixed; inset: 0; z-index: 100; display: flex; flex-direction: column; background: rgba(15, 15, 15, 0.94); color: #fff; }
+.pd-modal:focus { outline: none; }
+.pd-modal button:focus-visible { outline-color: #fff; }
+.pd-vb { display: flex; align-items: center; justify-content: center; border-radius: 50%; border: 1px solid #4b5563; background: transparent; color: #fff; cursor: pointer; transition: background 0.3s, color 0.3s; }
+.pd-vb:hover, .pd-vb:focus-visible { background: #fff; color: #1d1d1d; }
+.pd-th { flex: none; width: 68px; height: 46px; padding: 0; border: 2px solid transparent; border-radius: 8px; overflow: hidden; background: #000; color: #9ca3af; cursor: pointer; opacity: 0.55; font: 600 12px "hwt-artz", Impact, sans-serif; transition: opacity 0.3s, border-color 0.3s; }
+.pd-th:hover { opacity: 0.85; }
+.pd-th.act { opacity: 1; border-color: #fff; }
+.pd-th img { display: block; width: 100%; height: 100%; object-fit: cover; }
+
+@media (max-width: 1099px) {
+  .pd-hero { grid-template-columns: minmax(0, 1fr) !important; }
+  .pd-dec { display: none !important; }
+  .pd-cg { grid-template-columns: minmax(0, 1fr) !important; }
+  .pd-gal { grid-template-columns: repeat(2, minmax(0, 1fr)); }
+  .pd-col:nth-child(3) { grid-column: 1 / -1; flex-direction: row; margin-top: 0; }
+  .pd-col:nth-child(3) > * { flex: 1; min-width: 0; }
+}
+@media (max-width: 760px) {
+  .pd-gal { grid-template-columns: minmax(0, 1fr); }
+  .pd-col { margin-top: 0 !important; transform: none !important; }
+  .pd-col:nth-child(3) { flex-direction: column; }
+  .pd-nx { padding: 36px 28px !important; }
+  .pd-cir { display: none !important; }
+  .pd-vst, .pd-vh { display: none !important; }
+  .pd-cs { grid-template-columns: minmax(0, 1fr) !important; }
+  .pd-stage { padding-left: 64px !important; padding-right: 64px !important; }
+}
+@media (prefers-reduced-motion: reduce) {
+  .pd-fl1, .pd-fl2, .pd-fl3, .pd-pop { animation: none; }
+  .pd-ph, .pd-ph img, .pd-wr, .pd-lk, .pd-nx, .pd-bk, .pd-ov { transition: none; }
+}

@@ -11,7 +11,7 @@ export const ProjectsData = [
     description: "A point-of-sale app, built during my internship at PT. Mitra Integrasi Digital.",
     tech: ["Kotlin", "Java", "Golang"],
     images: [],
-    href: "#",
+    href: "/projects/moni-pos",
   },
   {
     type: "Mobile",
@@ -22,7 +22,7 @@ export const ProjectsData = [
     description: "A human-resources app, built during the same internship.",
     tech: ["Kotlin", "Java", "Golang"],
     images: [],
-    href: "#",
+    href: "/projects/cmoasik-hris",
   },
   {
     type: "[Type]",

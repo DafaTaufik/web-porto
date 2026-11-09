@@ -1,3 +1,4 @@
+// import mainPhoto from "../../assets/Image/g.png";
 import mainPhoto from "../../assets/Image/about-main.jpg";
 import bouquetPhoto from "../../assets/Image/about-bouquet.jpg";
 
@@ -30,14 +31,7 @@ export default function AboutCluster() {
         <div data-mouse className="w-full h-full">
           <div className="about-fl1 box-border w-full h-full p-2.5 rounded-t-[215px] rounded-b-[34px] bg-[#ECECEC] shadow-[0_28px_56px_rgba(0,0,0,0.16)]">
             <div data-clip className="relative box-border w-full h-full overflow-hidden border-[3px] border-[#1D1D1D] rounded-t-[205px] rounded-b-[26px] bg-[#F4F4F4]">
-              <img
-                data-zoom
-                src={mainPhoto}
-                width={1200}
-                height={1800}
-                alt="Dafa Taufik Al Latief in a graduation gown, seated and smiling"
-                className="block w-full h-full object-cover object-[50%_30%]"
-              />
+              <img data-zoom src={mainPhoto} width={1200} height={1800} alt="Dafa Taufik Al Latief in a graduation gown, seated and smiling" className="block w-full h-full object-cover object-[50%_30%]" />
             </div>
           </div>
         </div>
@@ -67,14 +61,7 @@ export default function AboutCluster() {
         <div data-mouse>
           <div className="rotate-[5deg]">
             <div className="about-fl3 box-border w-[190px] px-2 pt-2 pb-3 rounded-[14px] bg-white border border-[#D4D4D4] shadow-[0_24px_48px_rgba(0,0,0,0.18)]">
-              <img
-                src={bouquetPhoto}
-                width={800}
-                height={1200}
-                loading="lazy"
-                alt="Dafa holding a graduation bouquet"
-                className="block w-full h-[220px] object-cover object-[50%_35%] rounded-lg"
-              />
+              <img src={bouquetPhoto} width={800} height={1200} loading="lazy" alt="Dafa holding a graduation bouquet" className="block w-full h-[220px] object-cover object-[50%_35%] rounded-lg" />
               <div className="mt-2.5 flex items-center justify-between font-Inter text-[11px] font-bold uppercase tracking-[0.06em]">
                 <span>Informatics / UMN</span>
                 <span aria-hidden="true" className="w-[7px] h-[7px] rounded-full bg-[#1D1D1D]" />
