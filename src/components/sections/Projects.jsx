@@ -367,20 +367,6 @@ export default function Projects() {
             <span aria-hidden="true" data-ln className="absolute left-0 right-0 top-0 h-0.5 bg-[#1D1D1D] origin-left" />
           </div>
         </div>
-
-        {/* Footer */}
-        <div className="mt-14 flex flex-wrap items-center justify-between gap-6">
-          <a
-            data-rv
-            href="#organizational"
-            className="flex items-center gap-2.5 w-fit pb-1 text-base font-semibold border-b-2 border-[#1D1D1D] transition-[gap] duration-300 hover:gap-4 focus-visible:outline-2 focus-visible:outline-offset-4 focus-visible:outline-[#1D1D1D]"
-          >
-            Next: Organizational
-            <svg aria-hidden="true" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
-              <path d="M5 12h14m0 0l-6-6m6 6l-6 6" />
-            </svg>
-          </a>
-        </div>
       </div>
     </section>
   );

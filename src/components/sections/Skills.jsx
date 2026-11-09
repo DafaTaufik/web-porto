@@ -51,6 +51,7 @@ export default function Skills() {
     mm.add({ motion: "(prefers-reduced-motion: no-preference)", wide: "(min-width: 1000px)" }, (mq) => {
       const { motion, wide } = mq.conditions;
 
+      const cleanups = [];
       const ctx = gsap.context(() => {
         // Kolom kiri menempel sepanjang daftar. Dipin lewat ScrollTrigger karena position: sticky
         // tidak jalan: html/body punya overflow-x: hidden sehingga body jadi scroll container.
@@ -65,10 +66,26 @@ export default function Skills() {
             pinSpacing: false,
             invalidateOnRefresh: true,
           });
+
+          // Tinggi section di atas (foto Organizational yang baru termuat, dll.) menggeser posisi pin,
+          // jadi hitung ulang setiap tinggi halaman berubah
+          let timer;
+          let lastH = document.body.scrollHeight;
+          const ro = new ResizeObserver(() => {
+            if (document.body.scrollHeight === lastH) return;
+            lastH = document.body.scrollHeight;
+            clearTimeout(timer);
+            timer = setTimeout(() => ScrollTrigger.refresh(), 150);
+          });
+          ro.observe(document.body);
+          cleanups.push(() => {
+            clearTimeout(timer);
+            ro.disconnect();
+          });
         }
 
         // Reduced motion: semua konten tampil langsung dalam keadaan akhir
-        if (!motion) return;
+        if (!motion) return () => cleanups.forEach((fn) => fn());
 
         // 1. Headline: trigger di PEMBUNGKUS mask, bukan di teksnya
         const lines = gsap.utils.toArray("[data-line]");
@@ -172,6 +189,7 @@ export default function Skills() {
         return () => {
           cancelled = true;
           clearTimeout(safety);
+          cleanups.forEach((fn) => fn());
           offs.forEach((off) => off());
           rows.forEach((row) => row._tl?.kill());
         };
@@ -226,7 +244,6 @@ export default function Skills() {
               <div data-rv className="mt-10 rounded-[22px] bg-[#1D1D1D] px-[26px] pt-6 pb-[26px] text-white">
                 <div className="flex items-baseline justify-between gap-3 border-b border-[#3A3A3A] pb-3.5">
                   <h3 className="m-0 font-HWT text-[26px] font-normal leading-none uppercase">Also familiar with</h3>
-                  <span className="text-xs font-bold uppercase tracking-[0.14em] text-[#9CA3AF]">No score</span>
                 </div>
                 <ul className="m-0 mt-[18px] flex list-none flex-wrap gap-2.5 p-0">
                   {FamiliarWith.map((name) => (
@@ -256,17 +273,6 @@ export default function Skills() {
                 </ul>
               </div>
             ))}
-
-            <a
-              data-rv
-              href="#courses"
-              className="flex items-center gap-2.5 w-fit mt-[52px] pb-1 text-base font-semibold border-b-2 border-[#1D1D1D] transition-[gap] duration-300 hover:gap-4 focus-visible:outline-2 focus-visible:outline-offset-4 focus-visible:outline-[#1D1D1D]"
-            >
-              Next: Courses
-              <svg aria-hidden="true" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
-                <path d="M5 12h14m0 0l-6-6m6 6l-6 6" />
-              </svg>
-            </a>
           </div>
         </div>
       </div>
