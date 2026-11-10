@@ -60,11 +60,7 @@ export function Experience() {
         }, 2000);
 
         // 4. Garis progres timeline
-        gsap.fromTo(
-          "[data-prog]",
-          { scaleY: 0, transformOrigin: "50% 0" },
-          { scaleY: 1, ease: "none", scrollTrigger: { trigger: "[data-tl]", start: "top 60%", end: "bottom 60%", scrub: true } },
-        );
+        gsap.fromTo("[data-prog]", { scaleY: 0, transformOrigin: "50% 0" }, { scaleY: 1, ease: "none", scrollTrigger: { trigger: "[data-tl]", start: "top 60%", end: "bottom 60%", scrub: true } });
 
         // 5 + 6. Node timeline dan penghitung per entri
         const entries = gsap.utils.toArray("[data-entry]");
@@ -182,17 +178,17 @@ export function Experience() {
         <h2 className="mt-11 font-HWT font-normal uppercase text-[clamp(56px,9vw,128px)] leading-[0.98] tracking-[0.005em]">
           <span className={MASK}>
             <span data-line className="block">
-              Hands-on with
+              Hands-on
             </span>
           </span>
           <span className={MASK}>
             <span data-line className="block">
-              real products
+              Real-world
             </span>
           </span>
           <span className={MASK}>
             <span data-line className="block text-[#9CA3AF]">
-              &amp; real teams.
+              Experience
             </span>
           </span>
         </h2>
@@ -274,11 +270,7 @@ export function Experience() {
 
             {EXPERIENCES.map((entry, i) => (
               <div key={entry.company} data-entry className={`relative ${i < EXPERIENCES.length - 1 ? "mb-14" : ""}`}>
-                <span
-                  data-node
-                  aria-hidden="true"
-                  className="absolute -left-10 top-11 box-border h-5 w-5 rounded-full border-2 border-[#1D1D1D] bg-[#1D1D1D] min-[1000px]:-left-14"
-                />
+                <span data-node aria-hidden="true" className="absolute -left-10 top-11 box-border h-5 w-5 rounded-full border-2 border-[#1D1D1D] bg-[#1D1D1D] min-[1000px]:-left-14" />
                 <ExperienceCard entry={entry} index={i} />
               </div>
             ))}

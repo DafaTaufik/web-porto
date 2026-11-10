@@ -56,7 +56,8 @@ export function Home() {
             </div>
 
             <p data-rv className="m-0 max-w-[540px] text-[18px] font-medium leading-[1.65] text-[#374151]">
-              Mobile &amp; backend developer skilled in Kotlin, Java and Golang. Informatics graduate from Universitas Multimedia Nusantara, passionate about building efficient and scalable solutions.
+              Mobile & backend developer skilled in Kotlin, Java, Flutter/Dart, and Golang. I’m an Informatics graduate from Universitas Multimedia Nusantara, with internship experience on POS, HRIS, and cross-platform apps. I care most
+              about writing clean code that's easy to maintain.
             </p>
 
             <div data-rv className=" flex flex-wrap items-center gap-x-[22px] gap-y-3.5 pointer-events-auto">

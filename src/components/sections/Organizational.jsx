@@ -97,14 +97,8 @@ function Photo({ index, hero = false, onOpen }) {
             img
           )}
         </span>
-        {hero && (
-          <span className="absolute left-[18px] top-[18px] rounded-full border border-[#D4D4D4] bg-white px-3 py-[5px] text-[11px] font-bold tracking-[0.1em]">GROUP PHOTO</span>
-        )}
-        <span
-          className={`absolute rounded-full bg-[#1D1D1D] font-HWT leading-[1.2] text-white ${hero ? "right-[18px] top-[18px] px-3 py-[5px] text-sm" : "right-3 top-3 px-2.5 py-1 text-[13px]"}`}
-        >
-          {pad(index + 1)}
-        </span>
+        {hero && <span className="absolute left-[18px] top-[18px] rounded-full border border-[#D4D4D4] bg-white px-3 py-[5px] text-[11px] font-bold tracking-[0.1em]">GROUP PHOTO</span>}
+        <span className={`absolute rounded-full bg-[#1D1D1D] font-HWT leading-[1.2] text-white ${hero ? "right-[18px] top-[18px] px-3 py-[5px] text-sm" : "right-3 top-3 px-2.5 py-1 text-[13px]"}`}>{pad(index + 1)}</span>
         <span aria-hidden="true" className="org-vw" style={{ background: hero ? "rgba(29,29,29,.3)" : "rgba(29,29,29,.35)" }}>
           <span className={`flex items-center gap-2 rounded-full bg-white font-bold text-[#1D1D1D] ${hero ? "px-5 py-3 text-sm" : "px-[18px] py-2.5 text-[13px]"}`}>
             <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" aria-hidden="true">
@@ -162,7 +156,7 @@ export default function Organizational() {
               if (entry.boundingClientRect.top > 0) anim.play();
               else anim.progress(1);
             },
-            { rootMargin: "0px 0px -6% 0px" }
+            { rootMargin: "0px 0px -6% 0px" },
           );
           enter.observe(el);
           observers.push(enter);
@@ -383,17 +377,6 @@ export default function Organizational() {
               </div>
             ))}
           </div>
-
-          <a
-            data-rv="0"
-            href="#skills"
-            className="flex items-center gap-2.5 w-fit mt-[104px] pb-1 text-base font-semibold border-b-2 border-[#1D1D1D] transition-[gap] duration-300 hover:gap-4 focus-visible:outline-2 focus-visible:outline-offset-4 focus-visible:outline-[#1D1D1D]"
-          >
-            Next: Skills
-            <svg aria-hidden="true" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
-              <path d="M5 12h14m0 0l-6-6m6 6l-6 6" />
-            </svg>
-          </a>
         </div>
       </section>
 

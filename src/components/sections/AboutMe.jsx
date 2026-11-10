@@ -16,7 +16,7 @@ const FACTS = [
   { label: "Experience", value: "2 Internships" },
 ];
 
-const MARQUEE = ["Kotlin", "Java", "Golang", "Flutter", "Firebase", "Gin", "SQL"];
+const MARQUEE = ["Kotlin", "Java", "Golang", "Flutter", "Dart ", "MySql", "Gin", "SQL"];
 
 const MASK = "block overflow-hidden pb-[0.05em]";
 
@@ -58,10 +58,7 @@ export default function AboutMe() {
         });
 
         // Foto utama terbuka dari bawah. Trigger = [data-cluster] yang tidak ikut parallax
-        replay(
-          sectionRef.current.querySelector("[data-cluster]"),
-          gsap.fromTo("[data-clip]", { clipPath: "inset(100% 0% 0% 0%)" }, { clipPath: "inset(0% 0% 0% 0%)", duration: 1.5, ease: "expo.out", delay: 0.15, paused: true }),
-        );
+        replay(sectionRef.current.querySelector("[data-cluster]"), gsap.fromTo("[data-clip]", { clipPath: "inset(100% 0% 0% 0%)" }, { clipPath: "inset(0% 0% 0% 0%)", duration: 1.5, ease: "expo.out", delay: 0.15, paused: true }));
 
         // Kata paragraf utama menyala mengikuti scroll
         const words = gsap.utils.toArray("[data-w]");
@@ -71,7 +68,7 @@ export default function AboutMe() {
           ease: "none",
           duration: 0.3,
           stagger: 0.1,
-          scrollTrigger: { trigger: "[data-hl]", start: "top 88%", end: "bottom 40%", scrub: true },
+          scrollTrigger: { trigger: "[data-hl]", start: "top 85%", end: "bottom 62%", scrub: true, invalidateOnRefresh: true },
         });
 
         // Zoom foto 1.14 -> 1.0, selesai saat pusat foto di tengah layar
@@ -163,8 +160,21 @@ export default function AboutMe() {
           if (!cancelled) ScrollTrigger.refresh();
         });
 
+        // Foto dan teks yang berubah menggeser posisi trigger, jadi hitung ulang saat tinggi halaman berubah
+        let refreshTimer;
+        let lastH = document.body.scrollHeight;
+        const ro = new ResizeObserver(() => {
+          if (document.body.scrollHeight === lastH) return;
+          lastH = document.body.scrollHeight;
+          clearTimeout(refreshTimer);
+          refreshTimer = setTimeout(() => ScrollTrigger.refresh(), 150);
+        });
+        ro.observe(document.body);
+
         return () => {
           cancelled = true;
+          clearTimeout(refreshTimer);
+          ro.disconnect();
           clearTimeout(safety);
           io.disconnect();
           disconnectReplay();
@@ -232,7 +242,7 @@ export default function AboutMe() {
             </p>
 
             <p data-rv="0" className="m-0 max-w-[540px] text-[17px] font-medium leading-[1.7] text-[#4B5563]">
-              Right now I&apos;m looking for a team where I can keep growing across mobile and backend engineering, and where clean, maintainable code is part of the culture.
+              Right now I&apos;m looking for an opportunity to keep growing as a software engineer, automation engineer, or applied ML engineer.
             </p>
 
             <div className="flex flex-wrap gap-6">
@@ -243,17 +253,6 @@ export default function AboutMe() {
                 </div>
               ))}
             </div>
-
-            <a
-              data-rv="0"
-              href="#experience"
-              className="group flex items-center gap-2.5 w-fit pb-1 text-base font-semibold border-b-2 border-[#1D1D1D] transition-[gap] duration-300 hover:gap-4 focus-visible:outline-2 focus-visible:outline-offset-4 focus-visible:outline-[#1D1D1D]"
-            >
-              See my experience
-              <svg aria-hidden="true" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
-                <path d="M5 12h14m0 0l-6-6m6 6l-6 6" />
-              </svg>
-            </a>
           </div>
         </div>
       </div>

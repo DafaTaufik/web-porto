@@ -175,7 +175,7 @@ export default function Courses() {
               Courses
             </span>
             <span className="flex-1 h-px bg-[#D4D4D4]" />
-            <span className="hidden sm:inline text-sm font-medium text-[#6B7280]">Learning beyond the classroom</span>
+            <span className="hidden sm:inline text-sm font-medium text-[#6B7280]">Courses and training</span>
           </div>
 
           {/* Hero */}
@@ -207,7 +207,7 @@ export default function Courses() {
           </div>
 
           <p data-rv className="mt-[52px] mb-0 max-w-[560px] text-[17px] font-medium leading-[1.7] text-[#4B5563]">
-            Courses and training I took outside of university to go deeper into the things I care about: mobile, backend, and clean software engineering.
+            Courses and training I took outside of university to go deeper into what I care about: mobile, backend, and clean software engineering.
           </p>
 
           {/* Label row */}
@@ -229,17 +229,6 @@ export default function Courses() {
               <CardCourse key={i} cert={cert} index={i} onOpen={open} />
             ))}
           </div>
-
-          <a
-            data-rv
-            href="#contact"
-            className="flex items-center gap-2.5 w-fit mt-16 pb-1 text-base font-semibold border-b-2 border-[#1D1D1D] transition-[gap] duration-300 hover:gap-4 focus-visible:outline-2 focus-visible:outline-offset-4 focus-visible:outline-[#1D1D1D]"
-          >
-            Next: Contact
-            <svg aria-hidden="true" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
-              <path d="M5 12h14m0 0l-6-6m6 6l-6 6" />
-            </svg>
-          </a>
         </div>
       </section>
 

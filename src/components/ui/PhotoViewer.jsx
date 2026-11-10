@@ -58,7 +58,7 @@ export default function PhotoViewer({ photos, index, orgName, onClose, onStep, o
             </span>{" "}
             · {orgName}
           </div>
-          <div className={`mt-1 truncate text-sm font-semibold ${hasCaption ? "text-[#D1D5DB]" : "italic text-[#D1D5DB]"}`}>{hasCaption ? photo.caption : "[Caption for this photo]"}</div>
+          <div className={`mt-1 truncate text-sm font-semibold ${hasCaption ? "text-[#D1D5DB]" : "italic text-[#D1D5DB]"}`}>{hasCaption ? photo.caption : ""}</div>
         </div>
       </div>
 
