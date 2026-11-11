@@ -8,10 +8,10 @@ export const ProfessionalExperienceData = [
     year: "2025",
     projects: ["Moni POS", "HRIS APP"],
     activities: [
-      "Added features to Moni POS: pending QRIS payment, Bluetooth printer configuration and printing, and menu management (CRUD) with options such as toppings or sizes on the Create Transaction page.",
+      "Added features to Moni POS: pending QRIS payment, and menu management (CRUD) with options such as toppings or sizes on the Create Transaction page.",
       "Redesigned the Transaction History, Sales Recap, Transaction, Login, and Cart screens in Moni POS.",
-      "Refactored the Bluetooth printer feature. Improved device pairing and connection handling, and added CPL paper size configuration and test printing.",
       "Built the online order screens and mobile notifications in Moni POS, integrated with a Socket.IO-based self-order system.",
+      "Refactored the Bluetooth printer feature in Moni POS. Improved device pairing and connection handling, and added CPL paper size configuration and test printing.",
       "Contributed to an HRIS application, including location-based employee attendance, salary viewing, leave requests, and cash advances.",
     ],
     technologies: ["Kotlin", "Java", "Golang", "Android", "Socket.IO"],
@@ -25,7 +25,7 @@ export const ProfessionalExperienceData = [
     year: "2025",
     activities: [
       "Developed a mobile application using Flutter and Dart as part of a 12-week Project-Based Internship program.",
-      "Implemented features including authentication, home carousel, Todo CRUD, notifications, and class enrollment.",
+      "Implemented features authentication, home carousel, Todo CRUD, notifications, and class enrollment.",
       "Applied Clean Architecture and GetX to structure the app and manage its state.",
       "Integrated Firebase to store application data.",
       "Participated in weekly mentoring and evaluation sessions to present my work, review assignments, and receive feedback.",
