@@ -100,9 +100,7 @@ export default function ProjectDetail({ project }) {
   const total = ProjectsData.length;
 
   // Item gallery: data asli, atau 6 tile placeholder bila belum ada screenshot
-  const items = project.gallery.length
-    ? project.gallery.map((g) => ({ ...g, ratio: g.ratio || "9/16" }))
-    : PLACEHOLDER_RATIOS.map((ratio) => ({ placeholder: true, ratio }));
+  const items = project.gallery.length ? project.gallery.map((g) => ({ ...g, ratio: g.ratio || "9/16" })) : PLACEHOLDER_RATIOS.map((ratio) => ({ placeholder: true, ratio }));
   const columns = [[], [], []];
   items.forEach((item, i) => columns[COLUMN_OF[i] ?? i % 3].push({ ...item, i }));
 
@@ -342,10 +340,7 @@ export default function ProjectDetail({ project }) {
             </p>
             <div data-rv="280" className="flex flex-wrap gap-2">
               {project.tags.map((tag, i) => (
-                <span
-                  key={`${tag}-${i}`}
-                  className={`rounded-full border px-3.5 py-1.5 text-sm font-semibold ${i === 0 ? "border-[#1D1D1D]" : "border-[#D4D4D4]"} ${isPh(tag) ? "italic text-[#9CA3AF]" : i === 0 ? "" : "text-[#374151]"}`}
-                >
+                <span key={`${tag}-${i}`} className={`rounded-full border px-3.5 py-1.5 text-sm font-semibold ${i === 0 ? "border-[#1D1D1D]" : "border-[#D4D4D4]"} ${isPh(tag) ? "italic text-[#9CA3AF]" : i === 0 ? "" : "text-[#374151]"}`}>
                   {tag}
                 </span>
               ))}
@@ -470,11 +465,6 @@ export default function ProjectDetail({ project }) {
                 </div>
               </div>
             </section>
-
-            <section data-rv="0">
-              <SectionHead no="05" label="Outcome" />
-              <Body text={sections.outcome} />
-            </section>
           </article>
 
           {/* Kolom penahan lebar dan tinggi; isinya (aside) yang di-pin */}
@@ -532,11 +522,7 @@ export default function ProjectDetail({ project }) {
         </div>
 
         {/* Next project */}
-        <Link
-          data-rv="0"
-          to={`/projects/${next.slug}`}
-          className="pd-nx mt-[130px] flex items-center justify-between gap-8 rounded-[32px] bg-[#1D1D1D] px-16 py-14 text-white"
-        >
+        <Link data-rv="0" to={`/projects/${next.slug}`} className="pd-nx mt-[130px] flex items-center justify-between gap-8 rounded-[32px] bg-[#1D1D1D] px-16 py-14 text-white">
           <div className="flex min-w-0 flex-col gap-3.5">
             <span className="flex items-center gap-3 text-xs font-bold uppercase tracking-[0.14em] text-[#9CA3AF]">
               <span className={`${HWT} text-lg leading-none tracking-[0.04em] text-white`}>{next.number}</span>
@@ -545,7 +531,12 @@ export default function ProjectDetail({ project }) {
             <span className={`${HWT} text-[clamp(44px,6vw,88px)] uppercase leading-[0.98]`}>{next.title}</span>
             <span className="flex flex-wrap gap-2">
               <span className="rounded-full border border-[#4B5563] px-3.5 py-[5px] text-sm font-semibold text-[#E5E7EB]">{next.meta.type}</span>
-              <span className="rounded-full border border-[#4B5563] px-3.5 py-[5px] text-sm font-semibold text-[#E5E7EB]">{next.stack.map((s) => s.name).slice(0, 3).join(" · ")}</span>
+              <span className="rounded-full border border-[#4B5563] px-3.5 py-[5px] text-sm font-semibold text-[#E5E7EB]">
+                {next.stack
+                  .map((s) => s.name)
+                  .slice(0, 3)
+                  .join(" · ")}
+              </span>
             </span>
           </div>
           <span aria-hidden="true" className="pd-cir flex h-24 w-24 flex-none items-center justify-center rounded-full border border-[#6B7280] text-white">

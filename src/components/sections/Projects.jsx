@@ -14,6 +14,60 @@ const STEP = 1.4; // detik per slide
 const pad = (n) => String(n).padStart(2, "0");
 const isPh = (text) => text.startsWith("[");
 
+// Asal project (field `origin` di ProjectsData). Ikon: SVG inline, stroke 2, viewBox 24.
+const ORIGINS = {
+  internship: {
+    label: "Internship",
+    icon: (
+      <>
+        <rect x="3" y="7" width="18" height="13" rx="2" />
+        <path d="M9 7V5a2 2 0 0 1 2-2h2a2 2 0 0 1 2 2v2M3 13h18" />
+      </>
+    ),
+  },
+  campus: {
+    label: "Campus project",
+    icon: (
+      <>
+        <path d="M22 10L12 5 2 10l10 5 10-5z" />
+        <path d="M6 12v5c3 2 9 2 12 0v-5" />
+      </>
+    ),
+  },
+  personal: {
+    label: "Personal project",
+    icon: (
+      <>
+        <circle cx="12" cy="8" r="4" />
+        <path d="M4 21a8 8 0 0 1 16 0" />
+      </>
+    ),
+  },
+  family: {
+    label: "Family business",
+    icon: (
+      <>
+        <path d="M3 9l1.5-5h15L21 9" />
+        <path d="M3 9a3 3 0 0 0 6 0 3 3 0 0 0 6 0 3 3 0 0 0 6 0" />
+        <path d="M5 12v8h14v-8" />
+        <path d="M10 20v-5h4v5" />
+      </>
+    ),
+  },
+};
+
+// Pill asal project. Dirender dua kali: .pj-tr (kolom kanan, desktop) dan .pj-tt (pojok thumbnail, <=1000px)
+function OriginTag({ origin, className }) {
+  return (
+    <span aria-hidden="true" className={`pj-tag ${className}`}>
+      <svg aria-hidden="true" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
+        {origin.icon}
+      </svg>
+      {origin.label}
+    </span>
+  );
+}
+
 // Tiga ponsel dekoratif. Tiap ponsel: [data-depth] (parallax GSAP) > .pj-flN (float CSS)
 function PhoneCluster() {
   return (
@@ -75,6 +129,7 @@ function Slides({ project, index }) {
 function Row({ project, index }) {
   const slideCount = project.images.length || 1 + SHOTS.length;
   const typeIsPh = isPh(project.meta.type);
+  const origin = ORIGINS[project.origin];
   // Link internal (/projects/:slug) lewat router; selain itu anchor biasa
   const href = project.slug ? `/projects/${project.slug}` : "#";
   const internal = Boolean(project.slug);
@@ -101,9 +156,11 @@ function Row({ project, index }) {
               ))}
             </span>
           )}
+          {origin && <OriginTag origin={origin} className="pj-tt" />}
         </div>
 
         <div className="pj-body flex min-w-0 flex-col gap-3.5">
+          {origin && <span className="sr-only">Project type: {origin.label}.</span>}
           <div className="flex flex-wrap gap-2">
             <span className={`rounded-full border border-[#1D1D1D] bg-white px-3 py-[5px] text-xs font-bold uppercase tracking-[0.08em] ${typeIsPh ? "italic" : ""}`}>{project.meta.type}</span>
             {project.meta.year && <span className="rounded-full border border-[#D4D4D4] bg-white px-3 py-[5px] text-xs font-semibold text-[#4B5563]">{project.meta.year}</span>}
@@ -121,11 +178,14 @@ function Row({ project, index }) {
           </div>
         </div>
 
-        <span aria-hidden="true" className="pj-arr">
-          <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
-            <path d="M5 12h14m0 0l-6-6m6 6l-6 6" />
-          </svg>
-        </span>
+        <div className="pj-rt">
+          {origin && <OriginTag origin={origin} className="pj-tr" />}
+          <span aria-hidden="true" className="pj-arr">
+            <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
+              <path d="M5 12h14m0 0l-6-6m6 6l-6 6" />
+            </svg>
+          </span>
+        </div>
       </RowLink>
     </div>
   );
