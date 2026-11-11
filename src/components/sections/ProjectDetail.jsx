@@ -4,8 +4,7 @@ import gsap from "gsap";
 import { ScrollTrigger } from "gsap/ScrollTrigger";
 import { createReplay } from "../../utils/replayOnVisit";
 import { TECH_ICONS } from "../../data/TechIcons";
-import { ProjectsData } from "../../data/ProjectsData";
-import { getNextProject } from "../../data/ProjectDetailData";
+import { ProjectsData, getNextProject } from "../../data/ProjectsData";
 import ProjectViewer from "../ui/ProjectViewer";
 import "./ProjectDetail.css";
 
@@ -285,12 +284,12 @@ export default function ProjectDetail({ project }) {
   const { meta } = project;
   const metaRows = [
     ["Role", meta.role],
-    ["Company", meta.company],
+    [meta.clientLabel || "Client", meta.client],
     ["Type", meta.type],
     ["Year", meta.year],
     ["Duration", meta.duration],
     ["Status", meta.status],
-  ];
+  ].filter(([, value]) => value);
   const work = project.work.length ? project.work : [{ title: "[Feature or task]", desc: "[What I did on it.]" }];
   const { sections } = project;
 

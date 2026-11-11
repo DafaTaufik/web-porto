@@ -1,15 +1,6 @@
 /* Halaman detail project: hover, loop dekor, gallery, viewer. Reveal, parallax, dan pin sidebar dikerjakan GSAP di ProjectDetail.jsx. */
 .pd {
   background-color: #fff;
-  background-image:
-    radial-gradient(circle at 6% 22%, #1d1d1d 0 3px, transparent 4px),
-    radial-gradient(circle at 44% 12%, #999 0 2px, transparent 3px),
-    radial-gradient(circle at 53% 46%, #333 0 2.5px, transparent 3.5px),
-    radial-gradient(circle at 38% 71%, #bbb 0 3px, transparent 4px),
-    radial-gradient(circle at 71% 30%, #bbb 0 2px, transparent 3px),
-    radial-gradient(circle at 92% 38%, #999 0 2px, transparent 3px),
-    radial-gradient(circle at 17% 88%, #777 0 2px, transparent 3px),
-    radial-gradient(circle at 96% 82%, #333 0 2.5px, transparent 3.5px);
 }
 
 @keyframes pd-fl1 { 0%, 100% { transform: translateY(0); } 50% { transform: translateY(-12px); } }

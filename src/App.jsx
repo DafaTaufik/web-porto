@@ -12,7 +12,7 @@ import Skills from "./components/sections/Skills";
 import Courses from "./components/sections/Courses";
 import ProjectDetail from "./components/sections/ProjectDetail";
 import Footer from "./components/layout/Footer";
-import { getProject } from "./data/ProjectDetailData";
+import { getProject } from "./data/ProjectsData";
 
 // Refresh selalu mulai dari atas. scrollRestoration saja tidak cukup (GSAP mengembalikannya ke "auto" setelah load),
 // jadi posisi juga dikembalikan ke 0 sebelum halaman ditutup/di-refresh; yang dipulihkan browser jadi posisi atas.
