@@ -28,6 +28,8 @@ import covenantCover3 from "../assets/Image/project/covenant/cover-3-masonry-gal
 import covenantHome from "../assets/Image/project/covenant/gallery-1-homepage.png";
 import covenantGallery from "../assets/Image/project/covenant/gallery-2-masonry-gallery.png";
 import covenantVolunteer from "../assets/Image/project/covenant/gallery-3-volunteer.png";
+import covenantAbout from "../assets/Image/project/covenant/gallery-4-about.png";
+import covenantTeachers from "../assets/Image/project/covenant/gallery-5-teachers.png";
 
 const SECTION_PLACEHOLDERS = {
   overview: "[What the product is, who uses it, and which problem it solves.]",
@@ -252,9 +254,15 @@ const PROJECTS = [
     },
     images: [covenantCover1, covenantCover2, covenantCover3],
     gallery: [
-      { src: covenantHome, alt: "Rumah Belajar Covenant home page", caption: "Homepage", ratio: "16/10" },
-      { src: covenantGallery, alt: "Rumah Belajar Covenant gallery page", caption: "Masonry photo gallery", ratio: "2/3" },
-      { src: covenantVolunteer, alt: "Rumah Belajar Covenant volunteer page", caption: "Volunteer page", ratio: "16/10" },
+      // col = kolom masonry; dibagi manual agar tinggi ketiga kolom seimbang
+      { src: covenantCover1, alt: "Rumah Belajar Covenant cover with white and yellow accent", caption: "Cover 1", ratio: "16/10", col: 0 },
+      { src: covenantCover2, alt: "Rumah Belajar Covenant cover from Figma to web", caption: "Cover 2", ratio: "16/10", col: 1 },
+      { src: covenantCover3, alt: "Rumah Belajar Covenant cover with yellow dominant", caption: "Cover 3", ratio: "16/10", col: 2 },
+      { src: covenantHome, alt: "Rumah Belajar Covenant home page", caption: "Homepage", ratio: "16/10", col: 1 },
+      { src: covenantGallery, alt: "Rumah Belajar Covenant gallery page", caption: "Masonry photo gallery", ratio: "2/3", col: 0 },
+      { src: covenantVolunteer, alt: "Rumah Belajar Covenant volunteer page", caption: "Volunteer page", ratio: "16/10", col: 2 },
+      { src: covenantAbout, alt: "Rumah Belajar Covenant about page", caption: "About page", ratio: "1080/970", col: 1 },
+      { src: covenantTeachers, alt: "Rumah Belajar Covenant teachers page", caption: "Teachers page", ratio: "1080/757", col: 2 },
     ],
   },
 

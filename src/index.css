@@ -15,6 +15,10 @@ html,
 body {
   overflow-x: hidden;
 }
+/* Saat kembali dari detail project, halaman disembunyikan sampai posisi scroll-nya benar (lihat ScrollManager di App.jsx) */
+html[data-restoring] #root {
+  opacity: 0;
+}
 /* Home intro: tombol sosial & titik "Available for work" */
 .social-btn {
   display: flex;

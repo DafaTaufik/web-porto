@@ -1,5 +1,6 @@
 import { useCallback, useLayoutEffect, useRef, useState } from "react";
 import { Link } from "react-router-dom";
+import { returnLinkState } from "../../utils/homeReturn";
 import gsap from "gsap";
 import { ScrollTrigger } from "gsap/ScrollTrigger";
 import { createReplay } from "../../utils/replayOnVisit";
@@ -102,7 +103,7 @@ export default function ProjectDetail({ project }) {
   // Item gallery: data asli, atau 6 tile placeholder bila belum ada screenshot
   const items = project.gallery.length ? project.gallery.map((g) => ({ ...g, ratio: g.ratio || "9/16" })) : PLACEHOLDER_RATIOS.map((ratio) => ({ placeholder: true, ratio }));
   const columns = [[], [], []];
-  items.forEach((item, i) => columns[COLUMN_OF[i] ?? i % 3].push({ ...item, i }));
+  items.forEach((item, i) => columns[item.col ?? COLUMN_OF[i] ?? i % 3].push({ ...item, i }));
 
   const openViewer = (i, el) => {
     openerRef.current = el;
@@ -296,14 +297,14 @@ export default function ProjectDetail({ project }) {
       <div className="mx-auto max-w-[1312px] px-5 pb-[140px] pt-[72px] min-[761px]:px-16">
         {/* Back row */}
         <div data-rv="0" className="flex flex-wrap items-center justify-between gap-x-5 gap-y-2">
-          <Link to={{ pathname: "/", hash: "#projects" }} className="pd-bk text-[15px] font-semibold">
+          <Link to={{ pathname: "/", hash: "#projects" }} state={returnLinkState(project.slug)} className="pd-bk text-[15px] font-semibold">
             <svg width="18" height="18" {...ICON}>
               <path d="M19 12H5M11 6l-6 6 6 6" />
             </svg>
             All projects
           </Link>
           <nav aria-label="Breadcrumb" className="text-sm font-semibold text-[#6B7280]">
-            <Link to={{ pathname: "/", hash: "#projects" }} className="hover:text-[#1D1D1D]">
+            <Link to={{ pathname: "/", hash: "#projects" }} state={returnLinkState(project.slug)} className="hover:text-[#1D1D1D]">
               Projects
             </Link>{" "}
             <span className="text-[#9CA3AF]">/</span>{" "}
