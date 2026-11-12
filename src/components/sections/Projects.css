@@ -94,6 +94,31 @@
 .pj-row:hover .pj-arr, .pj-row:focus-visible .pj-arr { background: #1d1d1d; color: #fff; transform: rotate(-45deg); }
 .pj-row:focus-visible { outline: 3px solid #1d1d1d; outline-offset: 6px; border-radius: 8px; }
 
+/* Pill asal project: .pj-tr di kolom kanan (desktop), .pj-tt di pojok thumbnail (<=1000px) */
+.pj-rt { align-self: stretch; position: relative; display: flex; flex-direction: column; justify-content: center; align-items: flex-end; }
+.pj-tag {
+  display: inline-flex;
+  align-items: center;
+  gap: 7px;
+  padding: 7px 13px 7px 10px;
+  border-radius: 999px;
+  border: 1.5px solid #1d1d1d;
+  background: #fff;
+  color: #1d1d1d;
+  font-family: Inter, system-ui, sans-serif;
+  font-size: 11px;
+  font-weight: 700;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  white-space: nowrap;
+  transition: transform 0.5s cubic-bezier(0.16, 1, 0.3, 1), background 0.3s ease, color 0.3s ease;
+}
+.pj-rt .pj-tag { position: absolute; top: 0; right: 0; }
+.pj-tt { display: none; position: absolute; right: 12px; top: 12px; z-index: 2; box-shadow: 0 6px 16px rgba(0, 0, 0, 0.12); transform: rotate(3deg); }
+.pj-row:hover .pj-tag, .pj-row:focus-visible .pj-tag { background: #1d1d1d; color: #fff; }
+.pj-row:hover .pj-tr, .pj-row:focus-visible .pj-tr { transform: translateY(-2px); }
+@media (min-width: 1001px) and (max-width: 1180px) { .pj-rt .pj-tag { top: -34px; } }
+
 .pj-list.hv .pj-row { opacity: 0.35; }
 .pj-list.hv .pj-row.on { opacity: 1; }
 
@@ -116,11 +141,14 @@
   .pj-ix { display: none; }
   .pj-thumb { grid-column: 1 / -1; grid-row: 1; max-width: 560px; }
   .pj-body { grid-column: 1; grid-row: 2; }
-  .pj-arr { grid-column: 2; grid-row: 2; align-self: start; width: 56px; height: 56px; }
+  .pj-rt { grid-column: 2; grid-row: 2; align-self: start; }
+  .pj-arr { width: 56px; height: 56px; }
+  .pj-tr { display: none; }
+  .pj-tt { display: inline-flex; }
   .pj-dec { display: none; }
 }
 @media (hover: none) { .pj-bars { display: none; } }
 @media (prefers-reduced-motion: reduce) {
   .pj-fl1, .pj-fl2, .pj-fl3 { animation: none; }
-  .pj-nm, .pj-arr, .pj-thumb { transition: none; }
+  .pj-nm, .pj-arr, .pj-thumb, .pj-tag { transition: none; }
 }

@@ -57,10 +57,20 @@ export const FloatingNav = ({ navItems, className }) => {
 
   const handleNavClick = (e, link) => {
     e.preventDefault();
-    const targetElement = document.getElementById(link.replace("#", ""));
-    if (targetElement) {
-      targetElement.scrollIntoView({ behavior: "smooth", block: "start" });
-    }
+    const id = link.replace("#", "");
+    // Home dan About selalu ada; section lain dimuat belakangan (lazy) dan baru aman digulir setelah ditandai ready
+    const alwaysThere = id === "home" || id === "about";
+    const canScroll = () => (alwaysThere || document.documentElement.dataset.belowFold === "ready") && document.getElementById(id);
+    const scrollToTarget = () => {
+      const targetElement = canScroll();
+      if (targetElement) targetElement.scrollIntoView({ behavior: "smooth", block: "start" });
+      return !!targetElement;
+    };
+    if (scrollToTarget()) return;
+    let tries = 0;
+    const wait = setInterval(() => {
+      if (scrollToTarget() || ++tries >= 60) clearInterval(wait);
+    }, 100);
   };
 
   return (

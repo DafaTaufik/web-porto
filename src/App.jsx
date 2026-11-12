@@ -1,18 +1,37 @@
-import { useEffect, useLayoutEffect, useRef } from "react";
+import { lazy, Suspense, useEffect, useLayoutEffect, useRef, useState } from "react";
 import { BrowserRouter, Navigate, Route, Routes, useLocation, useParams } from "react-router-dom";
 import Lenis from "@studio-freight/lenis";
 import { ScrollTrigger } from "gsap/ScrollTrigger";
 import { Navbar } from "./components/layout/Navbar";
 import { Home } from "./components/sections/Home";
 import AboutMe from "./components/sections/AboutMe";
-import Projects from "./components/sections/Projects";
-import { Experience } from "./components/sections/Experience";
-import Organizational from "./components/sections/Organizational";
-import Skills from "./components/sections/Skills";
-import Courses from "./components/sections/Courses";
-import ProjectDetail from "./components/sections/ProjectDetail";
-import Footer from "./components/layout/Footer";
-import { getProject } from "./data/ProjectDetailData";
+import { getProject } from "./data/ProjectsData";
+
+// Section di bawah fold dan halaman detail dipecah jadi chunk sendiri supaya JS awal lebih kecil
+const loadExperience = () => import("./components/sections/Experience");
+const loadProjects = () => import("./components/sections/Projects");
+const loadOrganizational = () => import("./components/sections/Organizational");
+const loadSkills = () => import("./components/sections/Skills");
+const loadCourses = () => import("./components/sections/Courses");
+const loadFooter = () => import("./components/layout/Footer");
+
+const Experience = lazy(loadExperience);
+const Projects = lazy(loadProjects);
+const Organizational = lazy(loadOrganizational);
+const Skills = lazy(loadSkills);
+const Courses = lazy(loadCourses);
+const Footer = lazy(loadFooter);
+const ProjectDetail = lazy(() => import("./components/sections/ProjectDetail"));
+
+// Urutan tampil di halaman; di-mount satu per satu supaya tidak jadi satu tugas panjang di main thread
+const BELOW_FOLD = [
+  { key: "experience", load: loadExperience, Component: Experience },
+  { key: "projects", load: loadProjects, Component: Projects },
+  { key: "organizational", load: loadOrganizational, Component: Organizational },
+  { key: "skills", load: loadSkills, Component: Skills },
+  { key: "courses", load: loadCourses, Component: Courses },
+  { key: "contact", load: loadFooter, Component: Footer },
+];
 
 // Refresh selalu mulai dari atas. scrollRestoration saja tidak cukup (GSAP mengembalikannya ke "auto" setelah load),
 // jadi posisi juga dikembalikan ke 0 sebelum halaman ditutup/di-refresh; yang dipulihkan browser jadi posisi atas.
@@ -36,8 +55,16 @@ function ScrollManager({ lenisRef }) {
 
   useEffect(() => {
     if (!hash) return;
-    // Tinggi halaman masih bergeser saat font/gambar dimuat, jadi coba lagi sekali
+    // Tinggi halaman masih bergeser saat font/gambar dimuat, jadi coba lagi sekali.
+    // Section lazy mungkin belum ada di DOM: tunggu (maksimal 4 detik) sampai semuanya ter-mount, lalu gulir.
     const go = () => document.querySelector(hash)?.scrollIntoView();
+    let tries = 0;
+    const poll = setInterval(() => {
+      if (document.documentElement.dataset.belowFold === "ready" && document.querySelector(hash)) {
+        clearInterval(poll);
+        go();
+      } else if (++tries >= 40) clearInterval(poll);
+    }, 100);
     const t1 = setTimeout(go, 150);
     const t2 = setTimeout(() => {
       go();
@@ -45,12 +72,85 @@ function ScrollManager({ lenisRef }) {
       window.history.replaceState(window.history.state, "", pathname + window.location.search);
     }, 900);
     return () => {
+      clearInterval(poll);
       clearTimeout(t1);
       clearTimeout(t2);
     };
   }, [pathname, hash]);
 
   return null;
+}
+
+// Pengganti section yang belum di-mount; tinggi kira-kira supaya scrollbar tidak terlalu menipu
+const BelowFoldPlaceholder = () => <div aria-hidden="true" style={{ minHeight: "300vh" }} />;
+
+// Section di bawah fold mulai dimuat setelah halaman idle, atau begitu pengunjung berinteraksi, lalu di-mount bertahap.
+// Kalau URL punya hash (mis. kembali ke "/#projects"), semuanya langsung di-mount.
+function BelowFold() {
+  const [count, setCount] = useState(() => (window.location.hash ? BELOW_FOLD.length : 0));
+  const [started, setStarted] = useState(() => count > 0);
+  const [eager, setEager] = useState(false); // sudah berinteraksi: tidak perlu menunggu idle lagi
+
+  useEffect(() => {
+    if (started) return;
+    const start = () => {
+      setEager(true);
+      setStarted(true);
+    };
+    const events = ["scroll", "wheel", "touchstart", "pointerdown", "keydown"];
+    events.forEach((e) => window.addEventListener(e, start, { once: true, passive: true }));
+
+    let idle;
+    const arm = () => {
+      idle = "requestIdleCallback" in window ? window.requestIdleCallback(() => setStarted(true), { timeout: 4000 }) : setTimeout(() => setStarted(true), 2500);
+    };
+    if (document.readyState === "complete") arm();
+    else window.addEventListener("load", arm, { once: true });
+
+    return () => {
+      events.forEach((e) => window.removeEventListener(e, start));
+      window.removeEventListener("load", arm);
+      if ("cancelIdleCallback" in window) window.cancelIdleCallback(idle);
+      else clearTimeout(idle);
+    };
+  }, [started]);
+
+  // Setelah mulai: unduh semua chunk (murah), lalu naikkan jumlah section yang di-mount satu per satu
+  useEffect(() => {
+    if (started) BELOW_FOLD.forEach((s) => s.load());
+  }, [started]);
+
+  useEffect(() => {
+    if (!started || count >= BELOW_FOLD.length) return;
+    const next = () => setCount((c) => c + 1);
+    if (eager || !("requestIdleCallback" in window)) {
+      const t = setTimeout(next, 60);
+      return () => clearTimeout(t);
+    }
+    const id = window.requestIdleCallback(next, { timeout: 600 });
+    return () => window.cancelIdleCallback(id);
+  }, [started, count, eager]);
+
+  // Tandai kapan semua section sudah ter-mount dan ScrollTrigger-nya sempat refresh. Menggulir sebelum itu bisa
+  // dibatalkan refresh (ScrollTrigger mengembalikan posisi lama), jadi klik navbar menunggu tanda ini.
+  useEffect(() => {
+    if (count < BELOW_FOLD.length) return;
+    const t = setTimeout(() => {
+      document.documentElement.dataset.belowFold = "ready";
+    }, 800);
+    return () => clearTimeout(t);
+  }, [count]);
+
+  return (
+    <>
+      {BELOW_FOLD.slice(0, count).map(({ key, Component }) => (
+        <Suspense key={key} fallback={null}>
+          <Component />
+        </Suspense>
+      ))}
+      {count < BELOW_FOLD.length && <BelowFoldPlaceholder />}
+    </>
+  );
 }
 
 // Halaman utama: semua section dengan navbar
@@ -60,12 +160,7 @@ function HomePage() {
       <Navbar />
       <Home />
       <AboutMe />
-      <Experience />
-      <Projects />
-      <Organizational />
-      <Skills />
-      <Courses />
-      <Footer />
+      <BelowFold />
     </>
   );
 }
@@ -75,7 +170,11 @@ function ProjectDetailPage() {
   const { slug } = useParams();
   const project = getProject(slug);
   if (!project) return <Navigate to={{ pathname: "/", hash: "#projects" }} replace />;
-  return <ProjectDetail key={project.slug} project={project} />;
+  return (
+    <Suspense fallback={null}>
+      <ProjectDetail key={project.slug} project={project} />
+    </Suspense>
+  );
 }
 
 function App() {
