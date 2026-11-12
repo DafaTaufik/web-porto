@@ -14,12 +14,20 @@ import ciakhamikExercise from "../assets/Image/project/ciakhamik/gallery-3-exerc
 import ciakhamikFood from "../assets/Image/project/ciakhamik/gallery-4-food.png";
 import ciakhamikGoal from "../assets/Image/project/ciakhamik/gallery-5-goal.png";
 import ciakhamikCalendar from "../assets/Image/project/ciakhamik/gallery-6-calendar.png";
+
 import abseninCover1 from "../assets/Image/project/absenin/cover-1-tap-and-photo.png";
 import abseninCover2 from "../assets/Image/project/absenin/cover-2-tap-snap-done.png";
 import abseninCover3 from "../assets/Image/project/absenin/cover-3-two-check-ins-a-day.png";
 import abseninHome from "../assets/Image/project/absenin/gallery-1-home.png";
 import abseninHistory from "../assets/Image/project/absenin/gallery-2-history.png";
 import abseninProfile from "../assets/Image/project/absenin/gallery-3-profile.png";
+
+import covenantCover1 from "../assets/Image/project/covenant/cover-1-logo-and-site.png";
+import covenantCover2 from "../assets/Image/project/covenant/cover-2-figma-to-web.png";
+import covenantCover3 from "../assets/Image/project/covenant/cover-3-masonry-gallery.png";
+import covenantHome from "../assets/Image/project/covenant/gallery-1-homepage.png";
+import covenantGallery from "../assets/Image/project/covenant/gallery-2-masonry-gallery.png";
+import covenantVolunteer from "../assets/Image/project/covenant/gallery-3-volunteer.png";
 
 const SECTION_PLACEHOLDERS = {
   overview: "[What the product is, who uses it, and which problem it solves.]",
@@ -69,7 +77,11 @@ const PROJECTS = [
       duration: "[Mon YYYY – Mon YYYY]",
       status: "[Status]",
     },
-    stack: [...MOBILE_STACK, { name: "Node.js", icon: "Node.js" }, { name: "Socket.IO", icon: "Socket.IO" }, { name: "gRPC", icon: null }],
+    stack: [
+      { name: "Kotlin", icon: "Kotlin" },
+      { name: "Golang", icon: "Golang" },
+      { name: "N8N", icon: "N8N" },
+    ],
     links: DEFAULT_LINKS,
     work: [
       { title: "Screen redesign", desc: "Transaction History, Sales Recap, Transaction, Login, and Cart." },
@@ -194,7 +206,57 @@ const PROJECTS = [
       { src: abseninCover3, alt: "Absenin home screens after check-in", caption: "Two check-ins a day", ratio: "16/10" },
     ],
   },
-  { ...EMPTY_PROJECT },
+
+  {
+    slug: "rumah-belajar-covenant",
+    title: "Rumah Belajar Covenant",
+    subtitle: "Website",
+    summary: "Rumah Belajar Covenant is a community service website for an orphanage and learning center, created for the final project of the IF330 Web Programming course.",
+    lead: "A website that puts the Covenant orphanage online for visitors, donors and volunteers. I turned the Figma design into the homepage, the masonry gallery and the volunteer page.",
+    tags: ["Website", "University project", "2023"],
+    origin: "campus",
+    meta: {
+      role: "Frontend Developer",
+      clientLabel: "Institution",
+      client: "Universitas Multimedia Nusantara",
+      type: "Website",
+      year: "2023",
+      duration: "Oct 2023 – Dec 2023",
+      status: "Offline",
+    },
+    stack: [
+      { name: "Laravel", icon: "Laravel" },
+      { name: "Tailwind CSS", icon: "Tailwind CSS" },
+      { name: "JavaScript", icon: "JavaScript" },
+    ],
+    links: [
+      { label: "Github", sub: "Repository", href: "https://github.com/Vn1k/Rumah-Belajar-Covenant" },
+      { label: "Figma", sub: "Design Web", href: "https://www.figma.com/design/TlQZ3ZHDyQDWFJDcqI29zo/UAS?node-id=0-1&t=LXp7cYjVxoPzRz2b-1" },
+    ],
+    work: [
+      { title: "Figma to web", desc: "Converted the Figma design into responsive, interactive pages that follow the design and user experience specs." },
+      { title: "Homepage", desc: "Built the full homepage, from the first section to the footer." },
+      { title: "Masonry gallery", desc: "A masonry grid gallery that shows photos of different sizes without gaps." },
+      { title: "Volunteer page", desc: "A page for people who want to volunteer at the orphanage." },
+      { title: "Animations", desc: "Added motion to the pages using JavaScript animation libraries." },
+      { title: "Backend collaboration", desc: "Worked with the backend team so the pages fit together in the Laravel project." },
+    ],
+    sections: {
+      overview:
+        "Rumah Belajar Covenant is a social institution, orphanage and learning center that helps children from low-income families, broken homes, and marginalized or street backgrounds. The website makes the orphanage reachable online, so visitors, donors and volunteers can find information and learn how to help.",
+      background:
+        "This was the final assignment for the IF330 Web Programming course, and the team was asked to build a website for community service. We chose Rumah Belajar Covenant so the orphanage could have a clear presence online. I was the frontend developer, responsible for turning the Figma design into real pages.",
+      challenge: "The pages had to match the Figma design closely and still work on different screen sizes. The gallery was the trickiest part, because photos come in different sizes and a plain grid leaves uneven gaps.",
+      solution:
+        "I built the layouts with Tailwind CSS so they adapt across screen sizes, and used a masonry grid for the gallery so photos of any size sit together neatly. JavaScript animation libraries added movement to the pages, and I checked the result with the backend team against the design and user experience specs.",
+    },
+    images: [covenantCover1, covenantCover2, covenantCover3],
+    gallery: [
+      { src: covenantHome, alt: "Rumah Belajar Covenant home page", caption: "Homepage", ratio: "16/10" },
+      { src: covenantGallery, alt: "Rumah Belajar Covenant gallery page", caption: "Masonry photo gallery", ratio: "2/3" },
+      { src: covenantVolunteer, alt: "Rumah Belajar Covenant volunteer page", caption: "Volunteer page", ratio: "16/10" },
+    ],
+  },
 
   {
     slug: "umoviez",
