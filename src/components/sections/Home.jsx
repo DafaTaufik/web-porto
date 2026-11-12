@@ -8,19 +8,27 @@ export function Home() {
   const [Lanyards, setLanyards] = useState(null);
   useEffect(() => {
     let alive = true;
-    import("../ui/lanyard_dafa").then((m) => alive && setLanyards(() => m.default));
+    let handle;
+    const load = () => import("../ui/lanyard_dafa").then((m) => alive && setLanyards(() => m.default));
+    const schedule = () => {
+      handle = "requestIdleCallback" in window ? window.requestIdleCallback(load, { timeout: 2500 }) : setTimeout(load, 1200);
+    };
+    if (document.readyState === "complete") schedule();
+    else window.addEventListener("load", schedule, { once: true });
     return () => {
       alive = false;
+      window.removeEventListener("load", schedule);
+      if ("cancelIdleCallback" in window) window.cancelIdleCallback(handle);
+      else clearTimeout(handle);
     };
   }, []);
 
-  // Animasi masuk baris intro: lokasi -> paragraf -> sosial. State awal lewat JS supaya tetap terlihat bila JS gagal.
   const introRef = useRef(null);
   useEffect(() => {
     const root = introRef.current;
     if (!root || window.matchMedia("(prefers-reduced-motion: reduce)").matches) return;
     const items = root.querySelectorAll("[data-rv]");
-    const tween = gsap.fromTo(items, { y: 36, opacity: 0 }, { y: 0, opacity: 1, duration: 1.1, ease: "expo.out", delay: 0.47, stagger: 0.07, clearProps: "transform" });
+    const tween = gsap.fromTo(items, { y: 36, opacity: (_, el) => (el.hasAttribute("data-lcp") ? 1 : 0) }, { y: 0, opacity: 1, duration: 1.1, ease: "expo.out", delay: 0.47, stagger: 0.07, clearProps: "transform" });
     const safety = setTimeout(() => gsap.set(items, { opacity: 1, y: 0 }), 1800);
     return () => {
       tween.kill();
@@ -55,7 +63,7 @@ export function Home() {
               Tangerang, Indonesia
             </div>
 
-            <p data-rv className="m-0 max-w-[540px] text-[18px] font-medium leading-[1.65] text-[#374151]">
+            <p data-rv data-lcp className="m-0 max-w-[540px] text-[18px] font-medium leading-[1.65] text-[#374151]">
               Mobile & backend developer skilled in Kotlin, Java, Flutter/Dart, and Golang. I’m an Informatics graduate from Universitas Multimedia Nusantara, with internship experience on POS, HRIS, and cross-platform apps. I care most
               about writing clean code that's easy to maintain.
             </p>
