@@ -6,6 +6,7 @@ import { Navbar } from "./components/layout/Navbar";
 import { Home } from "./components/sections/Home";
 import AboutMe from "./components/sections/AboutMe";
 import { getProject } from "./data/ProjectsData";
+import { clearReturn, getReturn, isReturning } from "./utils/homeReturn";
 
 // Section di bawah fold dan halaman detail dipecah jadi chunk sendiri supaya JS awal lebih kecil
 const loadExperience = () => import("./components/sections/Experience");
@@ -47,14 +48,59 @@ function ScrollManager({ lenisRef }) {
   // Layout effect: jalan sebelum halaman baru membuat ScrollTrigger-nya. ScrollTrigger mengingat posisi scroll
   // terakhir dan mengembalikannya saat refresh(), jadi memorinya dibersihkan; Lenis juga punya posisi targetnya sendiri.
   useLayoutEffect(() => {
-    if (hash) return;
+    if (hash || (pathname === "/" && isReturning())) return;
     ScrollTrigger.clearScrollMemory();
     lenisRef.current?.scrollTo(0, { immediate: true, force: true });
     window.scrollTo(0, 0);
   }, [pathname, hash, lenisRef]);
 
+  // Kembali ke Home dari detail project (tombol back HP/browser atau link "Back to projects"): gulir ke baris project
+  // yang tadi dibuka, di posisi layar yang sama seperti saat diklik. Section di-mount bertahap dan ScrollTrigger.refresh()
+  // menggeser scroll berkali-kali, jadi digulir setelah semuanya "ready"; halaman disembunyikan selama itu supaya tidak
+  // terlihat melompat-lompat.
   useEffect(() => {
-    if (!hash) return;
+    if (pathname !== "/" || !isReturning()) return;
+    const { slug, offset } = getReturn();
+    const root = document.documentElement;
+    root.dataset.restoring = "1";
+    if (hash) window.history.replaceState(window.history.state, "", pathname + window.location.search);
+
+    const apply = () => {
+      const row = document.querySelector(`a[href="/projects/${slug}"]`);
+      const top = row ? row.getBoundingClientRect().top + window.scrollY - offset : document.getElementById("projects")?.offsetTop;
+      if (top === undefined) return false;
+      lenisRef.current?.scrollTo(top, { immediate: true, force: true });
+      window.scrollTo(0, top);
+      return true;
+    };
+    const finish = () => {
+      delete root.dataset.restoring;
+      clearReturn();
+    };
+
+    let tries = 0;
+    const timers = [];
+    const poll = setInterval(() => {
+      const ready = root.dataset.belowFold === "ready";
+      if (ready && apply()) {
+        clearInterval(poll);
+        // Gambar yang baru selesai dimuat bisa menggeser tinggi halaman; terapkan lagi sebentar setelahnya
+        timers.push(setTimeout(apply, 350), setTimeout(apply, 900), setTimeout(finish, 950));
+      } else if (++tries >= 50) {
+        clearInterval(poll);
+        apply();
+        finish();
+      }
+    }, 100);
+    return () => {
+      clearInterval(poll);
+      timers.forEach(clearTimeout);
+      delete root.dataset.restoring;
+    };
+  }, [pathname, hash, lenisRef]);
+
+  useEffect(() => {
+    if (!hash || (pathname === "/" && isReturning())) return;
     // Tinggi halaman masih bergeser saat font/gambar dimuat, jadi coba lagi sekali.
     // Section lazy mungkin belum ada di DOM: tunggu (maksimal 4 detik) sampai semuanya ter-mount, lalu gulir.
     const go = () => document.querySelector(hash)?.scrollIntoView();
@@ -87,7 +133,7 @@ const BelowFoldPlaceholder = () => <div aria-hidden="true" style={{ minHeight: "
 // Section di bawah fold mulai dimuat setelah halaman idle, atau begitu pengunjung berinteraksi, lalu di-mount bertahap.
 // Kalau URL punya hash (mis. kembali ke "/#projects"), semuanya langsung di-mount.
 function BelowFold() {
-  const [count, setCount] = useState(() => (window.location.hash ? BELOW_FOLD.length : 0));
+  const [count, setCount] = useState(() => (window.location.hash || isReturning() ? BELOW_FOLD.length : 0));
   const [started, setStarted] = useState(() => count > 0);
   const [eager, setEager] = useState(false); // sudah berinteraksi: tidak perlu menunggu idle lagi
 
@@ -130,6 +176,14 @@ function BelowFold() {
     const id = window.requestIdleCallback(next, { timeout: 600 });
     return () => window.cancelIdleCallback(id);
   }, [started, count, eager]);
+
+  // Tanda "ready" milik instance ini; dihapus saat Home ditinggalkan supaya kunjungan berikutnya menunggu lagi
+  useEffect(
+    () => () => {
+      delete document.documentElement.dataset.belowFold;
+    },
+    []
+  );
 
   // Tandai kapan semua section sudah ter-mount dan ScrollTrigger-nya sempat refresh. Menggulir sebelum itu bisa
   // dibatalkan refresh (ScrollTrigger mengembalikan posisi lama), jadi klik navbar menunggu tanda ini.

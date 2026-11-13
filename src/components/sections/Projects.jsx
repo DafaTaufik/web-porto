@@ -1,5 +1,6 @@
 import { useLayoutEffect, useRef } from "react";
 import { Link } from "react-router-dom";
+import { rememberClick } from "../../utils/homeReturn";
 import gsap from "gsap";
 import { ScrollTrigger } from "gsap/ScrollTrigger";
 import { createReplay } from "../../utils/replayOnVisit";
@@ -134,7 +135,7 @@ function Row({ project, index }) {
   const href = project.slug ? `/projects/${project.slug}` : "#";
   const internal = Boolean(project.slug);
   const RowLink = internal ? Link : "a";
-  const rowProps = internal ? { to: href } : { href };
+  const rowProps = internal ? { to: href, onClick: (e) => rememberClick(project.slug, e.currentTarget) } : { href };
 
   return (
     <div data-rv className="relative">
