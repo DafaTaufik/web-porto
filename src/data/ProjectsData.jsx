@@ -1,3 +1,10 @@
+import rekapanCover1 from "../assets/Image/project/rekapan/Cover 1 - Logo + loading@1x.png";
+import rekapanCover2 from "../assets/Image/project/rekapan/Cover 2 - n8n workflow@1x.png";
+import rekapanCover3 from "../assets/Image/project/rekapan/Cover 3 - Transactions@1x.png";
+import rekapanBrand from "../assets/Image/project/rekapan/Gallery 1 - Brand + loading@1x.png";
+import rekapanN8n from "../assets/Image/project/rekapan/Gallery 2 - n8n workflow@1x.png";
+import rekapanTransactions from "../assets/Image/project/rekapan/Gallery 3 - Transactions@1x.png";
+
 import umoviezCover1 from "../assets/Image/project/umoviez/Cover 1 - Desktop + Mobile@1x.png";
 import umoviezCover2 from "../assets/Image/project/umoviez/Cover 2 - Mobile@1x.png";
 import umoviezCover3 from "../assets/Image/project/umoviez/Cover 3 - Detail@1x.png";
@@ -66,35 +73,45 @@ const PROJECTS = [
     slug: "Rekapan",
     title: "Rekapan",
     subtitle: "Mobile app.",
-    summary: "A fitness and wellness Android app for tracking food, water, workouts, and daily calorie goals.",
-    lead: "CiakHamik helps people reach a personal fitness goal by turning their body data into a daily calorie target, then tracking meals, water, and workouts against it in one place.",
+    summary: "An internal Android app for checking the daily transaction recap of all three Dafa Laundry branches.",
+    lead: "Daily transaction recaps for three Dafa Laundry branches, collected automatically and viewed in an internal Android app.",
     tags: ["Mobile", "Family Business", "2026"],
     origin: "family",
     meta: {
       role: "Full Stack Android",
-      clientLabel: "Company",
-      client: "PT. Mitra Integrasi Digital",
+      clientLabel: "Client",
+      client: "Dafa Laundry",
       type: "Mobile",
       year: "2026",
-      duration: "[Oct 2026 – Mon YYYY]",
+      duration: "[Oct 2026 – Present]",
       status: "On Progress",
     },
     stack: [
       { name: "Kotlin", icon: "Kotlin" },
-      { name: "Golang", icon: "Golang" },
       { name: "N8N", icon: "N8N" },
+      { name: "Golang", icon: "Golang" },
+      { name: "Jetpack Compose", icon: "JetpackCompose" },
+      { name: "PostgreSQL", icon: "PostgreSQL" },
+      { name: "Supabase", icon: "Supabase" },
     ],
     links: DEFAULT_LINKS,
     work: [
-      { title: "Screen redesign", desc: "Transaction History, Sales Recap, Transaction, Login, and Cart." },
-      { title: "Pending QRIS payment", desc: "Handling QRIS payments that are still pending." },
-      { title: "Menu management", desc: "Create, read, update and delete menu items, with topping and size options on the create transaction page." },
-      { title: "Bluetooth printer", desc: "Refactored pairing, connection, CPL configuration and test print." },
-      { title: "Online orders", desc: "An order page and mobile notifications for orders coming from the self-order web app (Socket.IO, Node.js, gRPC, Golang)." },
+      { title: "x", desc: "-" },
+      { title: "x", desc: "-" },
+      { title: "x", desc: "-" },
+      { title: "x", desc: "-" },
+      { title: "x", desc: "-" },
     ],
     sections: SECTION_PLACEHOLDERS,
-    images: [],
-    gallery: [],
+    images: [rekapanCover1, rekapanCover2, rekapanCover3],
+    gallery: [
+      { src: rekapanCover1, alt: "Rekapan cover with logo and loading screen", caption: "Cover 1", ratio: "16/10", col: 0 },
+      { src: rekapanBrand, alt: "Rekapan brand and loading screen", caption: "Brand and loading", ratio: "9/16", col: 0 },
+      { src: rekapanTransactions, alt: "Rekapan transaction list per branch", caption: "Transactions", ratio: "9/16", col: 1 },
+      { src: rekapanCover3, alt: "Rekapan cover for transactions", caption: "Cover 3", ratio: "16/10", col: 1 },
+      { src: rekapanCover2, alt: "Rekapan cover for n8n workflow", caption: "Cover 2", ratio: "16/10", col: 2 },
+      { src: rekapanN8n, alt: "Rekapan n8n automation workflow", caption: "n8n workflow", ratio: "9/16", col: 2 },
+    ],
   },
 
   {
@@ -137,8 +154,8 @@ const PROJECTS = [
       overview: "CiakHamik is an Android fitness app that sets a daily calorie target from the user's body data and goal, then tracks meals, workouts, and water against it.",
       background:
         "Built as the final project for IF 570 Mobile Application Programming at Universitas Multimedia Nusantara, in a team of students. I designed and built the onboarding, home, calendar, water, login, signup, and designed the Firebase database with a teammate. Another teammate built the food section.",
-      challenge: "[Bagian tersulit untuk kamu — lihat pertanyaan di bawah.]",
-      solution: "[Bagaimana kamu menyelesaikannya, dan apa yang dipelajari.]",
+      challenge: "[-]",
+      solution: "[-]",
     },
     images: [ciakhamikCover1, ciakhamikCover2, ciakhamikCover3],
     gallery: [
