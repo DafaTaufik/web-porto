@@ -1,6 +1,7 @@
 import { lazy, Suspense, useEffect, useLayoutEffect, useRef, useState } from "react";
 import { BrowserRouter, Navigate, Route, Routes, useLocation, useParams } from "react-router-dom";
 import Lenis from "@studio-freight/lenis";
+import gsap from "gsap";
 import { ScrollTrigger } from "gsap/ScrollTrigger";
 import { Navbar } from "./components/layout/Navbar";
 import { Home } from "./components/sections/Home";
@@ -245,12 +246,14 @@ function App() {
       easing: easeOutCubic,
     });
     lenisRef.current = lenis;
-    function raf(time) {
-      lenis.raf(time);
-      requestAnimationFrame(raf);
-    }
-    requestAnimationFrame(raf);
+    // Lenis digerakkan ticker GSAP (bukan rAF sendiri) dan memberi tahu ScrollTrigger tiap scroll,
+    // supaya animasi scrub membaca posisi scroll di frame yang sama dengan yang dirender Lenis
+    lenis.on("scroll", ScrollTrigger.update);
+    const tick = (time) => lenis.raf(time * 1000);
+    gsap.ticker.add(tick);
+    gsap.ticker.lagSmoothing(0);
     return () => {
+      gsap.ticker.remove(tick);
       lenis.destroy();
       lenisRef.current = null;
     };

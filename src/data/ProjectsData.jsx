@@ -78,7 +78,7 @@ const PROJECTS = [
     tags: ["Mobile", "Family Business", "2026"],
     origin: "family",
     meta: {
-      role: "Full Stack Android",
+      role: "FullStack Android",
       clientLabel: "Client",
       client: "Dafa Laundry",
       type: "Mobile",

@@ -79,7 +79,7 @@ export default function PhotoViewer({ photos, index, orgName, onClose, onStep, o
       <div className="org-strip flex items-center justify-center gap-2.5 border-t border-white/[0.14] px-[26px] pt-3.5 pb-5">
         {photos.map((p, i) => (
           <button key={p.src} type="button" onClick={() => onJump(i)} aria-label={`Go to photo ${pad(i + 1)}`} aria-current={i === index} className={`org-tb ${i === index ? "act" : ""}`}>
-            <img src={p.src} alt="" />
+            <img src={p.thumb} alt="" loading="lazy" decoding="async" />
           </button>
         ))}
         <span className="org-hint ml-[18px] text-xs font-medium text-[#9CA3AF]">← → browse · Esc close</span>
