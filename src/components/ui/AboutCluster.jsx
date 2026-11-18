@@ -1,6 +1,6 @@
 // import mainPhoto from "../../assets/Image/g.png";
-import mainPhoto from "../../assets/Image/about-main.jpg";
-import bouquetPhoto from "../../assets/Image/about-bouquet.jpg";
+import mainPhoto from "../../assets/Image/about-main.webp";
+import bouquetPhoto from "../../assets/Image/about-bouquet.webp";
 
 const CHIP = "flex items-center gap-2 rounded-full border border-[#D4D4D4] bg-white px-[18px] py-2.5 font-Inter text-[15px] font-semibold shadow-[0_10px_24px_rgba(0,0,0,0.08)]";
 

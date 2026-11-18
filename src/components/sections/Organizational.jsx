@@ -76,7 +76,7 @@ function Deco() {
 function Photo({ index, hero = false, onOpen }) {
   const photo = PHOTOS[index];
   const radius = hero ? 28 : 22;
-  const img = <img className="org-im" src={photo.src} alt={photo.alt} loading={hero ? undefined : "lazy"} />;
+  const img = <img className="org-im" src={hero ? photo.src : photo.thumb} alt={photo.alt} loading={hero ? undefined : "lazy"} decoding="async" />;
 
   return (
     <div data-tw data-radius={radius} className="relative">
