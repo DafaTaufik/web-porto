@@ -207,56 +207,86 @@ export default function Projects() {
         const rows = gsap.utils.toArray("[data-row]");
         const cleanups = [];
 
-        // Dim baris lain saat hover/fokus: CSS. Galeri thumbnail hanya saat motion aktif.
-        if (hover) {
-          const setOn = (row) => rows.forEach((o) => o.classList.toggle("on", o === row));
-          let stopShow = () => {};
-          let startShow = () => {};
-          const galleries = new Map();
+        // Galeri thumbnail (hanya saat motion aktif). Dipicu hover/fokus di desktop, atau sentuhan di layar sentuh.
+        const setOn = (row) => rows.forEach((o) => o.classList.toggle("on", o === row));
+        let stopShow = () => {};
+        let startShow = () => {};
+        const galleries = new Map();
 
-          if (motion) {
-            rows.forEach((r) => {
-              galleries.set(r, { slides: gsap.utils.toArray("[data-sl]", r), bars: gsap.utils.toArray("[data-bar] i", r), i: 0, call: null });
-              gsap.set(galleries.get(r).bars, { scaleX: 0 });
+        if (motion) {
+          rows.forEach((r) => {
+            galleries.set(r, { slides: gsap.utils.toArray("[data-sl]", r), bars: gsap.utils.toArray("[data-bar] i", r), i: 0, call: null });
+            gsap.set(galleries.get(r).bars, { scaleX: 0 });
+          });
+
+          const showSlide = (g, n) => {
+            g.i = n;
+            g.slides.forEach((sl, i) => {
+              gsap.to(sl, { autoAlpha: i === n ? 1 : 0, scale: i === n ? 1 : 0.96, duration: i === n ? 0.6 : 0.45, ease: "expo.out", overwrite: "auto" });
             });
+            g.bars.forEach((b, i) => {
+              gsap.killTweensOf(b);
+              if (i < n) gsap.set(b, { scaleX: 1 });
+              else if (i === n) gsap.fromTo(b, { scaleX: 0 }, { scaleX: 1, duration: STEP, ease: "none" });
+              else gsap.set(b, { scaleX: 0 });
+            });
+          };
 
-            const showSlide = (g, n) => {
-              g.i = n;
-              g.slides.forEach((sl, i) => {
-                gsap.to(sl, { autoAlpha: i === n ? 1 : 0, scale: i === n ? 1 : 0.96, duration: i === n ? 0.6 : 0.45, ease: "expo.out", overwrite: "auto" });
-              });
-              g.bars.forEach((b, i) => {
-                gsap.killTweensOf(b);
-                if (i < n) gsap.set(b, { scaleX: 1 });
-                else if (i === n) gsap.fromTo(b, { scaleX: 0 }, { scaleX: 1, duration: STEP, ease: "none" });
-                else gsap.set(b, { scaleX: 0 });
-              });
-            };
+          stopShow = (r) => {
+            const g = galleries.get(r);
+            g.call?.kill();
+            g.call = null;
+            if (g.slides.length < 2) return;
+            g.i = 0;
+            g.slides.forEach((sl, i) => gsap.to(sl, { autoAlpha: i === 0 ? 1 : 0, scale: i === 0 ? 1 : 0.96, duration: 0.45, overwrite: "auto" }));
+            g.bars.forEach((b) => gsap.killTweensOf(b));
+            gsap.set(g.bars, { scaleX: 0 });
+          };
 
-            stopShow = (r) => {
-              const g = galleries.get(r);
-              g.call?.kill();
-              g.call = null;
-              if (g.slides.length < 2) return;
-              g.i = 0;
-              g.slides.forEach((sl, i) => gsap.to(sl, { autoAlpha: i === 0 ? 1 : 0, scale: i === 0 ? 1 : 0.96, duration: 0.45, overwrite: "auto" }));
-              g.bars.forEach((b) => gsap.killTweensOf(b));
-              gsap.set(g.bars, { scaleX: 0 });
-            };
-
-            startShow = (r) => {
-              const g = galleries.get(r);
-              if (g.slides.length < 2) return;
-              g.call?.kill();
-              showSlide(g, 1); // langsung ke slide ke-2
-              const tick = () => {
-                showSlide(g, (g.i + 1) % g.slides.length);
-                g.call = gsap.delayedCall(STEP, tick);
-              };
+          startShow = (r) => {
+            const g = galleries.get(r);
+            if (g.slides.length < 2) return;
+            g.call?.kill();
+            showSlide(g, 1); // langsung ke slide ke-2
+            const tick = () => {
+              showSlide(g, (g.i + 1) % g.slides.length);
               g.call = gsap.delayedCall(STEP, tick);
             };
-          }
+            g.call = gsap.delayedCall(STEP, tick);
+          };
+        }
 
+        // Layar sentuh: sentuhan apa pun (termasuk saat mulai scroll) memutar galeri baris itu sampai barisnya
+        // keluar layar atau baris lain disentuh. Tanpa dim baris lain (akan berkedip saat scroll).
+        if (!hover && motion) {
+          let active = null;
+          const stop = () => {
+            if (!active) return;
+            stopShow(active);
+            active.classList.remove("on");
+            active = null;
+          };
+          const offscreen = new IntersectionObserver((entries) => entries.forEach((e) => !e.isIntersecting && e.target === active && stop()));
+          rows.forEach((r) => {
+            offscreen.observe(r);
+            const touch = () => {
+              if (active === r) return;
+              stop();
+              active = r;
+              setOn(r);
+              startShow(r);
+            };
+            r.addEventListener("touchstart", touch, { passive: true });
+            cleanups.push(() => r.removeEventListener("touchstart", touch));
+          });
+          cleanups.push(() => {
+            offscreen.disconnect();
+            stop();
+          });
+        }
+
+        // Desktop: dim baris lain saat hover/fokus (CSS) dan putar galeri baris itu
+        if (hover) {
           rows.forEach((r) => {
             const enter = () => {
               list.classList.add("hv");

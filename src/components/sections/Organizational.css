@@ -63,14 +63,13 @@
 @media (max-width: 1100px) {
   .org-deco { display: none; }
   .org-info { grid-template-columns: minmax(0, 1fr) !important; }
-  .org-gal { grid-template-columns: repeat(2, minmax(0, 1fr)) !important; }
-  .org-gal > div:nth-child(3) { grid-column: 1 / -1; flex-direction: row !important; margin-top: 0 !important; }
-  .org-gal > div:nth-child(3) > * { flex: 1; }
+  /* Kolom desktop dilebur: semua foto mengalir ke masonry 2 kolom (urutan DOM: kolom 1, 2, lalu 3) */
+  .org-gal { display: block !important; columns: 2; column-gap: 24px; }
+  .org-gal > div { display: contents; }
+  .org-gal [data-tw] { break-inside: avoid; margin-bottom: 24px; }
 }
 @media (max-width: 700px) {
-  .org-gal { grid-template-columns: minmax(0, 1fr) !important; }
-  .org-gal > div { margin-top: 0 !important; }
-  .org-gal > div:nth-child(3) { flex-direction: column !important; }
+  .org-gal { columns: 1; }
   .org-arr { width: 44px; height: 44px; margin-top: -22px; }
   .org-stage { padding: 16px 12px; }
   .org-hint, .org-strip { display: none !important; }
