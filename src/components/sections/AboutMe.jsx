@@ -235,25 +235,28 @@ export default function AboutMe() {
           </div>
 
           {/* Right: teks */}
-          <div className="flex flex-col gap-10 min-w-0 flex-[1.1_1_480px]">
-            <div data-hl className="flex flex-col gap-[0.9em] text-justify text-[clamp(21px,2.1vw,28px)] font-medium leading-normal tracking-[-0.005em]">
+          <div className="flex flex-col min-w-0 flex-[1.1_1_480px]">
+            <div data-hl className="flex flex-col gap-[0.75em] text-justify text-[clamp(20px,1.9vw,25px)] font-medium leading-normal tracking-[-0.005em]">
               {LEAD.map((para) => (
                 <p key={para} aria-label={para} className="m-0">
                   {/* Spasi asli antar kata (bukan margin) supaya text-justify bisa meregangkannya */}
-                  {para.split(" ").map((word, i) => (
-                    <span key={i} data-w aria-hidden="true" className="inline-block">
-                      {word}
-                    </span>
-                  )).reduce((acc, el) => (acc.length ? [...acc, " ", el] : [el]), [])}
+                  {para
+                    .split(" ")
+                    .map((word, i) => (
+                      <span key={i} data-w aria-hidden="true" className="inline-block">
+                        {word}
+                      </span>
+                    ))
+                    .reduce((acc, el) => (acc.length ? [...acc, " ", el] : [el]), [])}
                 </p>
               ))}
             </div>
 
-            <p data-rv="0" className="m-0 max-w-[540px] text-[17px] font-medium leading-[1.7] text-[#4B5563]">
+            <p data-rv="0" className="m-0 mt-7 max-w-[540px] text-[17px] font-medium leading-[1.7] text-[#4B5563]">
               Right now I&apos;m looking for an opportunity to keep growing as a software engineer, automation engineer, or applied ML engineer.
             </p>
 
-            <div className="flex flex-wrap gap-6">
+            <div className="mt-14 flex flex-wrap gap-6">
               {FACTS.map(({ label, value }, i) => (
                 <div key={label} data-rv={i * 100} className="flex flex-col gap-1.5 flex-[1_1_150px] border-t-2 border-[#1D1D1D] pt-3.5">
                   <span className="text-xs font-bold uppercase tracking-[0.12em] text-[#6B7280]">{label}</span>

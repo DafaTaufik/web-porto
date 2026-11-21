@@ -147,7 +147,6 @@
   .pj-tt { display: inline-flex; }
   .pj-dec { display: none; }
 }
-@media (hover: none) { .pj-bars { display: none; } }
 @media (prefers-reduced-motion: reduce) {
   .pj-fl1, .pj-fl2, .pj-fl3 { animation: none; }
   .pj-nm, .pj-arr, .pj-thumb, .pj-tag { transition: none; }

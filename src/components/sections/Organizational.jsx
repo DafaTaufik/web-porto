@@ -133,8 +133,8 @@ export default function Organizational() {
   useLayoutEffect(() => {
     const mm = gsap.matchMedia();
 
-    mm.add({ motion: "(prefers-reduced-motion: no-preference)", wide: "(min-width: 1101px)", desktop: "(min-width: 701px)" }, (mq) => {
-      const { motion, wide, desktop } = mq.conditions;
+    mm.add({ motion: "(prefers-reduced-motion: no-preference)", wide: "(min-width: 1101px)" }, (mq) => {
+      const { motion, wide } = mq.conditions;
       if (!motion) return;
       const section = sectionRef.current;
 
@@ -193,8 +193,8 @@ export default function Organizational() {
           replay(tw, tl);
         });
 
-        // 4. Parallax kolom galeri (desktop) dan zoom foto utama
-        if (desktop) {
+        // 4. Parallax kolom galeri (hanya layout 3 kolom; di bawah 1100px kolomnya dilebur jadi masonry) dan zoom foto utama
+        if (wide) {
           gsap.utils.toArray("[data-col]").forEach((col) => {
             const speed = parseFloat(col.dataset.speed) || 0;
             gsap.fromTo(col, { y: 0.5 * speed * 1000 }, { y: -0.5 * speed * 1000, ease: "none", scrollTrigger: { trigger: "[data-gal]", start: "top bottom", end: "bottom top", scrub: true } });
