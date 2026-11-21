@@ -7,8 +7,11 @@ import "./AboutMe.css";
 
 gsap.registerPlugin(ScrollTrigger);
 
-const LEAD =
-  "I'm an Informatics graduate from Universitas Multimedia Nusantara who enjoys the whole path of an app, from the Android screen a user taps to the Go service that answers it. I've worked on POS and HRIS apps as a mobile developer intern, and built cross-platform apps with Flutter, Clean Architecture and Firebase.";
+// Satu string = satu paragraf
+const LEAD = [
+  "I'm an Informatics graduate from Universitas Multimedia Nusantara with a strong interest in software development, especially in mobile and backend engineering.",
+  "During my internship at PT Mitra Integrasi Digital, I contributed to the development of POS and HRIS applications. I also completed a 12-week project-based internship at Luar Sekolah, where I developed a Flutter application using GetX, Clean Architecture, and Firebase.",
+];
 
 const FACTS = [
   { label: "Focus", value: "Android & Backend" },
@@ -205,7 +208,7 @@ export default function AboutMe() {
         <h2 className="mt-11 font-HWT font-normal uppercase text-[clamp(56px,9vw,128px)] leading-[0.98] tracking-[0.005em]">
           <span className={MASK}>
             <span data-line className="block">
-              I build mobile apps
+              Build mobile apps
             </span>
           </span>
           <span className={MASK}>
@@ -233,13 +236,18 @@ export default function AboutMe() {
 
           {/* Right: teks */}
           <div className="flex flex-col gap-10 min-w-0 flex-[1.1_1_480px]">
-            <p data-hl aria-label={LEAD} className="m-0 text-[clamp(21px,2.1vw,28px)] font-medium leading-normal tracking-[-0.005em]">
-              {LEAD.split(" ").map((word, i) => (
-                <span key={i} data-w aria-hidden="true" className="inline-block mr-[0.27em]">
-                  {word}
-                </span>
+            <div data-hl className="flex flex-col gap-[0.9em] text-justify text-[clamp(21px,2.1vw,28px)] font-medium leading-normal tracking-[-0.005em]">
+              {LEAD.map((para) => (
+                <p key={para} aria-label={para} className="m-0">
+                  {/* Spasi asli antar kata (bukan margin) supaya text-justify bisa meregangkannya */}
+                  {para.split(" ").map((word, i) => (
+                    <span key={i} data-w aria-hidden="true" className="inline-block">
+                      {word}
+                    </span>
+                  )).reduce((acc, el) => (acc.length ? [...acc, " ", el] : [el]), [])}
+                </p>
               ))}
-            </p>
+            </div>
 
             <p data-rv="0" className="m-0 max-w-[540px] text-[17px] font-medium leading-[1.7] text-[#4B5563]">
               Right now I&apos;m looking for an opportunity to keep growing as a software engineer, automation engineer, or applied ML engineer.

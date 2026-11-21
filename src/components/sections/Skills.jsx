@@ -212,7 +212,7 @@ export default function Skills() {
             <aside>
               <div data-rv className="flex items-center gap-3">
                 <span className="flex items-center gap-2.5 rounded-full border border-[#D4D4D4] bg-white px-4 py-2 text-sm font-semibold">
-                  <span className="font-HWT text-base leading-none">07</span>
+                  <span className="font-HWT text-base leading-none">05</span>
                   Skills
                 </span>
                 <span className="flex-1 h-px bg-[#D4D4D4]" />
@@ -221,23 +221,18 @@ export default function Skills() {
               <h2 className="mt-10 font-HWT font-normal uppercase text-[clamp(40px,4.2vw,60px)] leading-none whitespace-nowrap tracking-[0.005em]">
                 <span className={MASK}>
                   <span data-line className="block">
-                    The tools
-                  </span>
-                </span>
-                <span className={MASK}>
-                  <span data-line className="block">
-                    I build with
+                    Skills &amp;
                   </span>
                 </span>
                 <span className={MASK}>
                   <span data-line className="block text-[#9CA3AF]">
-                    &amp; how well.
+                    Tools
                   </span>
                 </span>
               </h2>
 
               <p data-rv className="mt-9 mb-0 max-w-[400px] text-base font-medium leading-[1.7] text-[#4B5563]">
-                Percentages are how I rate myself, not exam scores. Each block is 5%, so you can see where I&apos;m strongest and where I&apos;m still growing.
+                Percentages are how I rate myself, not exam scores.
               </p>
 
               {/* Also familiar with */}
@@ -264,7 +259,9 @@ export default function Skills() {
                 <h3 data-rv className={`flex items-center gap-3.5 pb-1.5 text-xs font-bold uppercase tracking-[0.14em] text-[#4B5563] ${gi ? "mt-[34px]" : ""}`}>
                   <span>{group.name}</span>
                   <span className="flex-1 h-px bg-[#1D1D1D]" />
-                  <span className="text-[#9CA3AF]">{group.skills.length} tools</span>
+                  <span className="text-[#9CA3AF]">
+                    {group.skills.length} {group.unit[group.skills.length === 1 ? 0 : 1]}
+                  </span>
                 </h3>
                 <ul className="m-0 list-none p-0">
                   {group.skills.map((skill) => (

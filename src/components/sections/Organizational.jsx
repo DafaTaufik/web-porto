@@ -140,8 +140,8 @@ export default function Organizational() {
 
       const ctx = gsap.context(() => {
         // Animasi masuk hanya dimainkan saat user datang dari ATAS (scroll turun). Selama section masih di layar tidak diulang.
-        // Reset hanya terjadi kalau user pergi ke section di atas (section 05 keluar lewat bawah layar), jadi main lagi saat kembali.
-        // User yang kembali dari bawah (mis. section 06 scroll naik): elemen langsung tampil tanpa animasi.
+        // Reset hanya terjadi kalau user pergi ke section di atas (section 04 keluar lewat bawah layar), jadi main lagi saat kembali.
+        // User yang kembali dari bawah (mis. section 05 scroll naik): elemen langsung tampil tanpa animasi.
         // Pakai IntersectionObserver (bukan ScrollTrigger) karena membaca posisi yang benar-benar tampil,
         // termasuk geseran parallax kolom galeri; ScrollTrigger menghitung dari posisi layout sehingga elemen bisa telat muncul
         const observers = [];
@@ -292,7 +292,7 @@ export default function Organizational() {
           {/* Label row */}
           <div data-rv="0" className="flex items-center gap-4">
             <span className="flex items-center gap-2.5 rounded-full border border-[#D4D4D4] bg-white px-4 py-2 text-sm font-semibold">
-              <span className="font-HWT text-base leading-none">05</span>
+              <span className="font-HWT text-base leading-none">04</span>
               Organizational
             </span>
             <span className="flex-1 h-px bg-[#D4D4D4]" />
@@ -300,22 +300,17 @@ export default function Organizational() {
           </div>
 
           {/* Headline + clipboard */}
-          <div className="relative mt-11">
+          <div className="relative mt-11 min-[1101px]:min-h-[440px]">
             <Deco />
             <h2 className="relative z-[2] m-0 font-HWT font-normal uppercase text-[clamp(52px,8vw,116px)] leading-[0.98] tracking-[0.005em]">
               <span className={MASK}>
                 <span data-line className="block">
-                  Beyond the
+                  ORGANIZATIONS
                 </span>
               </span>
               <span className={MASK}>
                 <span data-line className="block">
-                  code, with
-                </span>
-              </span>
-              <span className={MASK}>
-                <span data-line className="block text-[#9CA3AF]">
-                  people.
+                  I'VE <span className="text-[#9CA3AF]">JOINED.</span>
                 </span>
               </span>
             </h2>

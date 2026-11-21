@@ -52,7 +52,7 @@ export function Home() {
           <h1 className="text-[#1D1D1D] text-3xl md:text-4xl font-HWT">hi, im</h1>
           <h1 className="text-[#1D1D1D] text-7xl w-32 md:w-full md:text-8xl font-HWT mt-1">Dafa Taufik</h1>
           <h1 className="text-[#1D1D1D] text-6xl md:text-7xl font-HWT">Al Latief</h1>
-          <h2 className="mt-5 mb-5 text-lg md:text-3xl text-[#1D1D1D] font-HWT">Android & Backend Developer</h2>
+          <h2 className="mt-5 mb-5 text-lg md:text-3xl text-[#1D1D1D] font-HWT">Mobile & Backend Developer</h2>
 
           <div className="flex max-w-[720px] flex-col gap-6 font-Inter">
             <div data-rv className="flex items-center gap-2 text-[15px] font-semibold text-[#6B7280]">
@@ -64,8 +64,8 @@ export function Home() {
             </div>
 
             <p data-rv data-lcp className="m-0 max-w-[540px] text-[18px] font-medium leading-[1.65] text-[#374151]">
-              Mobile & backend developer skilled in Kotlin, Java, Flutter/Dart, and Golang. I’m an Informatics graduate from Universitas Multimedia Nusantara, with internship experience on POS, HRIS, and cross-platform apps. I care most
-              about writing clean code that's easy to maintain.
+              Mobile & Backend Developer with experience in Kotlin, Java, Flutter, and Golang. An Informatics graduate from Universitas Multimedia Nusantara with hands-on experience developing POS and HRIS applications. Passionate about
+              building reliable, maintainable, and user-focused software.
             </p>
 
             <div data-rv className=" flex flex-wrap items-center gap-x-[22px] gap-y-3.5 pointer-events-auto">

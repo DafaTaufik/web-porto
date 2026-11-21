@@ -244,7 +244,7 @@ export default function Footer() {
         {/* Label row */}
         <div data-rv="0" className="flex flex-wrap items-center gap-x-5 gap-y-3">
           <span className="flex items-center gap-2.5 rounded-full border border-[#3A3A3A] bg-[#161616] px-4 py-2 text-sm font-semibold">
-            <span className="font-HWT text-base leading-none">09</span>
+            <span className="font-HWT text-base leading-none">07</span>
             Contact
           </span>
           <span className="hidden h-px flex-1 bg-[#2A2A2A] min-[701px]:block" />

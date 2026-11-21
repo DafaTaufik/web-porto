@@ -402,22 +402,17 @@ export default function Projects() {
         </div>
 
         {/* Headline + klaster ponsel */}
-        <div className="relative mt-11">
+        <div className="relative mt-11 min-[1001px]:min-h-[440px]">
           <PhoneCluster />
           <h2 className="relative z-[1] m-0 font-HWT font-normal uppercase text-[clamp(56px,9vw,128px)] leading-[0.98] tracking-[0.005em]">
             <span className={MASK}>
               <span data-line className="block">
-                Selected work
+                A FEW THINGS
               </span>
             </span>
             <span className={MASK}>
               <span data-line className="block">
-                from the screen
-              </span>
-            </span>
-            <span className={MASK}>
-              <span data-line className="block text-[#9CA3AF]">
-                to the server.
+                I'VE <span className="text-[#9CA3AF]">BUILT.</span>
               </span>
             </span>
           </h2>
