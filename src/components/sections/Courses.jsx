@@ -171,7 +171,7 @@ export default function Courses() {
           {/* Header row */}
           <div data-rv className="flex items-center gap-4">
             <span className="flex items-center gap-2.5 rounded-full border border-[#D4D4D4] bg-white px-4 py-2 text-sm font-semibold">
-              <span className="font-HWT text-base leading-none">08</span>
+              <span className="font-HWT text-base leading-none">06</span>
               Courses
             </span>
             <span className="flex-1 h-px bg-[#D4D4D4]" />
@@ -190,24 +190,19 @@ export default function Courses() {
             <h2 className="relative z-[2] m-0 font-HWT font-normal uppercase text-[clamp(52px,8vw,116px)] leading-[0.98] tracking-[0.005em]">
               <span className={MASK}>
                 <span data-line className="block">
-                  Always
-                </span>
-              </span>
-              <span className={MASK}>
-                <span data-line className="block">
-                  learning,
+                  COURSES AND
                 </span>
               </span>
               <span className={MASK}>
                 <span data-line className="block text-[#9CA3AF]">
-                  never done.
+                  CERTIFICATES.
                 </span>
               </span>
             </h2>
           </div>
 
           <p data-rv className="mt-[52px] mb-0 max-w-[560px] text-[17px] font-medium leading-[1.7] text-[#4B5563]">
-            Courses and training I took outside of university to go deeper into what I care about: mobile, backend, and clean software engineering.
+            Courses and training I took outside of university.
           </p>
 
           {/* Label row */}

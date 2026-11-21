@@ -1,35 +1,34 @@
 import { SiSqlite } from "react-icons/si";
 
 // percent: penilaian diri (0-100). Kosong = placeholder "[xx]%" sampai diisi. Jangan mengarang angka.
+// unit: [tunggal, jamak] untuk penghitung di kanan judul grup
 export const SkillGroups = [
   {
-    name: "Mobile",
+    name: "Languages",
+    unit: ["language", "languages"],
     skills: [
       { name: "Kotlin", percent: 83 },
       { name: "Java", percent: 73 },
-      { name: "Flutter", percent: 76 },
       { name: "Dart", percent: 82 },
-    ],
-  },
-  {
-    name: "Backend",
-    skills: [
       { name: "Golang", percent: 75 },
       { name: "Python", percent: 78 },
+      { name: "JavaScript", percent: 81 },
+      { name: "PHP", percent: 72 },
     ],
   },
   {
-    name: "Web",
+    name: "Frameworks & libraries",
+    unit: ["framework", "frameworks"],
     skills: [
-      { name: "JavaScript", percent: 81 },
+      { name: "Flutter", percent: 76 },
       { name: "ReactJs", percent: 71 },
-      { name: "PHP", percent: 72 },
       { name: "Laravel", percent: 68 },
       { name: "Tailwind CSS", percent: 84 },
     ],
   },
   {
-    name: "Data & tools",
+    name: "Databases",
+    unit: ["database", "databases"],
     skills: [
       { name: "MySQL", percent: 83 },
       { name: "Firebase", percent: 89 },
@@ -38,7 +37,8 @@ export const SkillGroups = [
     ],
   },
   {
-    name: "tools",
+    name: "Tools",
+    unit: ["tool", "tools"],
     skills: [
       { name: "Postman", percent: 87 },
       { name: "Bruno", percent: 86 },

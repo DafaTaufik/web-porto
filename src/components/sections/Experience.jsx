@@ -178,17 +178,12 @@ export function Experience() {
         <h2 className="mt-11 font-HWT font-normal uppercase text-[clamp(56px,9vw,128px)] leading-[0.98] tracking-[0.005em]">
           <span className={MASK}>
             <span data-line className="block">
-              Hands-on
+              WHERE I'VE
             </span>
           </span>
           <span className={MASK}>
             <span data-line className="block">
-              Real-world
-            </span>
-          </span>
-          <span className={MASK}>
-            <span data-line className="block text-[#9CA3AF]">
-              Experience
+              WORKED <span className="text-[#9CA3AF]">SO FAR</span>
             </span>
           </span>
         </h2>
@@ -247,7 +242,7 @@ export function Experience() {
               </div>
 
               <p data-rv="200" className="m-0 text-[17px] font-medium leading-[1.7] text-[#4B5563]">
-                Two internships, two stacks: native Android with Kotlin and Java, and cross-platform apps with Flutter.
+                Two internships: fullstack Android with Kotlin, Java, and Golang, then cross-platform mobile with Flutter.
               </p>
 
               <a
