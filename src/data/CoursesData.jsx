@@ -49,7 +49,7 @@ export const CoursesData = [
     thumb: androidFundamentalThumb,
     credentialId: "2VX3V675QPYQ",
     validUntil: "Sep 23, 2029",
-    verifyUrl: "https://dicoding.com/certificates/2VX3V675QPYQ",
+    verifyUrl: "https://www.dicoding.com/certificates/2VX3V675QPYQ",
   },
   {
     platform: "Dicoding",
@@ -63,7 +63,7 @@ export const CoursesData = [
     thumb: devopsThumb,
     credentialId: "4EXGJK4K1XRL",
     validUntil: "Sep 28, 2029",
-    verifyUrl: "https://dicoding.com/certificates/4EXGJK4K1XRL",
+    verifyUrl: "https://www.dicoding.com/certificates/4EXGJK4K1XRL",
   },
   {
     platform: "Dicoding",
@@ -77,7 +77,7 @@ export const CoursesData = [
     thumb: promptEngineeringThumb,
     credentialId: "81P25LOWYPOY",
     validUntil: "Oct 20, 2028",
-    verifyUrl: "https://dicoding.com/certificates/81P25LOWYPOY",
+    verifyUrl: "https://www.dicoding.com/certificates/81P25LOWYPOY",
   },
   {
     platform: "Dicoding",
@@ -91,7 +91,7 @@ export const CoursesData = [
     thumb: dartThumb,
     credentialId: "98XW5DKV9PM3",
     validUntil: "Dec 22, 2027",
-    verifyUrl: "https://dicoding.com/certificates/98XW5DKV9PM3",
+    verifyUrl: "https://www.dicoding.com/certificates/98XW5DKV9PM3",
   },
   {
     platform: "Luarsekolah",
@@ -134,6 +134,7 @@ export const CoursesData = [
     src: intermediatePython,
     thumb: intermediatePython,
     credentialId: "CC-U4U8NEN3",
+    verifyUrl: "https://www.sololearn.com/en/certificates/CC-U4U8NEN3",
   },
   {
     platform: "SoloLearn",
@@ -145,6 +146,7 @@ export const CoursesData = [
     src: introPython,
     thumb: introPython,
     credentialId: "CC-OYIGG1FM",
+    verifyUrl: "https://www.sololearn.com/certificates/CC-OYIGG1FM",
   },
   {
     platform: "Dicoding",
@@ -158,7 +160,7 @@ export const CoursesData = [
     thumb: dasarAiThumb,
     credentialId: "1OP8JO5OLPQK",
     validUntil: "Dec 17, 2028",
-    verifyUrl: "https://dicoding.com/certificates/1OP8JO5OLPQK",
+    verifyUrl: "https://www.dicoding.com/certificates/1OP8JO5OLPQK",
   },
   {
     platform: "Dicoding",
@@ -172,7 +174,7 @@ export const CoursesData = [
     thumb: generativeAiThumb,
     credentialId: "MRZM668JKPYQ",
     validUntil: "Oct 25, 2028",
-    verifyUrl: "https://dicoding.com/certificates/MRZM668JKPYQ",
+    verifyUrl: "https://www.dicoding.com/certificates/MRZM668JKPYQ",
   },
   {
     platform: "Dicoding",
@@ -186,6 +188,6 @@ export const CoursesData = [
     thumb: financialLiteracyThumb,
     credentialId: "QLZ93JGEMZ5D",
     validUntil: "Jun 21, 2028",
-    verifyUrl: "https://dicoding.com/certificates/QLZ93JGEMZ5D",
+    verifyUrl: "https://www.dicoding.com/certificates/QLZ93JGEMZ5D",
   },
 ];
