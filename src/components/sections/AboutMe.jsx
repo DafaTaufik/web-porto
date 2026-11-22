@@ -14,7 +14,7 @@ const LEAD = [
 ];
 
 const FACTS = [
-  { label: "Focus", value: "Android & Backend" },
+  { label: "Focus", value: "Mobile & Backend" },
   { label: "Education", value: "Informatics, UMN" },
   { label: "Experience", value: "2 Internships" },
 ];

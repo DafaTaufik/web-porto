@@ -98,7 +98,7 @@ export default function CertificateModal({ items, index, onClose, onStep }) {
   const facts = [
     ["Completed", cert.date],
     cert.hours && ["Duration", cert.hours],
-    cert.credentialId && ["Credential ID", cert.credentialId],
+    cert.credentialId && ["Credential ID", cert.credentialId, cert.verifyUrl],
     cert.validUntil && ["Valid until", cert.validUntil],
   ].filter(Boolean);
 
@@ -176,10 +176,19 @@ export default function CertificateModal({ items, index, onClose, onStep }) {
           <h3 className="mt-1.5 font-HWT text-2xl font-normal leading-[1.05] uppercase">{cert.title}</h3>
         </div>
         <div className="flex flex-wrap gap-x-8 gap-y-2.5">
-          {facts.map(([label, value]) => (
+          {facts.map(([label, value, href]) => (
             <div key={label}>
               <small className="block text-[11px] font-bold uppercase tracking-[0.12em] text-[#9CA3AF]">{label}</small>
-              <b className="block mt-1 text-sm font-semibold">{value}</b>
+              {href ? (
+                <a href={href} target="_blank" rel="noopener noreferrer" aria-label={`Show credential ${value} (opens in new tab)`} className="mt-1 inline-flex items-center gap-1.5 text-sm font-semibold underline decoration-[#6B7280] underline-offset-4 hover:decoration-current">
+                  {value}
+                  <svg width="14" height="14" {...ICON}>
+                    <path d="M7 17 17 7M9 7h8v8" />
+                  </svg>
+                </a>
+              ) : (
+                <b className="block mt-1 text-sm font-semibold">{value}</b>
+              )}
             </div>
           ))}
         </div>
