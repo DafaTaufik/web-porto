@@ -159,7 +159,6 @@ const PROJECTS = [
     },
     images: [ciakhamikCover1, ciakhamikCover2, ciakhamikCover3],
     gallery: [
-      // Urutan mengikuti kolom masonry (COLUMN_OF di ProjectDetail): kolom 1 = 01,03,07; kolom 2 = 02,04,08; kolom 3 = 05,06
       { src: ciakhamikHome, alt: "CiakHamik home screen", caption: "Today at a glance", ratio: "9/16" },
       { src: ciakhamikCover2, alt: "CiakHamik dashboard, hydration and calendar screens", caption: "Calories, water and workouts in one app", ratio: "16/10" },
       { src: ciakhamikCover3, alt: "CiakHamik goal and exercise screens", caption: "Set a goal, log the day", ratio: "16/10" },
@@ -216,7 +215,6 @@ const PROJECTS = [
     },
     images: [abseninCover1, abseninCover2, abseninCover3],
     gallery: [
-      // Urutan mengikuti kolom masonry (COLUMN_OF di ProjectDetail): kolom 1 = 01,03; kolom 2 = 02,04; kolom 3 = 05,06
       { src: abseninHome, alt: "Absenin home screen with the check-in button", caption: "One tap to check in", ratio: "9/16" },
       { src: abseninCover1, alt: "Absenin login and home screens", caption: "Check in with a tap and a photo", ratio: "16/10" },
       { src: abseninCover2, alt: "Absenin photo preview, home and history screens", caption: "Tap, snap, done", ratio: "16/10" },
@@ -271,7 +269,6 @@ const PROJECTS = [
     },
     images: [covenantCover1, covenantCover2, covenantCover3],
     gallery: [
-      // col = kolom masonry; dibagi manual agar tinggi ketiga kolom seimbang
       { src: covenantCover1, alt: "Rumah Belajar Covenant cover with white and yellow accent", caption: "Cover 1", ratio: "16/10", col: 0 },
       { src: covenantCover2, alt: "Rumah Belajar Covenant cover from Figma to web", caption: "Cover 2", ratio: "16/10", col: 1 },
       { src: covenantCover3, alt: "Rumah Belajar Covenant cover with yellow dominant", caption: "Cover 3", ratio: "16/10", col: 2 },

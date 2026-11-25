@@ -2,7 +2,7 @@ export const ProfessionalExperienceData = [
   {
     company: "PT. Mitra Integrasi Digital",
     mode: "Remote",
-    position: "Fullstack Android Intern",
+    position: "Junior Programmer Intern (Android & Backend)",
     type: "Intern",
     duration: "Feb 2025 - Jun 2025",
     year: "2025",

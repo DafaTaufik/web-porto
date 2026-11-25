@@ -42,9 +42,6 @@ export const OrganizationalData = {
   heroCaption: "Building D Garden, Universitas Multimedia Nusantara · Jul 2023",
 };
 
-// Satu sumber untuk hero, galeri, viewer, dan strip. Urutan array = nomor foto 01-14.
-// src: resolusi penuh (hero + viewer), thumb: lebar 800px (galeri + strip).
-// caption: kosong = viewer menampilkan placeholder. ratio: rasio kotak di galeri.
 export const OrganizationalPhotos = [
   { src: p1, thumb: p1s, alt: "Aerial view of the whole group standing in formation on the lawn", ratio: "16 / 9" },
   { src: p2, thumb: p2s, alt: "A committee member in a light blue shirt crossing the street", ratio: "3 / 2" },
