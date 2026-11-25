@@ -23,13 +23,13 @@ import introPython from "../assets/Courses/intro_python.png";
  * @typedef {Object} Certificate
  * @property {string} platform
  * @property {string} title
- * @property {string} date          sudah diformat, mis. "Dec 22, 2024"
- * @property {string} [hours]       opsional, mis. "20 hrs"
- * @property {string[]} tags        maks ~3
+ * @property {string} date
+ * @property {string} [hours]
+ * @property {string[]} tags
  * @property {"pdf"|"jpg"|"png"} type
- * @property {string} file          nama file asli (tampil di top bar modal)
- * @property {string} [src]         URL file asli; kosong = placeholder
- * @property {string} [thumb]       URL thumbnail gambar; kosong = kotak placeholder
+ * @property {string} file
+ * @property {string} [src]
+ * @property {string} [thumb]
  * @property {string} [credentialId]
  * @property {string} [validUntil]
  * @property {string} [verifyUrl]

@@ -1,7 +1,5 @@
 import { SiSqlite } from "react-icons/si";
 
-// percent: penilaian diri (0-100). Kosong = placeholder "[xx]%" sampai diisi. Jangan mengarang angka.
-// unit: [tunggal, jamak] untuk penghitung di kanan judul grup
 export const SkillGroups = [
   {
     name: "Languages",
