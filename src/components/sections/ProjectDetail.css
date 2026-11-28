@@ -78,6 +78,10 @@
 .pd-modal button:focus-visible { outline-color: #fff; }
 .pd-vb { display: flex; align-items: center; justify-content: center; border-radius: 50%; border: 1px solid #4b5563; background: transparent; color: #fff; cursor: pointer; transition: background 0.3s, color 0.3s; }
 .pd-vb:hover, .pd-vb:focus-visible { background: #fff; color: #1d1d1d; }
+.pd-zoom { position: relative; display: flex; align-items: center; justify-content: center; max-width: 100%; }
+.pd-zoom.is-zoom { position: absolute; inset: 0; z-index: 1; overflow: hidden; contain: paint; padding: 8px 90px; box-sizing: border-box; }
+.pd-zoom.is-zoom .pd-pg { max-height: 100%; }
+.pd-pg { display: block; max-width: 100%; max-height: min(66vh, 720px); width: auto; height: auto; object-fit: contain; border-radius: 20px; animation: pd-pop 0.5s cubic-bezier(0.16, 1, 0.3, 1); }
 .pd-th { flex: none; width: 68px; height: 46px; padding: 0; border: 2px solid transparent; border-radius: 8px; overflow: hidden; background: #000; color: #9ca3af; cursor: pointer; opacity: 0.55; font: 600 12px "hwt-artz", Impact, sans-serif; transition: opacity 0.3s, border-color 0.3s; }
 .pd-th:hover { opacity: 0.85; }
 .pd-th.act { opacity: 1; border-color: #fff; }
@@ -100,8 +104,9 @@
   .pd-vst, .pd-vh { display: none !important; }
   .pd-cs { grid-template-columns: minmax(0, 1fr) !important; }
   .pd-stage { padding-left: 64px !important; padding-right: 64px !important; }
+  .pd-zoom.is-zoom { padding-left: 64px; padding-right: 64px; }
 }
 @media (prefers-reduced-motion: reduce) {
-  .pd-fl1, .pd-fl2, .pd-fl3, .pd-pop { animation: none; }
+  .pd-fl1, .pd-fl2, .pd-fl3, .pd-pop, .pd-pg { animation: none; }
   .pd-ph, .pd-ph img, .pd-wr, .pd-lk, .pd-nx, .pd-bk, .pd-ov { transition: none; }
 }
