@@ -305,12 +305,12 @@ export default function Organizational() {
             <h2 className="relative z-[2] m-0 font-HWT font-normal uppercase text-[clamp(52px,8vw,116px)] leading-[0.98] tracking-[0.005em]">
               <span className={MASK}>
                 <span data-line className="block">
-                  ORGANIZATIONS
+                  ORGANIZATIONAL
                 </span>
               </span>
               <span className={MASK}>
-                <span data-line className="block">
-                  I'VE <span className="text-[#9CA3AF]">JOINED.</span>
+                <span data-line className="block text-[#9CA3AF]">
+                  EXPERIENCE.
                 </span>
               </span>
             </h2>

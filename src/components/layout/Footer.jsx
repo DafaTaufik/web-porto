@@ -50,7 +50,9 @@ function Envelope() {
       </div>
       <div className="pointer-events-none absolute inset-0 rounded-[18px] bg-[#F1F1F1] [clip-path:polygon(0_34%,50%_66%,100%_34%,100%_100%,0_100%)]" />
       <div className="pointer-events-none absolute inset-0 rounded-[18px] bg-[#E4E4E4] [clip-path:polygon(0_34%,50%_66%,50%_68%,0_36%)]" />
-      <span className="absolute -bottom-[26px] -right-[22px] flex h-[62px] w-[62px] rotate-[10deg] items-center justify-center rounded-full border-[3px] border-white bg-[#1D1D1D] font-HWT text-[32px] leading-none text-white shadow-[0_12px_24px_rgba(0,0,0,0.4)]">@</span>
+      <span className="absolute -bottom-[26px] -right-[22px] flex h-[62px] w-[62px] rotate-[10deg] items-center justify-center rounded-full border-[3px] border-white bg-[#1D1D1D] font-HWT text-[32px] leading-none text-white shadow-[0_12px_24px_rgba(0,0,0,0.4)]">
+        @
+      </span>
       <span className="absolute -left-[30px] bottom-[22px] -rotate-[8deg] rounded-full bg-white px-3.5 py-[7px] text-xs font-bold uppercase tracking-[0.1em] text-[#1D1D1D] shadow-[0_10px_20px_rgba(0,0,0,0.35)]">Say hi</span>
     </div>
   );
@@ -259,17 +261,15 @@ export default function Footer() {
           <h2 className="relative z-[2] m-0 font-HWT text-[clamp(52px,8vw,116px)] font-normal uppercase leading-[0.98] tracking-[0.005em]">
             <span className={MASK}>
               <span data-line="0" className="block">
-                Let&apos;s build
+                I&apos;D LOVE TO
               </span>
             </span>
             <span className={MASK}>
-              <span data-line="120" className="block">
-                something
-              </span>
+              <span data-line="120" className="block"></span>
             </span>
             <span className={MASK}>
               <span data-line="240" className="block text-[#6B7280]">
-                together.
+                HEAR FROM YOU.
               </span>
             </span>
           </h2>
@@ -314,7 +314,7 @@ export default function Footer() {
           <div data-rv="90" className="flex flex-col gap-[18px]">
             <span className={COL_LABEL}>Based in</span>
             <span className="text-lg font-medium leading-[1.6] text-[#E5E7EB]">
-              Kunciran, Kota Tangerang,
+              Kota Tangerang,
               <br />
               Banten, 15144
             </span>
@@ -348,11 +348,7 @@ export default function Footer() {
 
         {/* Nama raksasa */}
         <div aria-hidden="true" className="mt-24 overflow-hidden pb-[0.04em]">
-          <div
-            ref={nameRef}
-            data-line="0"
-            className="block whitespace-nowrap font-HWT text-[clamp(70px,16vw,240px)] font-normal uppercase leading-[0.9] text-transparent [-webkit-text-stroke:1.5px_#404040]"
-          >
+          <div ref={nameRef} data-line="0" className="block whitespace-nowrap font-HWT text-[clamp(70px,16vw,240px)] font-normal uppercase leading-[0.9] text-transparent [-webkit-text-stroke:1.5px_#404040]">
             Dafa Taufik
           </div>
         </div>

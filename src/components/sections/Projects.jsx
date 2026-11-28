@@ -437,12 +437,12 @@ export default function Projects() {
           <h2 className="relative z-[1] m-0 font-HWT font-normal uppercase text-[clamp(56px,9vw,128px)] leading-[0.98] tracking-[0.005em]">
             <span className={MASK}>
               <span data-line className="block">
-                A FEW THINGS
+                THINGS
               </span>
             </span>
             <span className={MASK}>
               <span data-line className="block">
-                I'VE <span className="text-[#9CA3AF]">BUILT.</span>
+                <span className="text-[#9CA3AF]">I'VE BUILT.</span>
               </span>
             </span>
           </h2>

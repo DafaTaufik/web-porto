@@ -39,11 +39,11 @@ import covenantAbout from "../assets/Image/project/covenant/gallery-4-about.png"
 import covenantTeachers from "../assets/Image/project/covenant/gallery-5-teachers.png";
 
 const SECTION_PLACEHOLDERS = {
-  overview: "[What the product is, who uses it, and which problem it solves.]",
-  background: "[Why this project started and what the team needed from it.]",
-  challenge: "[The hardest problem you ran into.]",
-  solution: "[How you solved it, and what you learned.]",
-  outcome: "[What changed because of your work.]",
+  overview: "[-]",
+  background: "[-]",
+  challenge: "[-]",
+  solution: "[-]",
+  outcome: "[-]",
 };
 
 const DEFAULT_LINKS = [
@@ -78,7 +78,7 @@ const PROJECTS = [
     tags: ["Mobile", "Family Business", "2026"],
     origin: "family",
     meta: {
-      role: "FullStack Android",
+      role: "Backend, Mobile & Automation Developer",
       clientLabel: "Client",
       client: "Dafa Laundry",
       type: "Mobile",
