@@ -178,12 +178,12 @@ export function Experience() {
         <h2 className="mt-11 font-HWT font-normal uppercase text-[clamp(56px,9vw,128px)] leading-[0.98] tracking-[0.005em]">
           <span className={MASK}>
             <span data-line className="block">
-              WHERE I'VE
+              MY EXPERIENCE
             </span>
           </span>
           <span className={MASK}>
             <span data-line className="block">
-              WORKED <span className="text-[#9CA3AF]">SO FAR</span>
+              <span className="text-[#9CA3AF]">SO FAR.</span>
             </span>
           </span>
         </h2>

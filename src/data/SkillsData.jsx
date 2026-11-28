@@ -28,9 +28,9 @@ export const SkillGroups = [
     name: "Databases",
     unit: ["database", "databases"],
     skills: [
-      { name: "MySQL", percent: 83 },
+      { name: "MySQL", percent: 79 },
       { name: "Firebase", percent: 89 },
-      { name: "Sqlite/Room", percent: 83 },
+      { name: "Sqlite/Room", percent: 79 },
       { name: "Redis", percent: 66 },
     ],
   },

@@ -208,17 +208,12 @@ export default function AboutMe() {
         <h2 className="mt-11 font-HWT font-normal uppercase text-[clamp(56px,9vw,128px)] leading-[0.98] tracking-[0.005em]">
           <span className={MASK}>
             <span data-line className="block">
-              Build mobile apps
-            </span>
-          </span>
-          <span className={MASK}>
-            <span data-line className="block">
-              and the backends
+              More than just
             </span>
           </span>
           <span className={MASK}>
             <span data-line className="block text-[#9CA3AF]">
-              behind them.
+              writing code.
             </span>
           </span>
         </h2>
